@@ -20,6 +20,10 @@ module Charlotte
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+    config.to_prepare do
+      DeviseController.clear_respond_to
+      DeviseController.respond_to :json
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
