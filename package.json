@@ -5,5 +5,9 @@
 
   "name": "charlotte",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ]
 }
