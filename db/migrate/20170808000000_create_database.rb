@@ -8,18 +8,19 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    create_table :items do |t|
-      t.belongs_to :stock_item, index: true, foreign_key: true
-      t.datetime :expires
-      t.integer :count
-
-      t.timestamps
-    end
-
     create_table :locations do |t|
       t.belongs_to :group, index: true, foreign_key: true
       t.string :name
       t.string :address
+      t.string :description
+
+      t.timestamps
+    end
+
+    create_table :sublocations do |t|
+      t.belongs_to :location, index: true, foreign_key: true, optional: true
+      t.belongs_to :sublocation, index: true, foreign_key: true, optional: true
+      t.string :name
       t.string :description
 
       t.timestamps
@@ -35,11 +36,10 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    create_table :sublocations do |t|
-      t.belongs_to :location, index: true, foreign_key: true, optional: true
-      t.belongs_to :sublocation, index: true, foreign_key: true, optional: true
-      t.string :name
-      t.string :description
+    create_table :items do |t|
+      t.belongs_to :stock_item, index: true, foreign_key: true
+      t.datetime :expires
+      t.integer :count
 
       t.timestamps
     end
