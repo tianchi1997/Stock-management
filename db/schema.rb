@@ -43,45 +43,44 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.index ["group_id"], name: "index_groups_on_group_id"
   end
 
-  create_table "items", force: :cascade do |t|
-    t.integer "stock_item_id"
+  create_table "item_expiries", force: :cascade do |t|
+    t.integer "item_id"
     t.datetime "expires"
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stock_item_id"], name: "index_items_on_stock_item_id"
+    t.index ["item_id"], name: "index_item_expiries_on_item_id"
   end
 
-  create_table "locations", force: :cascade do |t|
-    t.integer "group_id"
-    t.string "name"
-    t.string "address"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_locations_on_group_id"
-  end
-
-  create_table "stock_items", force: :cascade do |t|
-    t.integer "sublocation_id"
-    t.string "name"
-    t.string "description"
+  create_table "items", force: :cascade do |t|
+    t.integer "location_id"
+    t.integer "stock_item_id"
     t.integer "required"
     t.integer "order_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["sublocation_id"], name: "index_stock_items_on_sublocation_id"
+    t.index ["location_id"], name: "index_items_on_location_id"
+    t.index ["stock_item_id"], name: "index_items_on_stock_item_id"
+    t.index [nil, nil], name: "location_item_index"
   end
 
-  create_table "sublocations", force: :cascade do |t|
+  create_table "locations", force: :cascade do |t|
+    t.integer "group_id"
     t.integer "location_id"
-    t.integer "sublocation_id"
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["location_id"], name: "index_sublocations_on_location_id"
-    t.index ["sublocation_id"], name: "index_sublocations_on_sublocation_id"
+    t.index ["group_id"], name: "index_locations_on_group_id"
+    t.index ["location_id"], name: "index_locations_on_location_id"
+  end
+
+  create_table "stock_items", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "supplier"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

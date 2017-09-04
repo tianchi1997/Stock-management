@@ -9,17 +9,8 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     end
 
     create_table :locations do |t|
-      t.belongs_to :group, index: true, foreign_key: true
-      t.string :name
-      t.string :address
-      t.string :description
-
-      t.timestamps
-    end
-
-    create_table :sublocations do |t|
+      t.belongs_to :group, index: true, foreign_key: true, optional: true
       t.belongs_to :location, index: true, foreign_key: true, optional: true
-      t.belongs_to :sublocation, index: true, foreign_key: true, optional: true
       t.string :name
       t.string :description
 
@@ -27,19 +18,29 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     end
 
     create_table :stock_items do |t|
-      t.belongs_to :sublocation, index: true, foreign_key: true
       t.string :name
       t.string :description
-      t.integer :required
-      t.integer :order_to
+      t.string :supplier
 
       t.timestamps
     end
 
     create_table :items do |t|
+      t.belongs_to :location, index: true, foreign_key: true
       t.belongs_to :stock_item, index: true, foreign_key: true
+      t.integer :required
+      t.integer :order_to
+
+      t.index [:location, :stock_item], name: "location_item_index"
+
+      t.timestamps
+    end
+
+    create_table :item_expiries do |t|
+      t.belongs_to :item, index: true, foreign_key: true
       t.datetime :expires
       t.integer :count
+
 
       t.timestamps
     end
@@ -78,7 +79,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.timestamps null: false
     end
 
-    create_table :audits, :force => true do |t|
+    create_table :audits do |t|
       t.column :auditable_id, :integer
       t.column :auditable_type, :string
       t.column :associated_id, :integer
@@ -93,10 +94,14 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.column :remote_address, :string
       t.column :request_uuid, :string, index: true
       t.column :created_at, :datetime, index: true
-    end
 
-    add_index :audits, [:auditable_id, :auditable_type], :name => 'auditable_index'
-    add_index :audits, [:associated_id, :associated_type], :name => 'associated_index'
-    add_index :audits, [:user_id, :user_type], :name => 'user_index'
+      t.index [:auditable_id, :auditable_type], name: 'auditable_index'
+      t.index [:associated_id, :associated_type], name: 'associated_index'
+      t.index [:user_id, :user_type], name: 'user_index'
+    end
+  end
+end
+class CreateItemExpiries < ActiveRecord::Migration[5.1]
+  def change
   end
 end
