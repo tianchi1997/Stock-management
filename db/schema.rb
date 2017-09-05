@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20170808000000) do
 
   create_table "groups", force: :cascade do |t|
     t.integer "group_id"
-    t.string "name"
-    t.string "description"
+    t.string "name", null: false
+    t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_groups_on_group_id"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   create_table "item_expiries", force: :cascade do |t|
     t.integer "item_id"
     t.datetime "expires"
-    t.integer "count"
+    t.integer "count", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_item_expiries_on_item_id"
@@ -55,20 +55,20 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   create_table "items", force: :cascade do |t|
     t.integer "location_id"
     t.integer "stock_item_id"
-    t.integer "required"
+    t.integer "required", null: false
     t.integer "order_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["location_id", "stock_item_id"], name: "location_item_index"
     t.index ["location_id"], name: "index_items_on_location_id"
     t.index ["stock_item_id"], name: "index_items_on_stock_item_id"
-    t.index [nil, nil], name: "location_item_index"
   end
 
   create_table "locations", force: :cascade do |t|
     t.integer "group_id"
     t.integer "location_id"
-    t.string "name"
-    t.string "description"
+    t.string "name", null: false
+    t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_locations_on_group_id"
@@ -76,9 +76,9 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   end
 
   create_table "stock_items", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.string "supplier"
+    t.string "name", null: false
+    t.string "description", null: false
+    t.string "supplier", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

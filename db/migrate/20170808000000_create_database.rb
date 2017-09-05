@@ -2,8 +2,8 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
   def change
     create_table :groups do |t|
       t.belongs_to :group, index: true, foreign_key: true, optional: true
-      t.string :name
-      t.string :description
+      t.string :name, null: false
+      t.string :description, null: false
 
       t.timestamps
     end
@@ -11,16 +11,16 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     create_table :locations do |t|
       t.belongs_to :group, index: true, foreign_key: true, optional: true
       t.belongs_to :location, index: true, foreign_key: true, optional: true
-      t.string :name
-      t.string :description
+      t.string :name, null: false
+      t.string :description, null: false
 
       t.timestamps
     end
 
     create_table :stock_items do |t|
-      t.string :name
-      t.string :description
-      t.string :supplier
+      t.string :name, null: false
+      t.string :description, null: false
+      t.string :supplier, null: false
 
       t.timestamps
     end
@@ -28,10 +28,10 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     create_table :items do |t|
       t.belongs_to :location, index: true, foreign_key: true
       t.belongs_to :stock_item, index: true, foreign_key: true
-      t.integer :required
+      t.integer :required, null: false
       t.integer :order_to
 
-      t.index [:location, :stock_item], name: "location_item_index"
+      t.index [:location_id, :stock_item_id], name: "location_item_index"
 
       t.timestamps
     end
@@ -39,8 +39,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     create_table :item_expiries do |t|
       t.belongs_to :item, index: true, foreign_key: true
       t.datetime :expires
-      t.integer :count
-
+      t.integer :count, null: false
 
       t.timestamps
     end
