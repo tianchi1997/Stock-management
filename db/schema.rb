@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170808000000) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "audits", force: :cascade do |t|
     t.integer "auditable_id"
     t.string "auditable_type"
@@ -35,16 +38,17 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   end
 
   create_table "groups", force: :cascade do |t|
-    t.integer "group_id"
+    t.bigint "group_id"
     t.string "name", null: false
-    t.string "description", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_groups_on_group_id"
+    t.index ["name"], name: "index_groups_on_name"
   end
 
   create_table "item_expiries", force: :cascade do |t|
-    t.integer "item_id"
+    t.bigint "item_id"
     t.datetime "expires"
     t.integer "count", null: false
     t.datetime "created_at", null: false
@@ -53,8 +57,8 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "location_id"
-    t.integer "stock_item_id"
+    t.bigint "location_id"
+    t.bigint "stock_item_id"
     t.integer "required", null: false
     t.integer "order_to"
     t.datetime "created_at", null: false
@@ -65,22 +69,24 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "location_id"
+    t.bigint "group_id"
+    t.bigint "location_id"
     t.string "name", null: false
-    t.string "description", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_locations_on_group_id"
     t.index ["location_id"], name: "index_locations_on_location_id"
+    t.index ["name"], name: "index_locations_on_name"
   end
 
   create_table "stock_items", force: :cascade do |t|
     t.string "name", null: false
-    t.string "description", null: false
-    t.string "supplier", null: false
+    t.string "description"
+    t.string "supplier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_stock_items_on_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -107,4 +113,10 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
+  add_foreign_key "groups", "groups"
+  add_foreign_key "item_expiries", "items"
+  add_foreign_key "items", "locations"
+  add_foreign_key "items", "stock_items"
+  add_foreign_key "locations", "groups"
+  add_foreign_key "locations", "locations"
 end

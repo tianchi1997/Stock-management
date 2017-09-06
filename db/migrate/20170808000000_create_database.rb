@@ -2,8 +2,8 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
   def change
     create_table :groups do |t|
       t.belongs_to :group, index: true, foreign_key: true, optional: true
-      t.string :name, null: false
-      t.string :description, null: false
+      t.string :name, null: false, index: true
+      t.string :description
 
       t.timestamps
     end
@@ -11,16 +11,16 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     create_table :locations do |t|
       t.belongs_to :group, index: true, foreign_key: true, optional: true
       t.belongs_to :location, index: true, foreign_key: true, optional: true
-      t.string :name, null: false
-      t.string :description, null: false
+      t.string :name, null: false, index: true
+      t.string :description
 
       t.timestamps
     end
 
     create_table :stock_items do |t|
-      t.string :name, null: false
-      t.string :description, null: false
-      t.string :supplier, null: false
+      t.string :name, null: false, index: true
+      t.string :description
+      t.string :supplier
 
       t.timestamps
     end
