@@ -9,7 +9,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     end
 
     create_table :locations do |t|
-      t.belongs_to :group, index: true, foreign_key: true, optional: true
+      t.belongs_to :group, index: true, foreign_key: true
       t.belongs_to :location, index: true, foreign_key: true, optional: true
       t.string :name, null: false, index: true
       t.string :description
