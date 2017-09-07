@@ -21,6 +21,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.string :name, null: false, index: true
       t.string :description
       t.string :supplier
+      t.boolean :expires, null:false
 
       t.timestamps
     end
