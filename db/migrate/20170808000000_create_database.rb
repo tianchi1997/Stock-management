@@ -23,7 +23,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.string :name, null: false, index: true
       t.string :description
       t.string :supplier
-      t.boolean :expires, null:false
+      t.boolean :expires, null: false
 
       t.datetime :deleted_at, index: true
       t.timestamps

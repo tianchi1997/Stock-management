@@ -11,4 +11,5 @@ class Item < ApplicationRecord
 
   # Validations
   validates :required, presence: true
+  validates_associated :item_expiries
 end
