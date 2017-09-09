@@ -24,15 +24,17 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.string "user_type"
     t.string "username"
     t.string "action"
-    t.text "audited_changes"
+    t.jsonb "audited_changes"
     t.integer "version", default: 0
     t.string "comment"
     t.string "remote_address"
     t.string "request_uuid"
     t.datetime "created_at"
+    t.datetime "deleted_at"
     t.index ["associated_id", "associated_type"], name: "associated_index"
     t.index ["auditable_id", "auditable_type"], name: "auditable_index"
     t.index ["created_at"], name: "index_audits_on_created_at"
+    t.index ["deleted_at"], name: "index_audits_on_deleted_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
   end
@@ -41,8 +43,10 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.bigint "group_id"
     t.string "name", null: false
     t.string "description"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_groups_on_deleted_at"
     t.index ["group_id"], name: "index_groups_on_group_id"
     t.index ["name"], name: "index_groups_on_name"
   end
@@ -51,8 +55,10 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.bigint "item_id"
     t.datetime "expires"
     t.integer "count", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_item_expiries_on_deleted_at"
     t.index ["item_id"], name: "index_item_expiries_on_item_id"
   end
 
@@ -61,8 +67,10 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.bigint "stock_item_id"
     t.integer "required", null: false
     t.integer "order_to"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_items_on_deleted_at"
     t.index ["location_id", "stock_item_id"], name: "location_item_index"
     t.index ["location_id"], name: "index_items_on_location_id"
     t.index ["stock_item_id"], name: "index_items_on_stock_item_id"
@@ -73,8 +81,10 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.bigint "location_id"
     t.string "name", null: false
     t.string "description"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_locations_on_deleted_at"
     t.index ["group_id"], name: "index_locations_on_group_id"
     t.index ["location_id"], name: "index_locations_on_location_id"
     t.index ["name"], name: "index_locations_on_name"
@@ -85,8 +95,10 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.string "description"
     t.string "supplier"
     t.boolean "expires", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_stock_items_on_deleted_at"
     t.index ["name"], name: "index_stock_items_on_name"
   end
 
@@ -104,8 +116,10 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end

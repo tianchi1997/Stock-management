@@ -39,8 +39,9 @@ gem 'react-rails'
 # Devise for authentication
 gem 'devise'
 
-# Audited for audit logs
+# Audited and act_as_paranoid for audit logs
 gem 'audited'
+gem 'paranoia'
 
 # Active Model Serializers for Rails API
 gem 'active_model_serializers'
