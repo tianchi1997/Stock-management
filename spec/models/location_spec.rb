@@ -23,5 +23,9 @@ RSpec.describe Location, type: :model do
     it "has many items and destroys dependents" do
       is_expected.to have_many(:items).dependent(:destroy)
     end
+
+    it "has many stock items through items" do
+      is_expected.to have_many(:stock_items)
+    end
   end
 end

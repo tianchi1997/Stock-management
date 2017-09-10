@@ -13,9 +13,9 @@ class ItemExpiry < ApplicationRecord
 
   private
   def expiry_date_valid
-    if item.stock_item.expires && expiry_date == nil
+    if stock_item.expires && expiry_date == nil
         errors.add(:expiry_date, "is not allowed unless stock item does not expire")
-    elsif !item.stock_item.expires && expiry_date != nil
+    elsif !stock_item.expires && expiry_date != nil
         errors.add(:expiry_date, "is not allowed unless stock item expires")
     end
   end

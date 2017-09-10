@@ -11,5 +11,5 @@ class StockItem < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :expires, inclusion: { in: [ true, false ] }
-  validates_associated :items
+  validates_associated :item_expiries
 end
