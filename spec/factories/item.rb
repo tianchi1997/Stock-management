@@ -4,7 +4,7 @@ FactoryGirl.define do
       expires false
     end
 
-    location
+    association :location, strategy: :build
     stock_item { build(:stock_item, expires: expires) }
     required 5
     order_to nil

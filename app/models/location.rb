@@ -4,6 +4,7 @@ class Location < ApplicationRecord
   belongs_to :location, optional: true
   has_many :locations, dependent: :destroy
   has_many :items, dependent: :destroy
+  has_many :stock_items, through: :items
 
   # Auditing
   acts_as_paranoid

@@ -1,6 +1,7 @@
 class ItemExpiry < ApplicationRecord
   # Assocations
   belongs_to :item
+  has_one :stock_item, through: :item
 
   # Auditing
   acts_as_paranoid
