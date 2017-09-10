@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20170808000000) do
 
   create_table "item_expiries", force: :cascade do |t|
     t.bigint "item_id"
-    t.datetime "expires"
+    t.datetime "expiry_date"
     t.integer "count", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false

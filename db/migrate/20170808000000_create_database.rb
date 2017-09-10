@@ -43,7 +43,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
 
     create_table :item_expiries do |t|
       t.belongs_to :item, index: true, foreign_key: true
-      t.datetime :expires
+      t.datetime :expiry_date
       t.integer :count, null: false
 
       t.datetime :deleted_at, index: true
