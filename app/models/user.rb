@@ -6,4 +6,7 @@ class User < ApplicationRecord
   # Auditing
   acts_as_paranoid
   audited
+
+  # Validations
+  validates :permission_level, presence: true
 end

@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   belongs_to :location
   belongs_to :stock_item
   has_many :item_expiries, dependent: :destroy
+  attr_readonly :location_id
+  attr_readonly :stock_item_id
 
   # Auditing
   acts_as_paranoid

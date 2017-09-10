@@ -1,8 +1,8 @@
 class StockItem < ApplicationRecord
   # Associations
   has_many :items, dependent: :destroy
-  has_many :locations, through: :items
   has_many :item_expiries, through: :items
+  has_many :locations, through: :items
 
   # Auditing
   acts_as_paranoid

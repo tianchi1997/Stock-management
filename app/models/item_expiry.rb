@@ -2,6 +2,7 @@ class ItemExpiry < ApplicationRecord
   # Assocations
   belongs_to :item
   has_one :stock_item, through: :item
+  attr_readonly :item_id
 
   # Auditing
   acts_as_paranoid
@@ -13,10 +14,14 @@ class ItemExpiry < ApplicationRecord
 
   private
   def expiry_date_valid
-    if stock_item.expires && expiry_date == nil
-        errors.add(:expiry_date, "is not allowed unless stock item does not expire")
-    elsif !stock_item.expires && expiry_date != nil
-        errors.add(:expiry_date, "is not allowed unless stock item expires")
+    if expiry_date != nil && expiry_date.past?
+      errors.add(:expiry_date, "cannot be in the past")
+    end
+
+    if item.stock_item.expires && expiry_date == nil
+      errors.add(:expiry_date, "must be set if stock item does not expire")
+    elsif !item.stock_item.expires && expiry_date != nil
+      errors.add(:expiry_date, "cannot be set if stock item expires") 
     end
   end
 end
