@@ -1,25 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe Location, type: :model do
-  context "with a group" do
-    g = Group.new name: "Hospital"
-
-    it "valid with name" do
-      expect(g.locations.new name: "Building A").to be_valid
-    end
-
-    it "invalid without name" do
-      expect(g.locations.new).to be_invalid
+  describe "Validations" do
+    it "validates presence of name" do
+      is_expected.to validate_presence_of(:name)
     end
   end
 
-  context "without a group" do
-    it "invalid with name" do
-      expect(Location.new name: "Building A").to be_invalid
+  describe "Assocations" do
+    it "belongs to group" do
+      is_expected.to belong_to(:group)
     end
 
-    it "invalid without name" do
-      expect(Location.new).to be_invalid
+    it "belongs to location" do
+      is_expected.to belong_to(:location)
+    end
+
+    it "has many locations and destroys dependents" do
+      is_expected.to have_many(:locations).dependent(:destroy)
+    end
+
+    it "has many items and destroys dependents" do
+      is_expected.to have_many(:items).dependent(:destroy)
     end
   end
 end

@@ -53,6 +53,9 @@ group :development, :test do
   # rspec for testing and simplecov for coverage checking
   gem 'rspec-rails', '~> 3.5'
   gem 'simplecov'
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 
 group :development do
