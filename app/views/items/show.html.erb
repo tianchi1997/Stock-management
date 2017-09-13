@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @item.location %>
+</p>
+
+<p>
+  <strong>Stock item:</strong>
+  <%= @item.stock_item %>
+</p>
+
+<p>
+  <strong>Required:</strong>
+  <%= @item.required %>
+</p>
+
+<p>
+  <strong>Order to:</strong>
+  <%= @item.order_to %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>

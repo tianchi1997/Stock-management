@@ -1,0 +1,32 @@
+<%= form_with(model: item_expiry, local: true) do |form| %>
+  <% if item_expiry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item_expiry.errors.count, "error") %> prohibited this item_expiry from being saved:</h2>
+
+      <ul>
+      <% item_expiry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :item_id %>
+    <%= form.text_field :item_id, id: :item_expiry_item_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiry_date %>
+    <%= form.datetime_select :expiry_date, id: :item_expiry_expiry_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :count %>
+    <%= form.number_field :count, id: :item_expiry_count %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
