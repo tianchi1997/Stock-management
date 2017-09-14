@@ -3,5 +3,6 @@ class StockTakeController < ApplicationController
   end
 
   def locations
+    @location = Location.find(params[:id])
   end
 end

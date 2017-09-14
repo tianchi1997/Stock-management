@@ -22,6 +22,10 @@ RSpec.describe Location, type: :model do
       is_expected.to have_many(:stock_items)
     end
 
+    it "has many item expiries through items" do
+      is_expected.to have_many(:item_expiries)
+    end
+
     it "group ID is read only" do
       is_expected.to have_readonly_attribute(:group_id)
     end
