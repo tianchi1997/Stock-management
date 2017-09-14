@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :expires %>
-    <%= form.check_box :expires, id: :stock_item_expires %>
+    <%= form.check_box :expires, id: :stock_item_expires, disabled: !stock_item.new_record? %>
   </div>
 
   <div class="actions">
