@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
 
-  resources :groups
   resources :items
   resources :item_expiries
   resources :locations
@@ -14,7 +13,6 @@ Rails.application.routes.draw do
 
   get 'reports', to: 'reports#index'
   get 'reports/locations/:id', to: 'reports#locations'
-  get 'reports/groups/:id', to: 'reports#groups'
   get 'reports/stock_items/:id', to: 'reports#stock_items'
 
 end

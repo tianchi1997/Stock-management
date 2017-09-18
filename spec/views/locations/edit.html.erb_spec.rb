@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe "locations/edit", type: :view do
   before(:each) do
     @location = assign(:location, Location.create!(
-      :group => nil,
       :location => nil,
       :name => "MyString",
       :description => "MyString"
@@ -14,8 +13,6 @@ RSpec.describe "locations/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", location_path(@location), "post" do
-
-      assert_select "input[name=?]", "location[group_id]"
 
       assert_select "input[name=?]", "location[location_id]"
 

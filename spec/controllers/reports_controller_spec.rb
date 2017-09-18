@@ -16,13 +16,6 @@ RSpec.describe ReportsController, type: :controller do
     end
   end
 
-  describe "GET #groups" do
-    it "returns http success" do
-      get :groups
-      expect(response).to have_http_status(:success)
-    end
-  end
-
   describe "GET #stock_items" do
     it "returns http success" do
       get :stock_items

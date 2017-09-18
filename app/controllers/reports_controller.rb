@@ -5,9 +5,6 @@ class ReportsController < ApplicationController
   def locations
   end
 
-  def groups
-  end
-
   def stock_items
   end
 end

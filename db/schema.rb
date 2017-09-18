@@ -39,18 +39,6 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
-  create_table "groups", force: :cascade do |t|
-    t.bigint "group_id"
-    t.string "name", null: false
-    t.string "description"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["deleted_at"], name: "index_groups_on_deleted_at"
-    t.index ["group_id"], name: "index_groups_on_group_id"
-    t.index ["name"], name: "index_groups_on_name"
-  end
-
   create_table "item_expiries", force: :cascade do |t|
     t.bigint "item_id"
     t.datetime "expiry_date"
@@ -77,7 +65,6 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.bigint "group_id"
     t.bigint "location_id"
     t.string "name", null: false
     t.string "description"
@@ -85,7 +72,6 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_locations_on_deleted_at"
-    t.index ["group_id"], name: "index_locations_on_group_id"
     t.index ["location_id"], name: "index_locations_on_location_id"
     t.index ["name"], name: "index_locations_on_name"
   end
@@ -125,10 +111,8 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
-  add_foreign_key "groups", "groups"
   add_foreign_key "item_expiries", "items"
   add_foreign_key "items", "locations"
   add_foreign_key "items", "stock_items"
-  add_foreign_key "locations", "groups"
   add_foreign_key "locations", "locations"
 end

@@ -4,13 +4,11 @@ RSpec.describe "locations/index", type: :view do
   before(:each) do
     assign(:locations, [
       Location.create!(
-        :group => nil,
         :location => nil,
         :name => "Name",
         :description => "Description"
       ),
       Location.create!(
-        :group => nil,
         :location => nil,
         :name => "Name",
         :description => "Description"

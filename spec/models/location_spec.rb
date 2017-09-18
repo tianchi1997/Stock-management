@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Location, type: :model do
   describe "Assocations" do
-    it "belongs to group" do
-      is_expected.to belong_to(:group)
-    end
-
     it "belongs to location" do
       is_expected.to belong_to(:location)
     end
@@ -24,10 +20,6 @@ RSpec.describe Location, type: :model do
 
     it "has many item expiries through items" do
       is_expected.to have_many(:item_expiries)
-    end
-
-    it "group ID is read only" do
-      is_expected.to have_readonly_attribute(:group_id)
     end
 
     it "location ID is read only" do

@@ -5,7 +5,6 @@
 <table>
   <thead>
     <tr>
-      <th>Group</th>
       <th>Location</th>
       <th>Name</th>
       <th>Description</th>
@@ -16,8 +15,7 @@
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <td><%= location.group %></td>
-        <td><%= location.location %></td>
+        <td><%= location.location.name %></td>
         <td><%= location.name %></td>
         <td><%= location.description %></td>
         <td><%= link_to 'Show', location %></td>
