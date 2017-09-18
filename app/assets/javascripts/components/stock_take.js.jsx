@@ -15,12 +15,10 @@ var StockTake = React.createClass({
   },
   componentDidMount(){
     //setting the context of 'this'
-    var self = this; 
-    var fetchstr = "/locations/"
-    fetchstr += this.props.location_id
-    fetchstr += ".json"
+    var self = this;
+    var fetchURL = "/locations/" + this.props.location_id + ".json";
     //fetch the items associated with the location
-    fetch(fetchstr)
+    fetch(fetchURL, { credentials: 'include' })
       //parse the response to json
       .then(function(response) { return response.json(); })
       .then(function(json) {
@@ -40,7 +38,7 @@ var StockTake = React.createClass({
         <div>Item name: {JSON.stringify(this.state.items.name)} Item description:{JSON.stringify(this.state.items.description)}</div>
       </div>
     );
-  }    
+  }
 });
 
 
