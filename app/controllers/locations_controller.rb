@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.all
+    @locations = Location.roots
   end
 
   # GET /locations/1
@@ -15,6 +15,9 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
+    if params[:location_id]
+      @location.location_id = params[:location_id]
+    end
   end
 
   # GET /locations/1/edit

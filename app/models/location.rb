@@ -13,4 +13,7 @@ class Location < ApplicationRecord
 
   # Validations
   validates :name, presence: true
+
+  # Scopes
+  scope :roots, -> { where(location: nil) }
 end
