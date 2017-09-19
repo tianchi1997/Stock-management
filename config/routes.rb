@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get 'reports/locations/:id', to: 'reports#locations'
   get 'reports/stock_items/:id', to: 'reports#stock_items'
 
+  root to: 'locations#index'
 end
