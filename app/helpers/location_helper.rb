@@ -8,7 +8,7 @@ module LocationHelper
       end
       concat(content_tag(:td, nested_div(location.name, depth)))
       concat(content_tag(:td, location.description))
-      concat(content_tag(:td, link_to('Show', location)))
+      concat(content_tag(:td, (link_to('Show', location))))
       concat(content_tag(:td, link_to('Edit', edit_location_path(location))))
       concat(content_tag(:td, link_to('Add Sublocation', new_location_path(location_id: location.id))))
     end
