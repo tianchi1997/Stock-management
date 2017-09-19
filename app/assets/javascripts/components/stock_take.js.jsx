@@ -30,11 +30,14 @@ var StockTake = React.createClass({
           })
       })
   },
-
+ 
   render: function() {
+    const headerstyle = {
+      fontSize: '20px'
+    }
     return (
       <div>
-        <div>Location: {this.props.location_id}</div>
+        <div style={headerstyle}>Location: {this.props.location_id}</div>
         <div>Item name: {JSON.stringify(this.state.items.name)} Item description:{JSON.stringify(this.state.items.description)}</div>
       </div>
     );
