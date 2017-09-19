@@ -16,8 +16,8 @@
   <tbody>
     <% @items.each do |item| %>
       <tr>
-        <td><%= item.location %></td>
-        <td><%= item.stock_item %></td>
+        <td><%= item.location.name %></td>
+        <td><%= item.stock_item.name %></td>
         <td><%= item.required %></td>
         <td><%= item.order_to %></td>
         <td><%= link_to 'Show', item %></td>

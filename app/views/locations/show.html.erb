@@ -15,6 +15,22 @@
   <%= @location.description %>
 </p>
 
+<h2>Sublocations</h2>
+<table class="table">
+  <thead>
+    <tr >
+      <th class="border columnwidth">Name</th>
+      <th class="border columnwidth">Description</th>
+      <th colspan="3" class="border"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= nested_display @location.locations, :index_display, :locations %>
+  </tbody>
+</table>
+
+
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', locations_path %>
