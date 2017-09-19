@@ -2,7 +2,7 @@ module ApplicationHelper
   def nested_display(objects, object_display, child_attribute, depth = 0)
     capture do
       objects.map do | object |
-        concat send(object_display, objects[0], depth)
+        concat send(object_display, object, depth)
         concat nested_display(object.send(child_attribute), object_display, child_attribute, depth + 1)
       end.join.html_safe
     end
