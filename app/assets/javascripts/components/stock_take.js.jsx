@@ -38,7 +38,7 @@ var StockTake = React.createClass({
     return (
       <div>
         <div style={headerstyle}>Location: {this.props.location_id}</div>
-        <div>Item name: {JSON.stringify(this.state.items.name)} Item description:{JSON.stringify(this.state.items.description)}</div>
+        <div>Item name: {JSON.stringify(this.state.items.items)} Item description:{JSON.stringify(this.state.items.description)}</div>
       </div>
     );
   }
