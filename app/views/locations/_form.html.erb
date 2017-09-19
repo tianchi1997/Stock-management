@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :location_id %>
-    <%= form.text_field :location_id, id: :location_location_id %>
+    <%= form.label :parent_location %>
+    <%= form.text_field :name, id: :location_name, disabled: true, value: location.parent_name %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :location_id, id: :location_location_id %>
   </div>
 
   <div class="field">

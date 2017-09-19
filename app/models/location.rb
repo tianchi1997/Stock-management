@@ -16,4 +16,9 @@ class Location < ApplicationRecord
 
   # Scopes
   scope :roots, -> { where(location: nil) }
+
+  # Get parent name
+  def parent_name
+    location != nil ? location.name : "No Parent"
+  end
 end

@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Location:</strong>
-  <%= @location.location %>
+  <strong>Parent Location:</strong>
+  <%= @location.parent_name %>
 </p>
 
 <p>
@@ -16,4 +16,5 @@
 </p>
 
 <%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', locations_path %>
