@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
 
   def locations
   	@item = Location.find(params[:id]).items
-    #@gr_item = Location.find(params[:id]).items.group(:stock_item_id)
+    @gr_item = Location.find(params[:id]).items.group(:stock_item_id)
   end
 
   def stock_items
