@@ -1,7 +1,12 @@
 var Item = React.createClass({
-  handleChange(event) {
-    this.setState({value: event.target.required});
-    console.log(this.state);
+  getInitialState() {
+    return {
+      "item_expiries": [],
+      "stock_item": null,
+      "id": 0,
+      "location_id": 0,
+      "expires": false
+    };
   },
 
   handleSubmit(event) {
@@ -13,15 +18,14 @@ var Item = React.createClass({
     this.setState(this.props.item);
   },
 
+  expiryDisplay(item_expiry) {
+    return <div>{JSON.stringify(item_expiry)}</div>
+  },
+
   render: function() {
+    return <div>{JSON.stringify(this.state.item_expiries)}</div>
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="number" value={this.props.required} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      this.state.item_expiries.map(expiryDisplay)
     );
   }
 });
