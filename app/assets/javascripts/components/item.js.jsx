@@ -1,3 +1,4 @@
+
 var Item = React.createClass({
   getInitialState() {
     return {
@@ -16,29 +17,46 @@ var Item = React.createClass({
 
   componentDidMount() {
     this.setState(this.props.item);
-    
+
   },
-  componentWillReceiveProps(nextProps){
-    console.log("newprops",nextProps)
-    this.setState(nextProps.item, ()=>console.log("newpropsitem", nextProps.item));
+  componentWillReceiveProps(nextProps) {
+    console.log("newprops", nextProps)
+    this.setState(nextProps.item, () => console.log("newpropsitem", nextProps.item));
   },
 
   expiryDisplay(item_expiry) {
     return <div>{JSON.stringify(item_expiry)}</div>
   },
 
-  render: function() {
-    if(this.state.stock_item.name != []){
-    console.log("items_component name",this.state.stock_item)
-    return (
-      <div>
-        <div>{this.state.stock_item.name}</div>
-        <div>{JSON.stringify(this.state.item_expiries)}</div>
-        <div>{this.state.item_expiries.map(this.expiryDisplay)}</div>
-      </div>
-    );
+  render: function () {
+    if (this.state.stock_item.name != []) {
+      console.log("items_component name", this.state.stock_item)
+      const border = {
+        border: '3px solid black',
+      };
+      return (
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{this.state.stock_item.name}</td>
+                <td>{this.state.stock_item.description}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Quantity</h3>
+          <h3>Expiries</h3>
+          <div>{this.state.item_expiries.map(this.expiryDisplay)}</div>
+        </div>
+      );
     }
-    else{
+    else {
       return (
         <div></div>
       )

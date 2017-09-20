@@ -14,13 +14,16 @@
  *= require_self
  */
 
-.table {
+table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent;
 }
-
+th {
+  border-bottom: 2px black; 
+  border-bottom-style: solid;
+}
 .columnwidth{
   width: 35%;
 }
@@ -41,6 +44,7 @@
 tr:nth-child(even) {
     background-color: #f2f2f2
 }
+
 
 a {
   background-color: #abcdef;

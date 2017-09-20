@@ -1,4 +1,4 @@
-var Location = React.createClass({
+var Location = React.createClass({ 
   getInitialState() {
     return {
       "cur_item": 0,
@@ -8,7 +8,6 @@ var Location = React.createClass({
       "readytorender": 0
     };
   },
-
   componentWillMount() {
     //setting the context of 'this'
     var self = this;
@@ -24,10 +23,8 @@ var Location = React.createClass({
         } )
       })
   },
-
   nextitem() {
     var self = this
-   
     if(Object.keys(self.state.items).length>self.state.cur_item+1){
       self.setState({
         cur_item: self.state.cur_item += 1  
