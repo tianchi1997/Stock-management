@@ -1,16 +1,25 @@
 <h1>Reports#locations</h1>
 <p>Find me in app/views/reports/locations.html.erb</p>
 
-<table class = table>
+<table class = "table">
 	<tr>
-		<th>Location ID</th>
-		<th>Item Name</th>
-		<th>Required</th>
-	</tr>
-	<tr>
-		<td><%= Item.first.location.id %></td>
-		<td><%= Item.first.stock_item.name %></td>
-		<td><%= Item.first.required %></td>
-
-	</tr>
+		<th class="border">Location ID</th>
+		<th class="border">Item Name</th>
+		<th class="border">Amount</th>
+		<th class="border">Required</th>
+		<th class="border">Order To</th>
+	</tr>]
+	<% @item.each do |item| %>
+		<tr>
+			<td><%= item.location.id %></td>
+			<td><%= item.stock_item.name %></td>
+			<td><%= @item.where(:stock_item_id => item.stock_item_id).count %></td>
+			<td><%= item.required %></td>
+			<td><%= item.order_to %></td>
+		</tr>
+	<% end %>
 </table>
+
+<p>
+	<%=@item.group(:stock_item_id).count %>
+</p>
