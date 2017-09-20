@@ -2,6 +2,7 @@ class ItemExpiry < ApplicationRecord
   # Assocations
   belongs_to :item
   has_one :stock_item, through: :item
+  has_one :location, through: :item
   attr_readonly :item_id
 
   # Auditing
