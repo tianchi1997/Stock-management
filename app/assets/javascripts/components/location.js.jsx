@@ -18,10 +18,7 @@ var Location = React.createClass({
       //parse the response to json
       .then(function(response) { return response.json(); })
       .then(function(json) {
-        self.setState(json, () => {
-          //set a callback to log the change
-          console.log('updated state value', self.state.items);
-        })
+        self.setState(json)
         self.setState({readytorender: 1}, () => {
           console.log('readytorender',self.state.readytorender)
         } )
@@ -45,7 +42,7 @@ var Location = React.createClass({
   },
   render: function() {
       if(this.state.readytorender == 1){
-        console.log("currentitem",this.state.items[this.state.cur_item])  
+        console.log("item to pass to item component",this.state.items[this.state.cur_item])  
         return (
           <div>
             <Item item={this.state.items[this.state.cur_item]} />

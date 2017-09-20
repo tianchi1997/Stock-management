@@ -15,8 +15,12 @@ var Item = React.createClass({
   },
 
   componentDidMount() {
-    this.setState(this.props.item, ()=>console.log("item", this.state.item));
+    this.setState(this.props.item);
     
+  },
+  componentWillReceiveProps(nextProps){
+    console.log("newprops",nextProps)
+    this.setState(nextProps.item, ()=>console.log("newpropsitem", nextProps.item));
   },
 
   expiryDisplay(item_expiry) {
@@ -25,6 +29,7 @@ var Item = React.createClass({
 
   render: function() {
     if(this.state.stock_item.name != []){
+    console.log("items_component name",this.state.stock_item)
     return (
       <div>
         <div>{this.state.stock_item.name}</div>
