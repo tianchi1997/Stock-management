@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_stock_items_and_locations, only: [:new, :edit]
 
   # GET /items
   # GET /items.json
@@ -70,5 +71,10 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:location_id, :stock_item_id, :required, :order_to)
+    end
+
+    def set_stock_items_and_locations
+      @locations = Location.all.order(:name)
+      @stock_items = StockItem.all.order(:name)
     end
 end

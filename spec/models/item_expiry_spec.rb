@@ -10,6 +10,10 @@ RSpec.describe ItemExpiry, type: :model do
       is_expected.to have_one(:stock_item)
     end
 
+    it "has one location through item" do
+      is_expected.to have_one(:location)
+    end
+
     it "item ID is read only" do
       is_expected.to have_readonly_attribute(:item_id)
     end

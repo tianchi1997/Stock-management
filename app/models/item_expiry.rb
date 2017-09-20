@@ -2,6 +2,7 @@ class ItemExpiry < ApplicationRecord
   # Assocations
   belongs_to :item
   has_one :stock_item, through: :item
+  has_one :location, through: :item
   attr_readonly :item_id
 
   # Auditing
@@ -19,9 +20,9 @@ class ItemExpiry < ApplicationRecord
     end
 
     if item.stock_item.expires && expiry_date == nil
-      errors.add(:expiry_date, "must be set if stock item does not expire")
+      errors.add(:expiry_date, "must be set if stock item expires")
     elsif !item.stock_item.expires && expiry_date != nil
-      errors.add(:expiry_date, "cannot be set if stock item expires") 
+      errors.add(:expiry_date, "must not be set if stock item does not expire")
     end
   end
 end

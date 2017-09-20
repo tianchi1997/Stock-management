@@ -13,12 +13,13 @@
 
   <div class="field">
     <%= form.label :location_id %>
-    <%= form.text_field :location_id, id: :item_location_id %>
+    <%= form.collection_select :location_id, @locations, :id, :name %>
   </div>
+
 
   <div class="field">
     <%= form.label :stock_item_id %>
-    <%= form.text_field :stock_item_id, id: :item_stock_item_id %>
+    <%= form.collection_select :stock_item_id, @stock_items, :id, :name %>
   </div>
 
   <div class="field">
