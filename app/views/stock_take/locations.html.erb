@@ -1,2 +1,10 @@
-<h1>Stock Take</h1>
-<%= react_component('StockTake', location_ids: [@location.id]) %>
+
+<div class="container">
+<div class="pageheading">
+    <h1>Stock Take</h1>
+    <h2>Location: <%= @location.name %></h2>
+</div>
+<div>
+    <%= react_component('StockTake', location_ids: [@location.id]) %>
+</div>
+</div>

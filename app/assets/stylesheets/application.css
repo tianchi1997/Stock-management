@@ -36,9 +36,15 @@ th {
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding-right: 15px;
-  padding-left: 15px;
-  width: 90%;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 95%;
+}
+.pageheading {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
 }
 
 tr:nth-child(even) {
@@ -54,7 +60,13 @@ a {
   padding: 0.5rem;
   text-decoration: none;
 }
-
+input{
+  height: 2rem;
+  width: 70%;
+  border-color: #abcdef;
+  border-style: solid;
+  border-radius: 9px;
+}
 input[type="submit"] {
   background-color: #abcdef;
   text-align: center;
@@ -62,6 +74,12 @@ input[type="submit"] {
   display: inline-block;
   border-radius: 9px;
   padding: 0.5rem;
+}
+input[type="button"]{
+  background-color: green;
+  width: 10%;
+  height: 2.5rem;
+  border-style: none;
 }
 
 .nested_display {

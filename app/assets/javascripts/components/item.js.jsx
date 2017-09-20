@@ -6,6 +6,7 @@ var Item = React.createClass({
       "stock_item": [],
       "id": 0,
       "location_id": 0,
+      "order_to": 0,
       "expires": false
     };
   },
@@ -50,9 +51,15 @@ var Item = React.createClass({
               </tr>
             </tbody>
           </table>
-          <h3>Quantity</h3>
+          <h3>Quantity</h3> 
+          <input type="number" placeholder={this.state.order_to} ></input>
           <h3>Expiries</h3>
           <div>{this.state.item_expiries.map(this.expiryDisplay)}</div>
+          <label>Quantity</label>
+          <input type="number" placeholder={this.state.order_to} /> 
+          <label>Expiry Date</label>
+          <input type="date"/>  <input type="button" value="✓"></input>
+          
         </div>
       );
     }
