@@ -4,11 +4,12 @@ var Location = React.createClass({
       "cur_item": 0,
       "items": [],
       "id": 0,
-      "name": "name"
+      "name": "name",
+      "readytorender": 0
     };
   },
 
-  componentDidMount() {
+  componentWillMount() {
     //setting the context of 'this'
     var self = this;
     var fetchURL = "/locations/" + this.props.location_id + ".json";
@@ -21,17 +22,44 @@ var Location = React.createClass({
           //set a callback to log the change
           console.log('updated state value', self.state.items);
         })
+        self.setState({readytorender: 1}, () => {
+          console.log('readytorender',self.state.readytorender)
+        } )
       })
   },
 
-
-  render: function() {
-    var has_items = this.state.items.length != 0;
-    if (has_items) {
-      return <Item item={this.state.items[this.state.cur_item]} />;
-    } else {
-      return <div>No Items</div>;
+  nextitem() {
+    var self = this
+   
+    if(Object.keys(self.state.items).length>self.state.cur_item+1){
+      self.setState({
+        cur_item: self.state.cur_item += 1  
+      },() => console.log('incremented state', self.state.cur_item) )
     }
+    else{
+      window.alert("no more items")
+      self.setState({readytorender: 0}, () => {
+          console.log('readytorender',self.state.readytorender)
+        } )
+    }
+  },
+  render: function() {
+      if(this.state.readytorender == 1){
+        console.log("currentitem",this.state.items[this.state.cur_item])  
+        return (
+          <div>
+            <Item item={this.state.items[this.state.cur_item]} />
+            <button onClick={this.nextitem}>Next</button>
+          </div>
+        );
+      }
+      else{
+        return (
+          <div>Empty</div>
+        )
+      }
+    
+    
   }
 });
 

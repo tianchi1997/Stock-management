@@ -2,7 +2,7 @@ var Item = React.createClass({
   getInitialState() {
     return {
       "item_expiries": [],
-      "stock_item": null,
+      "stock_item": [],
       "id": 0,
       "location_id": 0,
       "expires": false
@@ -15,7 +15,8 @@ var Item = React.createClass({
   },
 
   componentDidMount() {
-    this.setState(this.props.item);
+    this.setState(this.props.item, ()=>console.log("item", this.state.item));
+    
   },
 
   expiryDisplay(item_expiry) {
@@ -23,10 +24,20 @@ var Item = React.createClass({
   },
 
   render: function() {
-    return <div>{JSON.stringify(this.state.item_expiries)}</div>
+    if(this.state.stock_item.name != []){
     return (
-      this.state.item_expiries.map(expiryDisplay)
+      <div>
+        <div>{this.state.stock_item.name}</div>
+        <div>{JSON.stringify(this.state.item_expiries)}</div>
+        <div>{this.state.item_expiries.map(this.expiryDisplay)}</div>
+      </div>
     );
+    }
+    else{
+      return (
+        <div></div>
+      )
+    }
   }
 });
 
