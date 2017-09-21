@@ -1,4 +1,4 @@
-<%= form_with(model: item, local: true) do |form| %>
+<%= bootstrap_form_for(@item) do |form| %>
   <% if item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -13,8 +13,7 @@
 
 
   <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location_name, id: :item_location_name, disabled: true, value: item.location.name %>
+    <%= form.text_field :location, id: :item_location_name, disabled: true, value: item.location.name %>
   </div>
 
   <div class="field">
@@ -22,17 +21,14 @@
   </div>
 
   <div class="field">
-    <%= form.label :stock_item_id %>
     <%= form.collection_select :stock_item_id, @stock_items, :id, :name %>
   </div>
 
   <div class="field">
-    <%= form.label :required %>
     <%= form.number_field :required, id: :item_required %>
   </div>
 
   <div class="field">
-    <%= form.label :order_to %>
     <%= form.number_field :order_to, id: :item_order_to %>
   </div>
 

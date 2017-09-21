@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :items
-  resources :item_expiries
+  resources :item_expiries, only: [:create, :update, :destroy], constraints: { format: 'json' }
   resources :locations
   resources :stock_items
   resources :users
