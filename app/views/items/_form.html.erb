@@ -11,11 +11,15 @@
     </div>
   <% end %>
 
+
   <div class="field">
-    <%= form.label :location_id %>
-    <%= form.collection_select :location_id, @locations, :id, :name %>
+    <%= form.label :location %>
+    <%= form.text_field :location_name, id: :item_location_name, disabled: true, value: item.location.name %>
   </div>
 
+  <div class="field">
+    <%= form.hidden_field :location_id, id: :item_location_id %>
+  </div>
 
   <div class="field">
     <%= form.label :stock_item_id %>

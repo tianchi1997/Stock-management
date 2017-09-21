@@ -16,6 +16,9 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    if params[:location_id]
+      @item.location_id = params[:location_id]
+    end
   end
 
   # GET /items/1/edit

@@ -16,18 +16,29 @@
 </p>
 
 <h2>Items</h2>
-<table class="table">
+<table class="table table-striped table-bordered table-hover">
   <thead>
-    <tr >
+    <tr>
       <th class="border columnwidth">Name</th>
-      <th class="border columnwidth">Description</th>
+      <th class="border columnwidth">Count</th>
+      <th class="border columnwidth">Order To</th>
+      <th class="border columnwidth">Current</th>
       <th colspan="3" class="border"></th>
     </tr>
   </thead>
 
   <tbody>
+    <% @location.items.each do |item| %>
+      <tr>
+        <td><%= item.stock_item.name %></td>
+        <td><%= item.required %></td>
+        <td><%= item.order_to %></td>
+        <td><%= item.item_expiries.sum(:count)  %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
+<%= link_to 'Add Item', new_item_path(location_id: @location) %>
 
 <h2>Sublocations</h2>
 <table class="table table-striped table-bordered table-hover">
@@ -40,7 +51,6 @@
   </thead>
 
   <tbody>
-    <%= nested_display @location.locations, :index_display, :locations %>
   </tbody>
 </table>
 
