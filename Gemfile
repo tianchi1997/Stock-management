@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -44,8 +45,10 @@ gem 'audited'
 gem 'paranoia'
 
 # Bootstrap
-gem 'bootstrap-sass', '3.3.6'
+gem 'rails-assets-bootstrap-sass'
+gem 'rails-assets-bootstrap-treeview'
 gem 'bootstrap_form'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
