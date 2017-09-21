@@ -2,7 +2,6 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /locations
-  # GET /locations.json
   def index
     @locations = Location.roots
   end
@@ -25,43 +24,29 @@ class LocationsController < ApplicationController
   end
 
   # POST /locations
-  # POST /locations.json
   def create
     @location = Location.new(location_params)
 
-    respond_to do |format|
-      if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
-        format.json { render :show, status: :created, location: @location }
-      else
-        format.html { render :new }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    if @location.save
+      redirect_to @location, notice: 'Location was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /locations/1
-  # PATCH/PUT /locations/1.json
   def update
-    respond_to do |format|
-      if @location.update(location_params)
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
-        format.json { render :show, status: :ok, location: @location }
-      else
-        format.html { render :edit }
-        format.json { render json: @location.errors, status: :unprocessable_entity }
-      end
+    if @location.update(location_params)
+      redirect_to @location, notice: 'Location was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /locations/1
-  # DELETE /locations/1.json
   def destroy
     @location.destroy
-    respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to locations_url, notice: 'Location was successfully destroyed.'
   end
 
   private

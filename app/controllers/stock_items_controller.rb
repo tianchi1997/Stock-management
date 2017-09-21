@@ -2,13 +2,11 @@ class StockItemsController < ApplicationController
   before_action :set_stock_item, only: [:show, :edit, :update, :destroy]
 
   # GET /stock_items
-  # GET /stock_items.json
   def index
     @stock_items = StockItem.all
   end
 
   # GET /stock_items/1
-  # GET /stock_items/1.json
   def show
   end
 
@@ -22,43 +20,29 @@ class StockItemsController < ApplicationController
   end
 
   # POST /stock_items
-  # POST /stock_items.json
   def create
     @stock_item = StockItem.new(stock_item_params)
 
-    respond_to do |format|
-      if @stock_item.save
-        format.html { redirect_to @stock_item, notice: 'Stock item was successfully created.' }
-        format.json { render :show, status: :created, location: @stock_item }
-      else
-        format.html { render :new }
-        format.json { render json: @stock_item.errors, status: :unprocessable_entity }
-      end
+    if @stock_item.save
+      redirect_to @stock_item, notice: 'Stock item was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /stock_items/1
-  # PATCH/PUT /stock_items/1.json
   def update
-    respond_to do |format|
-      if @stock_item.update(stock_item_params)
-        format.html { redirect_to @stock_item, notice: 'Stock item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @stock_item }
-      else
-        format.html { render :edit }
-        format.json { render json: @stock_item.errors, status: :unprocessable_entity }
-      end
+    if @stock_item.update(stock_item_params)
+      redirect_to @stock_item, notice: 'Stock item was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /stock_items/1
-  # DELETE /stock_items/1.json
   def destroy
     @stock_item.destroy
-    respond_to do |format|
-      format.html { redirect_to stock_items_url, notice: 'Stock item was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to stock_items_url, notice: 'Stock item was successfully destroyed.'
   end
 
   private
