@@ -1,20 +1,10 @@
+<%= javascript_tag do %>
+  var tree = <%== render partial: "locations/tree", formats: [:json], object: @locations, as: :locations %>;
+<% end %>
+
 <p id="notice"><%= notice %></p>
 <h1>Locations</h1>
-
-<table class="table">
-  <thead>
-    <tr >
-      <th class="columnwidth">Name</th>
-      <th class="columnwidth">Description</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td>Nested Display HERE</td>
-    </tr>
-  </tbody>
-</table>
+<div id="tree"></div>
 
 <br>
 <%= link_to 'New Location', new_location_path %>

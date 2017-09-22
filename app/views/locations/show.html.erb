@@ -1,3 +1,7 @@
+<%= javascript_tag do %>
+  var tree = <%== render partial: "locations/tree", formats: [:json], object: [@location], as: :locations %>;
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -40,19 +44,8 @@
 <%= link_to 'Add Item', new_item_path(location_id: @location) %>
 
 <h2>Sublocations</h2>
-<table class="table table-striped table-bordered table-hover">
-  <thead>
-    <tr >
-      <th class="border columnwidth">Name</th>
-      <th class="border columnwidth">Description</th>
-      <th colspan="3" class="border"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-  </tbody>
+  <div id="tree"></div>
 </table>
-
 
 
 <%= link_to 'Edit', edit_location_path(@location) %> |
