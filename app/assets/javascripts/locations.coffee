@@ -4,7 +4,8 @@
 
 ready = -> $('#tree').treeview({
   data: tree,
-  enableLinks: true
+  enableLinks: true,
+  levels: 3
 });
 
 $(document).ready(ready);
