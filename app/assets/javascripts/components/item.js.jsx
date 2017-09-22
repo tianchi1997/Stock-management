@@ -10,7 +10,8 @@ var Item = React.createClass({
       "required": 0,
       "expires": false,
       "readytorender": 0, //set to 1 when the item is loaded in
-      "formvalue": 0 //a variable storing which form value to show under quantity
+      "formvalue": 0, //a variable storing which form value to show under quantity
+      "expiryquantity": 0, //the quantity of the expired item.
     };
   },
 
@@ -46,8 +47,15 @@ var Item = React.createClass({
     this.setState({formvalue: event.target.value});
   },
   handleExpiry(event){
-
-    this.setState({item_expiries: this.state.item_expiries.push(event.target.)})
+    //0 and 1 simply state whether a number or an expiry was changed 
+    const type = event.target.name ==="number" ? 0 : 1;
+    if(type == 0){
+      this.state.expiryquantity = event.target.value
+    }
+    else {
+      //TODO: if expiry was entered
+    }
+    
   },
  
   render: function () {
