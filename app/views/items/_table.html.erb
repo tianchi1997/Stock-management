@@ -1,0 +1,22 @@
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Current</th>
+      <th>Required</th>
+      <th>Order To</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% items.each do |item| %>
+      <tr>
+        <td><%= item.send(name_type).name %></td>
+        <td><%= item.item_expiries.sum(:count)  %></td>
+        <td><%= item.required  %></td>
+        <td><%= item.order_to %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

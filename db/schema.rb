@@ -39,6 +39,18 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.bigint "group_id"
+    t.string "name", null: false
+    t.string "description"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_groups_on_deleted_at"
+    t.index ["group_id"], name: "index_groups_on_group_id"
+    t.index ["name"], name: "index_groups_on_name"
+  end
+
   create_table "item_expiries", force: :cascade do |t|
     t.bigint "item_id"
     t.datetime "expiry_date"
@@ -67,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   create_table "locations", force: :cascade do |t|
     t.bigint "location_id"
     t.string "name", null: false
+    t.integer "priority"
     t.string "description"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
@@ -74,10 +87,18 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.index ["deleted_at"], name: "index_locations_on_deleted_at"
     t.index ["location_id"], name: "index_locations_on_location_id"
     t.index ["name"], name: "index_locations_on_name"
+    t.index ["priority"], name: "index_locations_on_priority"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stock_items", force: :cascade do |t|
     t.string "name", null: false
+    t.string "item_code", null: false
     t.string "description"
     t.string "supplier"
     t.boolean "expires", null: false
@@ -85,10 +106,18 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_stock_items_on_deleted_at"
+    t.index ["item_code"], name: "index_stock_items_on_item_code"
     t.index ["name"], name: "index_stock_items_on_name"
   end
 
+  create_table "tests", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
+    t.string "name", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "permission_level", default: 0, null: false
@@ -108,9 +137,11 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
+  add_foreign_key "groups", "groups"
   add_foreign_key "item_expiries", "items"
   add_foreign_key "items", "locations"
   add_foreign_key "items", "stock_items"

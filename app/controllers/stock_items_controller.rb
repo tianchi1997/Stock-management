@@ -53,6 +53,6 @@ class StockItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_item_params
-      params.require(:stock_item).permit(:name, :description, :supplier, :expires)
+      params.require(:stock_item).permit(:item_code, :name, :description, :supplier, :expires)
     end
 end

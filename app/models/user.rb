@@ -8,5 +8,9 @@ class User < ApplicationRecord
   audited
 
   # Validations
+  validates :name, presence: true
   validates :permission_level, presence: true
+
+  # Scope
+  default_scope { order(name: :asc) }
 end

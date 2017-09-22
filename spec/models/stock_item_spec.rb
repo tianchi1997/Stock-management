@@ -16,6 +16,10 @@ RSpec.describe StockItem, type: :model do
   end
 
   describe "Validations" do
+    it "validates presence of item code" do
+      is_expected.to validate_presence_of :item_code
+    end
+
     it "validates presence of name" do
       is_expected.to validate_presence_of :name
     end
