@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_stock_items_and_locations, only: [:new, :edit]
+  before_action :set_stock_items, only: [:new, :edit, :create, :update]
 
   # GET /items/1
   def show
@@ -55,8 +55,7 @@ class ItemsController < ApplicationController
       params.require(:item).permit(:location_id, :stock_item_id, :required, :order_to)
     end
 
-    def set_stock_items_and_locations
-      @locations = Location.all.order(:name)
+    def set_stock_items
       @stock_items = StockItem.all.order(:name)
     end
 end

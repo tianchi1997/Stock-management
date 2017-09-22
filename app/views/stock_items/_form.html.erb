@@ -1,10 +1,10 @@
-<%= bootstrap_form_for(@stock_item) do |form| %>
-  <% if @stock_item.errors.any? %>
+<%= bootstrap_form_for(stock_item) do |form| %>
+  <% if stock_item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@stock_item.errors.count, "error") %> prohibited this @stock_item from being saved:</h2>
+      <h2><%= pluralize(stock_item.errors.count, "error") %> prohibited this stock_item from being saved:</h2>
 
       <ul>
-      <% @stock_item.errors.full_messages.each do |message| %>
+      <% stock_item.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -24,7 +24,7 @@
   </div>
 
   <div class="field">
-    <%= form.check_box :expires, id: :stock_item_expires, disabled: !@stock_item.new_record? %>
+    <%= form.check_box :expires, id: :stock_item_expires, disabled: !stock_item.new_record? %>
   </div>
 
   <div class="actions">
