@@ -18,7 +18,7 @@
         <td><%= stock_item.item_code %></td>
         <td><%= stock_item.name %></td>
         <td><%= stock_item.supplier %></td>
-        <td><%= stock_item.total %></td>
+        <td><%= stock_item.item_expiries.sum(:count) %></td>
       </tr>
     <% end %>
   </tbody>
