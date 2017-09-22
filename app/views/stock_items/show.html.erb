@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Item Code:</strong>
+  <%= @stock_item.item_code %>
+</p>
+
+<p>
   <strong>Name:</strong>
   <%= @stock_item.name %>
 </p>
@@ -19,6 +24,8 @@
   <strong>Expires:</strong>
   <%= @stock_item.expires %>
 </p>
+
+<%= render 'items/table', items: @stock_item.items, name_type: :location %>
 
 <%= link_to 'Edit', edit_stock_item_path(@stock_item) %> |
 <%= link_to 'Back', stock_items_path %>

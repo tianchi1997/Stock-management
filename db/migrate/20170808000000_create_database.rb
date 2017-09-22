@@ -3,6 +3,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     create_table :locations do |t|
       t.belongs_to :location, index: true, foreign_key: true, optional: true
       t.string :name, null: false, index: true
+      t.integer :priority, index: true
       t.string :description
 
       t.datetime :deleted_at, index: true
@@ -11,6 +12,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
 
     create_table :stock_items do |t|
       t.string :name, null: false, index: true
+      t.string :item_code, null: false, index: true
       t.string :description
       t.string :supplier
       t.boolean :expires, null: false
@@ -41,6 +43,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     end
 
     create_table :users do |t|
+      t.string :name,               null: false, index: true
       ## Database authenticatable
       t.string :email,              null: false, default: "", index: true
       t.string :encrypted_password, null: false, default: ""

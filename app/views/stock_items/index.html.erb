@@ -2,27 +2,23 @@
 
 <h1>Stock Items</h1>
 
-<table class='table'>
+<table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th class='border columnwidth'>Name</th>
-      <th class='border columnwidth'>Description</th>
-      <th class='border columnwidth'>Supplier</th>
-      <th class='border'>Expires</th>
-      <th class='border' colspan='3'></th>
+      <th>Item Code</th>
+      <th>Name</th>
+      <th>Supplier</th>
+      <th>Total</th>
     </tr>
   </thead>
 
   <tbody>
     <% @stock_items.each do |stock_item| %>
       <tr>
+        <td><%= stock_item.item_code %></td>
         <td><%= stock_item.name %></td>
-        <td><%= stock_item.description %></td>
         <td><%= stock_item.supplier %></td>
-        <td><%= stock_item.expires %></td>
-        <td><%= link_to 'Show', stock_item %></td>
-        <td><%= link_to 'Edit', edit_stock_item_path(stock_item) %></td>
-        <td><%= link_to 'Destroy', stock_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= stock_item.total %></td>
       </tr>
     <% end %>
   </tbody>

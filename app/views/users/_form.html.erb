@@ -12,17 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :email %>
+    <%= form.text_field :name, id: :user_name %>
+  </div>
+
+  <div class="field">
     <%= form.text_field :email, id: :user_email %>
   </div>
 
   <div class="field">
-    <%= form.label :password %>
     <%= form.password_field :password, id: :user_password %>
   </div>
 
   <div class="field">
-    <%= form.label :permission_level %>
     <%= form.number_field :permission_level, id: :user_permission_level %>
   </div>
 
