@@ -2,11 +2,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_stock_items_and_locations, only: [:new, :edit]
 
-  # GET /items
-  def index
-    @items = Item.all
-  end
-
   # GET /items/1
   def show
   end
