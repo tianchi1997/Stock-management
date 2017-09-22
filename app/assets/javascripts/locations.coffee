@@ -4,8 +4,9 @@
 
 ready = -> $('#tree').treeview({
   data: tree,
-  enableLinks: true,
-  levels: 3
+  levels: 3,
+  onNodeSelected: (event, data) ->
+    $("li[data-nodeid*=" + data.nodeId + "] a")[0].click();
 });
 
 $(document).ready(ready);
