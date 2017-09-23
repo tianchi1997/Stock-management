@@ -2,9 +2,9 @@
   var tree = <%== render partial: "locations/tree", formats: [:json], object: @locations, as: :locations %>;
 <% end %>
 
+
 <p id="notice"><%= notice %></p>
 <h1>Locations</h1>
 <div id="tree"></div>
 
-<br>
 <%= link_to 'New Location', new_location_path %>

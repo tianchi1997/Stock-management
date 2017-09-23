@@ -13,7 +13,7 @@
 
   <tbody>
     <% @users.each do |user| %>
-      <tr>
+      <tr class="clickable-row" data-url="<%= user_path(user) %>">
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.permission_level %></td>
@@ -21,7 +21,5 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
 
 <%= link_to 'New User', new_user_path %>

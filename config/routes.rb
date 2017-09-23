@@ -9,12 +9,9 @@ Rails.application.routes.draw do
   resources :stock_items
   resources :users
 
-  get 'stock_take', to: 'stock_take#index'
-  get 'stock_take/locations/:id', to: 'stock_take#locations'
-
-  get 'reports', to: 'reports#index'
-  get 'reports/locations/:id', to: 'reports#locations'
-  get 'reports/stock_items/:id', to: 'reports#stock_items'
+  get 'locations/:id/stock_take', to: 'stock_take#location', as: 'stock_take'
+  get 'locations/:id/report', to: 'reports#location', as: 'location_report'
+  get 'stock_items/:id/report', to: 'reports#stock_item', as: 'stock_item_report'
 
   root to: 'locations#index'
 end

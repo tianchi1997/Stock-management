@@ -11,6 +11,10 @@
 
   <body>
     <div class="container-fluid">
+      <ol class="breadcrumb">
+        <%= render_breadcrumbs :tag => :li, :separator => "" %>
+      </ol>
+
       <%= yield %>
     </div>
   </body>

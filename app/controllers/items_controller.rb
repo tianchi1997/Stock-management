@@ -11,11 +11,14 @@ class ItemsController < ApplicationController
     @item = Item.new
     if params[:location_id]
       @item.location_id = params[:location_id]
+      add_location_breadcrumb @item.location
+      add_breadcrumb "New Item", new_item_path(location_id: params[:location_id])
     end
   end
 
   # GET /items/1/edit
   def edit
+    add_breadcrumb "Edit", edit_item_path(@item)
   end
 
   # POST /items
@@ -48,6 +51,8 @@ class ItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
+      add_location_breadcrumb @item.location
+      add_breadcrumb @item.stock_item.name, item_path(@item)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

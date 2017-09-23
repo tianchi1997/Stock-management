@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  add_breadcrumb "Users", :users_path
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -13,10 +14,12 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    add_breadcrumb "New", new_user_path
   end
 
   # GET /users/1/edit
   def edit
+    add_breadcrumb "Edit", edit_user_path(@user)
   end
 
   # POST /users
@@ -53,6 +56,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      add_breadcrumb @user.name, user_path(@user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

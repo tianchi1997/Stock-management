@@ -1,16 +1,18 @@
 class ReportsController < ApplicationController
-  def index
-    @items = Item.all
+  def location
+    @location = Location.find(params[:id])
+    add_location_breadcrumb @location
+    add_breadcrumb "Report", location_report_path(params[:id])
+
+    @item = @location.items
+    @gr_item = @item.group(:stock_item_id)
   end
 
-  def show
-  end
+  def stock_item
+    @stock_item = StockItem.find(params[:id])
+    add_breadcrumb @stock_item.name, stock_item_path(@stock_item)
+    add_breadcrumb "Report", stock_item_report_path(params[:id])
 
-  def locations
-    @item = Location.find(params[:id]).items
-    @gr_item = Location.find(params[:id]).items.group(:stock_item_id)
-  end
-
-  def stock_items
+    // Do Stuff
   end
 end

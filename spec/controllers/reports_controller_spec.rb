@@ -1,24 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe ReportsController, type: :controller do
-
-  describe "GET #index" do
+  describe "GET #location" do
     it "returns http success" do
-      get :index
+      get :location
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET #locations" do
+  describe "GET #stock_item" do
     it "returns http success" do
-      get :locations
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET #stock_items" do
-    it "returns http success" do
-      get :stock_items
+      get :stock_item
       expect(response).to have_http_status(:success)
     end
   end

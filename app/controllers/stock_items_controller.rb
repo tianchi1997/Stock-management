@@ -1,4 +1,5 @@
 class StockItemsController < ApplicationController
+  add_breadcrumb "Stock Items", :stock_items_path
   before_action :set_stock_item, only: [:show, :edit, :update, :destroy]
 
   # GET /stock_items
@@ -13,10 +14,12 @@ class StockItemsController < ApplicationController
   # GET /stock_items/new
   def new
     @stock_item = StockItem.new
+    add_breadcrumb "New", new_stock_item_path
   end
 
   # GET /stock_items/1/edit
   def edit
+    add_breadcrumb "Edit", edit_stock_item_path(@stock_item)
   end
 
   # POST /stock_items
@@ -49,6 +52,7 @@ class StockItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_stock_item
       @stock_item = StockItem.find(params[:id])
+      add_breadcrumb @stock_item.name, stock_item_path(@stock_item)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

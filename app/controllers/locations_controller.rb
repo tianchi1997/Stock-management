@@ -16,11 +16,15 @@ class LocationsController < ApplicationController
     @location = Location.new
     if params[:location_id]
       @location.location_id = params[:location_id]
+      add_location_breadcrumb @location.location
     end
+
+    add_breadcrumb "New Sublocation", new_location_path
   end
 
   # GET /locations/1/edit
   def edit
+    add_breadcrumb "Edit", edit_location_path(@location)
   end
 
   # POST /locations
@@ -53,6 +57,7 @@ class LocationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_location
       @location = Location.find(params[:id])
+      add_location_breadcrumb @location
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

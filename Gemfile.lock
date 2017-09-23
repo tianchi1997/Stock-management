@@ -50,6 +50,7 @@ GEM
     bcrypt (3.1.11-x86-mingw32)
     bindex (0.5.0)
     bootstrap_form (2.7.0)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (9.1.0)
     coffee-rails (4.2.2)
@@ -238,6 +239,7 @@ DEPENDENCIES
   audited
   bcrypt (~> 3.1.7)
   bootstrap_form
+  breadcrumbs_on_rails
   byebug
   coffee-rails (~> 4.2)
   database_cleaner
