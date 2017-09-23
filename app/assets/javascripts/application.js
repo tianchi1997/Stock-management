@@ -22,4 +22,3 @@
 //= require bootstrap-treeview
 
 //= require_tree .
-

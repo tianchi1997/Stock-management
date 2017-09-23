@@ -10,7 +10,7 @@
 
   <tbody>
     <% items.each do |item| %>
-      <tr>
+      <tr class="clickable-row" data-url='<%= url_for(item) %>'>
         <td><%= item.send(name_type).name %></td>
         <td><%= item.item_expiries.sum(:count)  %></td>
         <td><%= item.required  %></td>
