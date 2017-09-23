@@ -20,16 +20,17 @@ var Item = React.createClass({
     event.preventDefault();
     console.log("submit",event.target.name)
   },
+
   getFormValue(){
     //default to getting no. required
     this.setState({formvalue: this.state.required},() => console.log("formvalue", this.state.formvalue))
   },
+
   componentDidMount() {
     this.setState(this.props.item,() => this.getFormValue());
     this.setState({readytorender: 1})
-    
-
   },
+
   componentWillReceiveProps(nextProps) {
     console.log("newprops", nextProps)
     this.setState(nextProps.item, () => console.log("newpropsitem", nextProps.item));
@@ -43,9 +44,11 @@ var Item = React.createClass({
         <div>Expiry: {JSON.stringify(item_expiry.expiry_date)} </div>
       </div> );
   },
+
   handleQuantity(event){
     this.setState({formvalue: event.target.value});
   },
+
   handleExpiry(event){
     //0 and 1 simply state whether a number or an expiry was changed 
     const type = event.target.name ==="number" ? 0 : 1;
@@ -87,7 +90,7 @@ var Item = React.createClass({
             <label>Quantity</label>
             <input type="number" name="quantity" value={this.state.required} onChange={this.handleExpiry}/> 
             <label>Expiry Date</label>
-            <input type="date" name="expiry" value={} onChange={this.handleExpiry}/>  <input type="submit" value="✓"></input>
+            <input type="date" name="expiry" value={this.state.item_expiries[0].expiry} onChange={this.handleExpiry}/>  <input type="submit" value="✓"></input>
           </form>
         </div>
       );
