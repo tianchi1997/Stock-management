@@ -1,0 +1,17 @@
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Count</th>
+      <th>Expiry</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% item_expiries.each do |item_expiry| %>
+      <tr>
+        <td><%= item_expiry.count  %></td>
+        <td><%= item_expiry.expiry_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
