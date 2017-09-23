@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :tests
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'home#index'
+  get 'home/index'
+
   devise_for :users
 
   resources :items, except: [:index]
@@ -13,5 +15,4 @@ Rails.application.routes.draw do
   get 'locations/:id/report', to: 'reports#location', as: 'location_report'
   get 'stock_items/:id/report', to: 'reports#stock_item', as: 'stock_item_report'
 
-  root to: 'locations#index'
 end

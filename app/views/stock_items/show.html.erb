@@ -24,8 +24,9 @@
   <strong>Expires:</strong>
   <%= @stock_item.expires %>
 </p>
+<%= link_to 'Report', stock_item_report_path(@stock_item) %> |
+<%= link_to 'Edit', edit_stock_item_path(@stock_item) %>
 
 <h2>Items</h2>
 <%= render 'items/table', items: @stock_item.items, name_type: :location %>
 
-<%= link_to 'Edit', edit_stock_item_path(@stock_item) %>

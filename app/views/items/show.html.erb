@@ -19,8 +19,8 @@
   <strong>Order to:</strong>
   <%= @item.order_to %>
 </p>
+<%= link_to 'Edit', edit_item_path(@item) %>
 
 <h2>Expiries</h2>
 <%= render 'item_expiries/table', item_expiries: @item.item_expiries %>
 
-<%= link_to 'Edit', edit_item_path(@item) %>

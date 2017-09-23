@@ -12,7 +12,5 @@ class ReportsController < ApplicationController
     @stock_item = StockItem.find(params[:id])
     add_breadcrumb @stock_item.name, stock_item_path(@stock_item)
     add_breadcrumb "Report", stock_item_report_path(params[:id])
-
-    // Do Stuff
   end
 end

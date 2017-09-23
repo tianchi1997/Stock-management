@@ -19,6 +19,11 @@
   <%= @location.description %>
 </p>
 
+<%= link_to 'Stock Take', stock_take_path(@location) %> |
+<%= link_to 'Report', location_report_path(@location) %> |
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' } %>
+
 <h2>Items</h2>
 <%= render 'items/table', items: @location.items, name_type: :stock_item %>
 <%= link_to 'Add Item', new_item_path(location_id: @location) %>
@@ -26,8 +31,5 @@
 <h2>Sublocations</h2>
   <div id="tree"></div>
 </table>
+<%= link_to 'Add Sublocation', new_location_path(location_id: @location) %>
 
-
-<%= link_to 'Add Sublocation', new_location_path(location_id: @location) %> |
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' } %>
