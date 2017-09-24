@@ -1,59 +1,74 @@
 var Location = React.createClass({ 
   getInitialState() {
     return {
-      "cur_item": 0,
-      "items": [],
-      "id": 0,
-      "name": "name",
-      "readytorender": 0
+      name: "",
+      curItem: -1,
+      items: [],
+      id: this.props.locationID,
     };
   },
-  componentWillMount() {
+
+  loadLocation(locationID) {
     //setting the context of 'this'
     var self = this;
-    var fetchURL = "/locations/" + this.props.location_id + ".json";
+    var fetchURL = "/locations/" + locationID + ".json";
+
     //fetch the items associated with the location
     fetch(fetchURL, { credentials: 'include' })
       //parse the response to json
       .then(function(response) { return response.json(); })
       .then(function(json) {
-        self.setState(json)
-        self.setState({readytorender: 1}, () => {
-          console.log('readytorender',self.state.readytorender)
-        } )
+        json.curItem = 0;
+        self.setState(json);
       })
   },
-  nextitem() {
-    var self = this
-    if(Object.keys(self.state.items).length>self.state.cur_item+1){
-      self.setState({
-        cur_item: self.state.cur_item += 1  
-      },() => console.log('incremented state', self.state.cur_item) )
-    }
-    else{
-      window.alert("no more items")
-      self.setState({readytorender: 0}, () => {
-          console.log('readytorender',self.state.readytorender)
-        } )
+
+  componentWillMount() {
+    this.loadLocation(this.props.locationID);
+  },
+
+  componentWillReceiveProps(newProps) {
+    this.loadLocation(newProps.locationID);
+  },
+
+  prevItem() {
+    if (this.state.curItem == -1) {
+      alert("Loading...");
+    } else if (this.state.curItem == 0) {
+      alert("Error: No Previous Items");
+    } else {
+      this.setState((prevState, props) => ({
+        curItem: prevState.curItem - 1
+      }));
     }
   },
+
+  nextItem() {
+    if (this.state.curItem == -1) {
+      alert("Loading...");
+    } else if (this.state.curItem == this.state.items.length - 1) {
+      alert("Error: No More Items");
+    } else {
+      this.setState((prevState, props) => ({
+        curItem: prevState.curItem + 1
+      }));
+    }
+  },
+
   render: function() {
-      if(this.state.readytorender == 1){
-        console.log("item to pass to item component",this.state.items[this.state.cur_item])  
-        return (
-          <div>
-            <Item item={this.state.items[this.state.cur_item]} />
-            <button onClick={this.nextitem}>Next</button>
-          </div>
-        );
-      }
-      else{
-        return (
-          <div>Empty</div>
-        )
-      }
-    
-    
+    if(this.state.curItem != -1){
+      return (
+        <div>
+          <Item item={this.state.items[this.state.curItem]} />
+          <button onClick={this.prevItem} className="btn">Previous</button>
+          <button onClick={this.nextItem} className="btn">Next</button>
+        </div>
+      );
+    } else{
+      return (
+        <div>Empty</div>
+      )
+    }
   }
 });
 
