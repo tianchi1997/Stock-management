@@ -1,13 +1,13 @@
 class LocationsController < ApplicationController
   load_and_authorize_resource
 
-  add_breadcrumb "Locations", :locations_path
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
 
   # GET /locations
   def index
     @locations = Location.roots
+    add_breadcrumb "Locations", :locations_path
   end
 
   # GET /locations/1
@@ -21,9 +21,11 @@ class LocationsController < ApplicationController
     if params[:location_id]
       @location.location_id = params[:location_id]
       add_location_breadcrumb @location.location
+    else
+      add_breadcrumb "Locations", :locations_path
     end
 
-    add_breadcrumb "New Sublocation", new_location_path
+    add_breadcrumb "New", new_location_path
   end
 
   # GET /locations/1/edit
@@ -54,7 +56,11 @@ class LocationsController < ApplicationController
   # DELETE /locations/1
   def destroy
     @location.destroy
-    redirect_to locations_url, notice: 'Location was successfully destroyed.'
+    if @location.location == nil
+      redirect_to locations_url, notice: 'Location was successfully destroyed.'
+    else
+      redirect_to location_path(@location.location), notice: 'Location was successfully destroyed.'
+    end
   end
 
   private

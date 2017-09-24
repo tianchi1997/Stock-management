@@ -24,8 +24,21 @@
   <strong>Expires:</strong>
   <%= @stock_item.expires %>
 </p>
-<%= link_to 'Report', stock_item_report_path(@stock_item) %> |
-<%= link_to 'Edit', edit_stock_item_path(@stock_item) %>
+
+<% links = [] %>
+<% if can? :stock_item, :report %>
+  <% links.push(link_to 'Report', stock_item_report_path(@stock_item)) %>
+<% end %>
+
+<% if can? :edit, @stock_item %>
+  <% links.push(link_to 'Edit', edit_stock_item_path(@stock_item)) %>
+<% end %>
+
+<% if can? :destroy, @stock_item %>
+  <% links.push(link_to 'Delete', @stock_item, method: :delete, data: { confirm: 'Are you sure?' }) %>
+<% end %>
+
+<%== links.join(' | ') %>
 
 <h2>Items</h2>
 <%= render 'items/table', items: @stock_item.items, name_type: :location %>

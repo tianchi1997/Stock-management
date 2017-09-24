@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def add_location_breadcrumb(location)
+    add_breadcrumb "Locations", locations_path
     locations = []
     while location != nil
       locations.push(location)
