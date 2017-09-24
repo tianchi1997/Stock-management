@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_item_expiries_on_deleted_at"
+    t.index ["item_id", "expiry_date"], name: "item_expiry_index", unique: true
     t.index ["item_id"], name: "index_item_expiries_on_item_id"
   end
 

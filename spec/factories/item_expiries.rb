@@ -10,7 +10,7 @@ FactoryGirl.define do
 
     after(:build, :stub) do |item_expiry, evaluator|
       if evaluator.expires && item_expiry.expiry_date == nil
-        item_expiry.expiry_date = DateTime.now + 2.weeks
+        item_expiry.expiry_date = Date.today + 2.weeks
       end
     end
   end

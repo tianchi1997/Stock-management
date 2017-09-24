@@ -11,6 +11,7 @@ class ItemExpiry < ApplicationRecord
 
   # Validations
   validates :count, presence: true
+  validates :expiry_date, uniqueness: { scope: :item_id }
   validate :expiry_date_valid
 
   private
