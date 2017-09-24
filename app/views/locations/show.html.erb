@@ -2,8 +2,6 @@
   var tree = <%== render partial: "locations/tree", formats: [:json], object: @location.locations, as: :locations %>;
 <% end %>
 
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Parent Location:</strong>
   <%= @location.parent_name %>
@@ -24,7 +22,7 @@
   <% links.push(link_to 'Stock Take', stock_take_path(@location)) %>
 <% end %>
 
-<% if can? :location, :report %>
+<% if can? :location, :reports %>
   <% links.push(link_to 'Report', location_report_path(@location)) %>
 <% end %>
 

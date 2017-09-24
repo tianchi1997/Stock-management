@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Item Code:</strong>
   <%= @stock_item.item_code %>
@@ -26,7 +24,7 @@
 </p>
 
 <% links = [] %>
-<% if can? :stock_item, :report %>
+<% if can? :stock_item, :reports %>
   <% links.push(link_to 'Report', stock_item_report_path(@stock_item)) %>
 <% end %>
 

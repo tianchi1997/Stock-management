@@ -8,6 +8,7 @@
 
 User.create!([
   { name: "Admin", email: "admin@example.com", password: "password", "permission_level": 2 },
+  { name: "Reports", email: "reports@example.com", password: "password", "permission_level": 1 },
   { name: "User", email: "user@example.com", password: "password", "permission_level": 0 }
 ])
 
