@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   add_breadcrumb "Home", :root_path
 
+  protected
   def add_location_breadcrumb(location)
-    add_breadcrumb "Locations", :locations_path
     locations = []
     while location != nil
       locations.push(location)

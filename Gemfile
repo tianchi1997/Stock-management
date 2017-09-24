@@ -37,7 +37,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'react-rails'
 
 # Devise for authentication
-gem 'devise'
+gem 'devise', '~> 4.3.0'
+gem 'cancancan'
 
 # Audited and act_as_paranoid for audit logs
 gem 'audited'
