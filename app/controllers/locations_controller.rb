@@ -1,6 +1,9 @@
 class LocationsController < ApplicationController
+  load_and_authorize_resource
+
   add_breadcrumb "Locations", :locations_path
   before_action :set_location, only: [:show, :edit, :update, :destroy]
+
 
   # GET /locations
   def index

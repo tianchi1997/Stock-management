@@ -1,4 +1,6 @@
 class StockTakeController < ApplicationController
+  authorize_resource class: false
+
   def location
     @location = Location.find(params[:id])
     add_location_breadcrumb @location

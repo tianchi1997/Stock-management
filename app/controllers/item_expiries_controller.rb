@@ -1,4 +1,6 @@
 class ItemExpiriesController < ApplicationController
+  load_and_authorize_resource
+
   before_action :set_item_expiry, only: [:update, :destroy]
 
   # POST /item_expiries.json
