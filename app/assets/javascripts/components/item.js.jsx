@@ -1,8 +1,20 @@
-
 var Item = React.createClass({
   getInitialState() {
-    newState = this.props.item;
-    newState.total = this.getTotal(newState.itemExpiries);
+    return this.getNewStateFromProps(this.props);
+  },
+
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.getNewStateFromProps(nextProps));
+  },
+
+  getNewStateFromProps(props) {
+    newState = props.item;
+    newState.quantity = Math.max(this.getTotal(newState.itemExpiries), newState.required);
+
+    newState.itemExpiries = newState.itemExpiries.sort(function(a, b) {
+      return new Date(a.expiryDate) - new Date(b.expiryDate);
+    });
 
     return newState;
   },
@@ -13,25 +25,57 @@ var Item = React.createClass({
     }, 0);
   },
 
-  getFormValue(){
-    return Math.max(this.state.required, this.state.total);
+  onExpiryDateChange(event) {
+    newItemExpiries = this.state.itemExpiries;
+    newItemExpiries[event.target.dataset.id].expiryDate = event.target.value;
+
+    this.setState({
+      itemExpiries: newItemExpiries
+    });
   },
 
-  componentWillReceiveProps(nextProps) {
-    newState = nextProps.item;
-    newState.total = this.getTotal(newState.itemExpiries);
+  onCountChange(event) {
+    newItemExpiries = this.state.itemExpiries;
+    newItemExpiries[event.target.dataset.id].count = event.target.value;
 
-    this.setState(newState);
+    this.setState({
+      itemExpiries: newItemExpiries
+    });
   },
 
-  expiryForm(itemExpiry) {
+  onQuantityChange(event) {
+    this.setState({quantity: event.target.value});
+  },
+
+  addExpiry() {
+    newItemExpiries = this.state.itemExpiries;
+    newItemExpiries.push({
+      count: 1,
+      expiryDate: ""
+    });
+
+    this.setState({
+      itemExpiries: newItemExpiries
+    });
+  },
+
+  removeExpiry(event) {
+    newItemExpiries = this.state.itemExpiries
+    newItemExpiries.splice(event.target.dataset.id, 1);
+
+    this.setState({
+      itemExpiries: newItemExpiries
+    });
+  },
+
+  expiryForm(itemExpiry, index) {
     return (
-      <form name="expiry" onSubmit={this.handleSubmit}>
+      <form name="expiry">
         <label>Quantity</label>
-        <input type="number" name="count" value={itemExpiry.count} />
+        <input type="number" name="count" value={itemExpiry.count} data-id={index} onChange={this.onCountChange} />
         <label>Expiry Date</label>
-        <input type="date" name="expiryDate" value={itemExpiry.expiryDate} />
-        <input type="submit" value="✓" />
+        <input type="date" name="expiryDate" value={itemExpiry.expiryDate} onChange={this.onExpiryDateChange} data-id={index} />
+        <button type="button" onClick={this.removeExpiry} className="btn" data-id={index}>x</button>
       </form>
     );
   },
@@ -41,9 +85,11 @@ var Item = React.createClass({
     expiries = null;
 
     if (this.state.stockItem.expires) {
-      expiries = this.state.itemExpiries.map((itemExpiry) =>
-        <div key={itemExpiry.id}>
-          {self.expiryForm(itemExpiry)}
+      itemExpiries = this.state.itemExpiries;
+
+      expiries = itemExpiries.map((itemExpiry, index) =>
+        <div key={index}>
+          {self.expiryForm(itemExpiry, index)}
         </div>
       );
 
@@ -51,6 +97,8 @@ var Item = React.createClass({
         <div>
           <h3>Expiries</h3>
           {expiries}
+
+          <button onClick={this.addExpiry} className="btn">Add Expiry</button>
         </div>
       );
     }
@@ -61,7 +109,6 @@ var Item = React.createClass({
           <thead>
             <tr>
               <th>Name</th>
-              <th>Description</th>
             </tr>
           </thead>
           <tbody>
@@ -71,9 +118,9 @@ var Item = React.createClass({
           </tbody>
         </table>
 
-        <form name="quantity" onSubmit={this.handleSubmit}>
+        <form name="quantity">
           <h3>Quantity</h3> 
-          <input type="number" value={this.getFormValue()} onChange={this.handleQuantity}></input><input type="submit" value="✓"></input>
+          <input type="number" value={this.state.quantity} onChange={this.onQuantityChange}></input>
         </form>
 
         {expiries}
