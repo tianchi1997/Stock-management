@@ -3,8 +3,8 @@ var Item = React.createClass({
     return this.getNewStateFromProps(this.props);
   },
 
-
   componentWillReceiveProps(nextProps) {
+    this.saveState();
     this.setState(this.getNewStateFromProps(nextProps));
   },
 
@@ -19,6 +19,45 @@ var Item = React.createClass({
     return newState;
   },
 
+  saveState() {
+    console.log(this.state);
+    if (this.state.stockItem.expires) {
+      total = this.getTotal(this.state.itemExpiries);
+      if (total != this.state.quantity) {
+        setTimeout(function() { alert("Quantity does not match total"); }, 1);
+        return false;
+      } else {
+        // Validate items and save
+        //
+        //
+
+      }
+    } else {
+      this.saveItemExpiry({
+        itemID: this.state.id,
+        expiryDate: null,
+        count: this.state.quantity
+      });
+    }
+
+    this.props.callback(this.props.itemIndex, this.state.expiries);
+  },
+
+  itemExpiryValid(itemExpiry) {
+    if (this.state.stockItem.expires) {
+      if (itemExpiry.expiryDate != null && itemExpiry.expiryDate >= new Date()) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  },
+
+  saveItemExpiry(itemExpiry) {
+  },
+
   getTotal(itemExpiries) {
     return itemExpiries.reduce(function(total, expiry) {
       return total + expiry.count;
@@ -28,6 +67,7 @@ var Item = React.createClass({
   onExpiryDateChange(event) {
     newItemExpiries = this.state.itemExpiries;
     newItemExpiries[event.target.dataset.id].expiryDate = event.target.value;
+    newItemExpiries[event.target.dataset.id].changed = false;
 
     this.setState({
       itemExpiries: newItemExpiries
@@ -36,7 +76,8 @@ var Item = React.createClass({
 
   onCountChange(event) {
     newItemExpiries = this.state.itemExpiries;
-    newItemExpiries[event.target.dataset.id].count = event.target.value;
+    newItemExpiries[event.target.dataset.id].count = parseInt(event.target.value);
+    newItemExpiries[event.target.dataset.id].changed = true;
 
     this.setState({
       itemExpiries: newItemExpiries
@@ -44,7 +85,7 @@ var Item = React.createClass({
   },
 
   onQuantityChange(event) {
-    this.setState({quantity: event.target.value});
+    this.setState({quantity: parseInt(event.target.value)});
   },
 
   addExpiry() {

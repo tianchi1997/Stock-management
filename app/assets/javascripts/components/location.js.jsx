@@ -23,6 +23,13 @@ var Location = React.createClass({
       })
   },
 
+  updateItemExpiryState(itemIndex, newExpiries) {
+    newState = this.state;
+    newState.items[itemIndex].expiries = newExpiries;
+
+    this.state = newState;
+  },
+
   componentWillMount() {
     this.loadLocation(this.props.locationID);
   },
@@ -59,7 +66,10 @@ var Location = React.createClass({
     if(this.state.curItem != -1){
       return (
         <div>
-          <Item item={this.state.items[this.state.curItem]} />
+          <Item item={this.state.items[this.state.curItem]}
+                callback={this.updateItemExpiryState}
+                itemIndex={this.state.curItem}
+          />
           <button onClick={this.prevItem} className="btn">Previous</button>
           <button onClick={this.nextItem} className="btn">Next</button>
         </div>
