@@ -1,5 +1,11 @@
 <h1>Reports:  locations</h1>
-<h2>Location ID: <%= @item.first.location_id %> Name: <%= @item.first.location.name %></h2>
+<%# If location has no items page breaks. #TODO! %>
+<% if @items%>
+  <h2>Location ID: <%= @items.first.location_id %> Name: <%= @location.name %></h2>
+<%#Workaround:%>
+<% else %>
+  <h2> Name: <%=@location.name%></h2>
+<%end%>
 
 <table class="table">
   <tr>
