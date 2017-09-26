@@ -15,10 +15,17 @@ class Location < ApplicationRecord
   validates :name, presence: true
 
   # Scopes
+  default_scope { order(:priority, :name) }
+
   scope :roots, -> { where(location: nil) }
 
   # Get parent name
   def parent_name
     location != nil ? location.name : "No Parent"
   end
+
+  def self_and_descendants
+    return ([self] + locations.map { |loc| loc.self_and_descendants}).flatten
+  end
 end
+
