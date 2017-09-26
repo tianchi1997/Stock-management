@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :save_expiries]
   before_action :set_stock_items, only: [:new, :edit, :create, :update]
 
   # GET /items/1
@@ -47,6 +47,22 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     redirect_to location_path(@item.location), notice: 'Item was successfully destroyed.'
+  end
+
+  def save_expiries
+    json = JSON.parse(request.body.read, symbolize_names: true)
+    json = json.group_by { |expiry| expiry[:expiryDate] }
+    item_expiries = []
+
+    json.each do |date, expiries|
+      total = expiries.map { |expiry| expiry[:count] }.sum
+      item_expiries.push(ItemExpiry.new(item: @item, expiry_date: date, count: total))
+    end
+
+    if item_expiries.all? { |item_expiry| item_expiry.valid? }
+      ItemExpiry.where(item: @item).destroy_all
+      item_expiries.each(&:save)
+    end
   end
 
   private

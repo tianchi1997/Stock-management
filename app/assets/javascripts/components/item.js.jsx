@@ -4,58 +4,16 @@ var Item = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    this.saveState();
     this.setState(this.getNewStateFromProps(nextProps));
   },
 
   getNewStateFromProps(props) {
     newState = props.item;
-    newState.quantity = Math.max(this.getTotal(newState.itemExpiries), newState.required);
-
-    newState.itemExpiries = newState.itemExpiries.sort(function(a, b) {
-      return new Date(a.expiryDate) - new Date(b.expiryDate);
-    });
+    if (!newState.quantity) {
+      newState.quantity = Math.max(this.getTotal(newState.itemExpiries), newState.required);
+    }
 
     return newState;
-  },
-
-  saveState() {
-    console.log(this.state);
-    if (this.state.stockItem.expires) {
-      total = this.getTotal(this.state.itemExpiries);
-      if (total != this.state.quantity) {
-        setTimeout(function() { alert("Quantity does not match total"); }, 1);
-        return false;
-      } else {
-        // Validate items and save
-        //
-        //
-
-      }
-    } else {
-      this.saveItemExpiry({
-        itemID: this.state.id,
-        expiryDate: null,
-        count: this.state.quantity
-      });
-    }
-
-    this.props.callback(this.props.itemIndex, this.state.expiries);
-  },
-
-  itemExpiryValid(itemExpiry) {
-    if (this.state.stockItem.expires) {
-      if (itemExpiry.expiryDate != null && itemExpiry.expiryDate >= new Date()) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  },
-
-  saveItemExpiry(itemExpiry) {
   },
 
   getTotal(itemExpiries) {
@@ -69,9 +27,10 @@ var Item = React.createClass({
     newItemExpiries[event.target.dataset.id].expiryDate = event.target.value;
     newItemExpiries[event.target.dataset.id].changed = false;
 
-    this.setState({
-      itemExpiries: newItemExpiries
-    });
+    newState = this.state;
+    newState.itemExpiries = newItemExpiries;
+
+    this.props.callback(this.props.itemIndex, newState);
   },
 
   onCountChange(event) {
@@ -79,34 +38,33 @@ var Item = React.createClass({
     newItemExpiries[event.target.dataset.id].count = parseInt(event.target.value);
     newItemExpiries[event.target.dataset.id].changed = true;
 
-    this.setState({
-      itemExpiries: newItemExpiries
-    });
+    newState = this.state;
+    newState.itemExpiries = newItemExpiries;
+
+    this.props.callback(this.props.itemIndex, newState);
   },
 
   onQuantityChange(event) {
-    this.setState({quantity: parseInt(event.target.value)});
+    newState = this.state;
+    newState.quantity = parseInt(event.target.value);
+
+    this.props.callback(this.props.itemIndex, newState);
   },
 
   addExpiry() {
-    newItemExpiries = this.state.itemExpiries;
-    newItemExpiries.push({
-      count: 1,
+    newState = this.state;
+    newState.itemExpiries.push({
+      count: 0,
       expiryDate: ""
     });
 
-    this.setState({
-      itemExpiries: newItemExpiries
-    });
+    this.props.callback(this.props.itemIndex, newState);
   },
 
   removeExpiry(event) {
     newItemExpiries = this.state.itemExpiries
     newItemExpiries.splice(event.target.dataset.id, 1);
-
-    this.setState({
-      itemExpiries: newItemExpiries
-    });
+    this.props.callback(this.props.itemIndex, newItemExpiries);
   },
 
   expiryForm(itemExpiry, index) {

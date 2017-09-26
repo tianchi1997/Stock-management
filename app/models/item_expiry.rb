@@ -6,13 +6,14 @@ class ItemExpiry < ApplicationRecord
   attr_readonly :item_id
 
   # Auditing
-  acts_as_paranoid
   audited associated_with: :item
 
   # Validations
   validates :count, presence: true
-  validates :expiry_date, uniqueness: { scope: :item_id }
   validate :expiry_date_valid
+
+  # Scopes
+  default_scope { order(expiry_date: :asc) }
 
   private
   def expiry_date_valid
