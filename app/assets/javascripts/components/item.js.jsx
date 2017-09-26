@@ -1,19 +1,56 @@
 var Item = React.createClass({
   getInitialState() {
-    return this.getNewStateFromProps(this.props);
+    return {
+      stockItem: {
+        name: "",
+        expires: false
+      },
+      itemExpiries: [],
+      required: 0,
+      quantity: 0,
+      error: ""
+    };
   },
 
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.getNewStateFromProps(nextProps));
+  componentWillMount() {
+    this.loadItem(this.props.itemID);
   },
 
-  getNewStateFromProps(props) {
-    newState = props.item;
-    if (!newState.quantity) {
-      newState.quantity = Math.max(this.getTotal(newState.itemExpiries), newState.required);
-    }
+  componentWillReceiveProps(newProps) {
+    this.loadItem(newProps.itemID);
+  },
 
-    return newState;
+  loadItem(itemID) {
+    // Setting the context of 'this'
+    var self = this;
+    var fetchURL = "/items/" + itemID + ".json";
+
+    // Fetch the items associated with the location
+    fetch(fetchURL, { credentials: 'include' })
+      // Parse the response to json
+      .then(function(response) { return response.json(); })
+      .then(function(json) {
+        total = 0;
+        if (!json.stockItem.expires) {
+          if (json.itemExpiries.length) {
+            total = json.itemExpiries[0].count;
+            json.itemExpiries = [];
+          } else {
+            total = 0;
+          }
+        } else {
+          total = self.getTotal(json.itemExpiries);
+        }
+
+        maximum = json.orderTo ? json.orderTo : json.required;
+        json.current = total;
+
+        json.quantity = Math.max(total, json.required);
+        json.quantity = Math.min(maximum, json.quantity);
+        json.errors = "";
+
+        self.setState(json);
+    })
   },
 
   getTotal(itemExpiries) {
@@ -22,107 +59,151 @@ var Item = React.createClass({
     }, 0);
   },
 
-  onExpiryDateChange(event) {
-    newItemExpiries = this.state.itemExpiries;
-    newItemExpiries[event.target.dataset.id].expiryDate = event.target.value;
-    newItemExpiries[event.target.dataset.id].changed = false;
+  saveItem() {
+    fetchURL = "/items/" + this.state.id + "/save_expiries";
+    itemExpiries = this.state.itemExpiries.slice();
 
-    newState = this.state;
-    newState.itemExpiries = newItemExpiries;
+    if (!this.state.stockItem.expires) {
+      itemExpiries = [{
+        expiryDate: null,
+        count: this.state.quantity
+      }];
+    } else {
+      total = this.getTotal(this.state.itemExpiries);
+      if (total != this.state.quantity) {
+        this.setState({errors: "Quantity does not match total"});
+        return false;
+      }
+    }
 
-    this.props.callback(this.props.itemIndex, newState);
-  },
+    fetch(fetchURL, {
+      credentials: 'include',
+      method: 'post',
+      body: JSON.stringify(itemExpiries)
+    })
 
-  onCountChange(event) {
-    newItemExpiries = this.state.itemExpiries;
-    newItemExpiries[event.target.dataset.id].count = parseInt(event.target.value);
-    newItemExpiries[event.target.dataset.id].changed = true;
-
-    newState = this.state;
-    newState.itemExpiries = newItemExpiries;
-
-    this.props.callback(this.props.itemIndex, newState);
+    return true;
   },
 
   onQuantityChange(event) {
-    newState = this.state;
-    newState.quantity = parseInt(event.target.value);
+    this.setState({
+      quantity: parseInt(event.target.value),
+      errors: ""
+    })
 
-    this.props.callback(this.props.itemIndex, newState);
+    event.preventDefault();
+  },
+
+  updateCount(expiryIndex, newCount) {
+    newItemExpiries = this.state.itemExpiries.slice();
+    newItemExpiries[expiryIndex] = {
+      expiryDate: this.state.itemExpiries[expiryIndex].expiryDate,
+      count: newCount
+    };
+
+    this.setState({
+      itemExpiries: newItemExpiries,
+      errors: ""
+    });
+  },
+
+  updateExpiry(expiryIndex, newExpiry) {
+    newItemExpiries = this.state.itemExpiries.slice();
+    newItemExpiries[expiryIndex] = {
+      expiryDate: newExpiry,
+      count: this.state.itemExpiries[expiryIndex].count
+    };
+
+    this.setState({
+      itemExpiries: newItemExpiries,
+      errors: ""
+    });
   },
 
   addExpiry() {
-    newState = this.state;
-    newState.itemExpiries.push({
-      count: 0,
-      expiryDate: ""
+    newItemExpiries = this.state.itemExpiries.slice();
+    newItemExpiries.push({
+      expiryDate: new Date().today,
+      count: 1
     });
 
-    this.props.callback(this.props.itemIndex, newState);
+    this.setState({
+      itemExpiries: newItemExpiries,
+      errors: ""
+    });
   },
 
-  removeExpiry(event) {
-    newItemExpiries = this.state.itemExpiries
-    newItemExpiries.splice(event.target.dataset.id, 1);
-    this.props.callback(this.props.itemIndex, newItemExpiries);
+  removeExpiry(expiryIndex) {
+    newItemExpiries = this.state.itemExpiries.slice();
+    newItemExpiries.splice(expiryIndex, 1);
+    this.setState({
+      itemExpiries: newItemExpiries,
+      errors: ""
+    });
   },
 
-  expiryForm(itemExpiry, index) {
-    return (
-      <form name="expiry">
-        <label>Quantity</label>
-        <input type="number" name="count" value={itemExpiry.count} data-id={index} onChange={this.onCountChange} />
-        <label>Expiry Date</label>
-        <input type="date" name="expiryDate" value={itemExpiry.expiryDate} onChange={this.onExpiryDateChange} data-id={index} />
-        <button type="button" onClick={this.removeExpiry} className="btn" data-id={index}>x</button>
-      </form>
-    );
+  prevItem() {
+    if (this.saveItem()) {
+      this.props.prevItem();
+    }
   },
 
-  render: function () {
-    var self = this;
-    expiries = null;
+  nextItem() {
+    if (this.saveItem()) {
+      this.props.nextItem();
+    }
+  },
+
+  preventDefault(event) {
+    event.preventDefault();
+  },
+
+  render() {
+    self = this;
+
+    expiries = "";
+    button = "";
 
     if (this.state.stockItem.expires) {
-      itemExpiries = this.state.itemExpiries;
-
-      expiries = itemExpiries.map((itemExpiry, index) =>
-        <div key={index}>
-          {self.expiryForm(itemExpiry, index)}
-        </div>
-      );
-
-      expiries = (
+      expiries = this.state.itemExpiries.map(function(itemExpiry, index) {
+        return (
+          <ItemExpiry
+            key={index}
+            expiryIndex={index}
+            itemExpiry={itemExpiry}
+            removeExpiry={self.removeExpiry}
+            updateExpiry={self.updateExpiry}
+            updateCount={self.updateCount}
+          />
+        );
+      });
+      button = (
         <div>
-          <h3>Expiries</h3>
-          {expiries}
-
-          <button onClick={this.addExpiry} className="btn">Add Expiry</button>
+          <button onClick={this.addExpiry} className="btn">Add expiry</button>
         </div>
       );
     }
 
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{this.state.stockItem.name}</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <form name="quantity">
-          <h3>Quantity</h3> 
-          <input type="number" value={this.state.quantity} onChange={this.onQuantityChange}></input>
+        <h2>{this.state.stockItem.name}</h2>
+        <p>Current (To be removed): {this.state.current}</p>
+        <p>Required: {this.state.required}</p>
+        <p>Order To: {this.state.orderTo}</p>
+        <form onSubmit={this.preventDefault}>
+          <label>Quantity:</label>
+          <input type="number" name="quantity"
+                 value={this.state.quantity}
+                 onChange={this.onQuantityChange}
+          />
         </form>
-
-        {expiries}
+        <div>
+          {expiries}
+          {button}
+        </div>
+        <button onClick={this.prevItem} className="btn">Previous</button>
+        <button onClick={this.nextItem} className="btn">Next</button>
+        <p>{this.state.errors}</p>
       </div>
     );
   }
