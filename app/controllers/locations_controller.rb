@@ -18,9 +18,9 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
-    if params[:location_id]
-      @location.location_id = params[:location_id]
-      add_location_breadcrumb @location.location
+    if params[:parent_id]
+      @location.parent = Location.find(id: :parent_id)
+      add_location_breadcrumb @location.parent
     else
       add_breadcrumb "Locations", :locations_path
     end
@@ -56,10 +56,10 @@ class LocationsController < ApplicationController
   # DELETE /locations/1
   def destroy
     @location.destroy
-    if @location.location == nil
+    if @location.parent == nil
       redirect_to locations_url, notice: 'Location was successfully destroyed.'
     else
-      redirect_to location_path(@location.location), notice: 'Location was successfully destroyed.'
+      redirect_to location_path(@location.parent), notice: 'Location was successfully destroyed.'
     end
   end
 
@@ -72,6 +72,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:location_id, :name, :priority, :description)
+      params.require(:location).permit(:parent_id, :name, :position, :description)
     end
 end

@@ -16,7 +16,7 @@
   </div>
 
   <div class="field">
-    <%= form.hidden_field :location_id, id: :location_location_id %>
+    <%= form.hidden_field :parent_id, id: :location_parent_id %>
   </div>
 
   <div class="field">
@@ -25,6 +25,10 @@
 
   <div class="field">
     <%= form.text_field :description, id: :location_description %>
+  </div>
+
+  <div class="field">
+    <%= form.number_field :position, id: :location_position %>
   </div>
 
   <div class="actions">

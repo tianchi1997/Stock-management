@@ -52,6 +52,9 @@ gem 'bootstrap_form'
 # Breadcrumbs
 gem 'breadcrumbs_on_rails'
 
+# Nested locations
+gem 'awesome_nested_set'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

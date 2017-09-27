@@ -1,10 +1,13 @@
 class CreateDatabase < ActiveRecord::Migration[5.1]
   def change
     create_table :locations do |t|
-      t.belongs_to :location, index: true, foreign_key: true, optional: true
       t.string :name, null: false, index: true
-      t.integer :priority, index: true
+      t.integer :position, index: true
       t.string :description
+
+      t.integer :parent_id, null: true, index: true
+      t.integer :lft, null: false, index: true
+      t.integer :rgt, null: false, index: true
 
       t.datetime :deleted_at, index: true
       t.timestamps

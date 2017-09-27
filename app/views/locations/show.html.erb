@@ -1,5 +1,5 @@
 <%= javascript_tag do %>
-  var tree = <%== render partial: "locations/tree", formats: [:json], object: @location.locations, as: :locations %>;
+  var tree = <%== render partial: "locations/tree", formats: [:json], object: @location.children, as: :locations %>;
 <% end %>
 
 <p>

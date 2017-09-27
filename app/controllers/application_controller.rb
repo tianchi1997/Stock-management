@@ -11,13 +11,8 @@ class ApplicationController < ActionController::Base
   protected
   def add_location_breadcrumb(location)
     add_breadcrumb "Locations", locations_path
-    locations = []
-    while location != nil
-      locations.push(location)
-      location = location.location
-    end
 
-    locations.reverse.each do |location|
+    location.ancestors.each do |location|
       add_breadcrumb location.name, location_path(location)
     end
   end

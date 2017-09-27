@@ -2,16 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Location, type: :model do
   describe "Assocations" do
-    it "belongs to location" do
-      is_expected.to belong_to(:location)
-    end
-
     it "has many items and destroys dependents" do
       is_expected.to have_many(:items).dependent(:destroy)
-    end
-
-    it "has many locations and destroys dependents" do
-      is_expected.to have_many(:locations).dependent(:destroy)
     end
 
     it "has many stock items through items" do
@@ -23,7 +15,7 @@ RSpec.describe Location, type: :model do
     end
 
     it "location ID is read only" do
-      is_expected.to have_readonly_attribute(:location_id)
+      is_expected.to have_readonly_attribute(:parent_id)
     end
   end
 

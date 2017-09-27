@@ -43,10 +43,8 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.bigint "item_id"
     t.date "expiry_date"
     t.integer "count", null: false
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["deleted_at"], name: "index_item_expiries_on_deleted_at"
     t.index ["item_id", "expiry_date"], name: "item_expiry_index", unique: true
     t.index ["item_id"], name: "index_item_expiries_on_item_id"
   end
@@ -66,17 +64,21 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.bigint "location_id"
     t.string "name", null: false
-    t.integer "priority"
+    t.integer "position"
     t.string "description"
+    t.integer "parent_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_locations_on_deleted_at"
-    t.index ["location_id"], name: "index_locations_on_location_id"
+    t.index ["lft"], name: "index_locations_on_lft"
     t.index ["name"], name: "index_locations_on_name"
-    t.index ["priority"], name: "index_locations_on_priority"
+    t.index ["parent_id"], name: "index_locations_on_parent_id"
+    t.index ["position"], name: "index_locations_on_position"
+    t.index ["rgt"], name: "index_locations_on_rgt"
   end
 
   create_table "stock_items", force: :cascade do |t|
@@ -121,5 +123,4 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   add_foreign_key "item_expiries", "items"
   add_foreign_key "items", "locations"
   add_foreign_key "items", "stock_items"
-  add_foreign_key "locations", "locations"
 end
