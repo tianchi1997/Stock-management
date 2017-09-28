@@ -13,7 +13,7 @@ class ItemExpiry < ApplicationRecord
   validate :expiry_date_valid
 
   # Scopes
-  default_scope { order(expiry_date: :asc) }
+  scope :ordered, -> { order(expiry_date: :asc) }
 
   private
   def expiry_date_valid

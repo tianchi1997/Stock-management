@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170808000000) do
 
   create_table "locations", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "position"
+    t.integer "position", default: 0, null: false
     t.string "description"
     t.string "ancestry"
     t.datetime "deleted_at"

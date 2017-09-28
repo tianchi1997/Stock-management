@@ -16,9 +16,6 @@ class Location < ApplicationRecord
   # Nested set
   has_ancestry orphan_strategy: :destroy
 
-  # Scope
-  default_scope { order(:position) }
-
   # Get parent name
   def parent_name
     parent != nil ? parent.name : "No Parent"

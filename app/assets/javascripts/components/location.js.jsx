@@ -47,6 +47,7 @@ var Location = React.createClass({
     if(this.state.curItem != -1){
       return (
         <div>
+          <div>{this.state.name}</div>
           <Item
             itemID={this.state.items[this.state.curItem].id}
             prevItem={this.prevItem}
@@ -56,7 +57,7 @@ var Location = React.createClass({
       );
     } else{
       return (
-        <div>Empty</div>
+        <div>{this.state.name}</div>
       )
     }
   }

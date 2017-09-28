@@ -8,4 +8,11 @@ namespace :db do
       conn.drop_table(table, force: :cascade)
     end
   end
+
+  desc "Recreate all tables"
+  task :recreate => :environment do
+    Rake::Task["db:clear"].invoke
+    Rake::Task["db:migrate"].invoke
+    Rake::Task["db:seed"].invoke
+  end
 end

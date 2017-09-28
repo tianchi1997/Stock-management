@@ -2,7 +2,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
   def change
     create_table :locations do |t|
       t.string :name, null: false, index: true
-      t.integer :position, index: true
+      t.integer :position, index: true, null: false, default: 0
       t.string :description
 
       t.string :ancestry, index: true

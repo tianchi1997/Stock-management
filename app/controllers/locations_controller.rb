@@ -7,13 +7,13 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     add_breadcrumb "Locations", :locations_path
-    @locations_tree = Location.all.arrange
+    @locations_tree = Location.arrange(order: [:position, :name, :id])
   end
 
   # GET /locations/1
   # GET /locations/1.json
   def show
-    @locations_tree = @location.descendants.arrange
+    @locations_tree = @location.descendants.arrange(order: [:position, :name, :id])
   end
 
   # GET /locations/new

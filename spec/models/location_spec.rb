@@ -14,8 +14,8 @@ RSpec.describe Location, type: :model do
       is_expected.to have_many(:item_expiries)
     end
 
-    it "location ID is read only" do
-      is_expected.to have_readonly_attribute(:parent_id)
+    it "ancestry is read only" do
+      is_expected.to have_readonly_attribute(:ancestry)
     end
   end
 
