@@ -2,12 +2,21 @@ class ReportsController < ApplicationController
   authorize_resource class: false
 
   def location
-    @location = Location.find(params[:id])
-    add_location_breadcrumb @location
-    add_breadcrumb "Report", location_report_path(params[:id])
+    @items=Location.find(params[:id]).items.joins(:location).joins(:stock_item).joins(:item_expiries).where(location: Location.find(params[:id])).group(:stock_item).sum(:count)
 
-    @item = @location.items
-    @gr_item = @item.group(:stock_item_id)
+    add_location_breadcrumb Location.find(params[:id])
+    add_breadcrumb "Report", location_report_path(params[:id])
+    
+    #if params[:order_to]
+     # @location=item.joins(:location).joins(:stock_item).joins(:item_expiries).where(location: Location.find(params[:id])).group(:stock_item).sum(:count)
+    #end
+    #if params[:expiry]
+    #  @location=item.joins(:location).joins(:stock_item).joins(:item_expiries).where(location: Location.find(params[:id]),:expires => (params[:expires]).group(:stock_item).sum(:count)
+    #end
+
+    #@item=@location.items
+    #@gr_item=item.group(:stock_item_id)
+
   end
 
   def stock_item
