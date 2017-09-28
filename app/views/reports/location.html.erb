@@ -1,12 +1,9 @@
 <h1>Reports:  locations</h1>
 <%# If location has no items page breaks. #TODO! %>
-<% if @item%>
-  <h2>Location ID: <%= @item.first.location_id %> Name: <%= @location.name %></h2>
-<%#Workaround:%>
-<% else %>
-  <h2> Name: <%=@location.name%></h2>
-<%end%>
-
+<% if @items%>
+  <h2>Location ID: <%#=  %> Name: <%#=  %></h2>
+<% end %>
+<%=@items%>
 <table class="table">
   <tr>
     <th class="border">Stock Item</th>
@@ -14,13 +11,14 @@
     <th class="border">Amount</th>
     <th class="border">Order To</th>
   </tr>
-  <% @gr_item.order(:stock_item_id).count.each do |count|  %>
-  <% @item %>
+  <%# @gr_item.order(:stock_item_id).count.each do |count|  %>
+  
+  <% @items.each do|entry| %>
     <tr>
-      <td><%= @item.where(:stock_item_id => count[0]).first.stock_item.name %></td>
-      <td><%= count[0] %></td>
-      <td><%= count[1] %>   /<%= @item.where(:stock_item_id => count[0]).first.required %></td>
-      <td><%= @item.where(:stock_item_id => count[0]).first.order_to %></td>
+      <td><%= entry.first.name %></td>
+      <td><%#=entry.first.Stock_Item_id %></td>
+      <td><%#=entry.first  %>/</td>
+      <td><%#=entry.first.  %></td>
     </tr>
-  <% end -%>
+  <% end %>
 </table>
