@@ -1,5 +1,5 @@
 <%= javascript_tag do %>
-  var tree = <%== render partial: "locations/tree", formats: [:json], object: @location.children, as: :locations %>;
+  var tree = <%== render partial: "locations/tree", formats: [:json], object: @locations_tree, as: :locations_tree %>;
 <% end %>
 
 <p>
@@ -39,6 +39,8 @@
 
 <h2>Items</h2>
 <%= render 'items/table', items: @location.items, name_type: :stock_item %>
+
+
 
 <% if can? :create, Item %>
   <%= link_to 'Add Item', new_item_path(location_id: @location) %>

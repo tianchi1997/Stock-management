@@ -5,9 +5,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.integer :position, index: true
       t.string :description
 
-      t.integer :parent_id, null: true, index: true
-      t.integer :lft, null: false, index: true
-      t.integer :rgt, null: false, index: true
+      t.string :ancestry, index: true
 
       t.datetime :deleted_at, index: true
       t.timestamps

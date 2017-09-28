@@ -6,13 +6,14 @@ class LocationsController < ApplicationController
 
   # GET /locations
   def index
-    @locations = Location.roots
     add_breadcrumb "Locations", :locations_path
+    @locations_tree = Location.all.arrange
   end
 
   # GET /locations/1
   # GET /locations/1.json
   def show
+    @locations_tree = @location.descendants.arrange
   end
 
   # GET /locations/new

@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def add_location_breadcrumb(location)
     add_breadcrumb "Locations", locations_path
 
-    location.ancestors.each do |location|
+    location.path.each do |location|
       add_breadcrumb location.name, location_path(location)
     end
   end

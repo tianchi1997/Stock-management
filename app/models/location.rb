@@ -4,7 +4,7 @@ class Location < ApplicationRecord
   has_many :locations, dependent: :destroy
   has_many :stock_items, through: :items
   has_many :item_expiries, through: :items
-  attr_readonly :parent_id
+  attr_readonly :ancestry
 
   # Auditing
   acts_as_paranoid
@@ -14,7 +14,10 @@ class Location < ApplicationRecord
   validates :name, presence: true
 
   # Nested set
-  acts_as_nested_set dependent: :destroy, order_column: :position
+  has_ancestry orphan_strategy: :destroy
+
+  # Scope
+  default_scope { order(:position) }
 
   # Get parent name
   def parent_name

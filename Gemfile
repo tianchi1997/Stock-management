@@ -53,7 +53,7 @@ gem 'bootstrap_form'
 gem 'breadcrumbs_on_rails'
 
 # Nested locations
-gem 'awesome_nested_set'
+gem 'ancestry', '~> 3.0.1'
 
 
 group :development, :test do

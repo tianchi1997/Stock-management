@@ -67,18 +67,14 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.string "name", null: false
     t.integer "position"
     t.string "description"
-    t.integer "parent_id"
-    t.integer "lft", null: false
-    t.integer "rgt", null: false
+    t.string "ancestry"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_locations_on_ancestry"
     t.index ["deleted_at"], name: "index_locations_on_deleted_at"
-    t.index ["lft"], name: "index_locations_on_lft"
     t.index ["name"], name: "index_locations_on_name"
-    t.index ["parent_id"], name: "index_locations_on_parent_id"
     t.index ["position"], name: "index_locations_on_position"
-    t.index ["rgt"], name: "index_locations_on_rgt"
   end
 
   create_table "stock_items", force: :cascade do |t|
