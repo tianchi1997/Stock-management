@@ -3,11 +3,6 @@
 <% end %>
 
 <p>
-  <strong>Parent Location:</strong>
-  <%= @location.parent_name %>
-</p>
-
-<p>
   <strong>Name:</strong>
   <%= @location.name %>
 </p>
@@ -38,8 +33,7 @@
 
 
 <h2>Items</h2>
-<%= render 'items/table', items: @location.items, name_type: :stock_item %>
-
+<%= render 'application/table', table: @items_table, headers: ["Name", "Current", "Required", "Order To"] %>
 
 
 <% if can? :create, Item %>

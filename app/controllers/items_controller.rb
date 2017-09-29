@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   def show
+    @item = Item.eager_load(:item_expiries).find(params[:id])
   end
 
   # GET /items/new
