@@ -8,9 +8,9 @@ class ReportsController < ApplicationController
     add_location_breadcrumb Location.find(params[:id])
     add_breadcrumb "Report", location_report_path(params[:id])
     
-    #if params[:order_to]
-     # @location=item.joins(:location).joins(:stock_item).joins(:item_expiries).where(location: Location.find(params[:id])).group(:stock_item).sum(:count)
-    #end
+    if params[:order_to]
+     @items_table = Item.joins(:location).joins(:stock_item).joins(:item_expiries).where(location: Location.find(params[:id])).where("order_to != ?",0).group("stock_items.id, items.id").order("stock_items.name").pluck("items.id, stock_items.name, SUM(item_expiries.count), items.required, items.order_to")
+    end
     #if params[:expiry]
     #  @location=item.joins(:location).joins(:stock_item).joins(:item_expiries).where(location: Location.find(params[:id]),:expires => (params[:expires]).group(:stock_item).sum(:count)
     #end
