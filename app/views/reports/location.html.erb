@@ -1,9 +1,5 @@
 <h1>Reports:  locations</h1>
-<%# If location has no items page breaks. #TODO! %>
-<% if @items%>
-  <h2>Location ID: <%#=  %> Name: <%#=  %></h2>
-<% end %>
-<%=@items%>
+  <h2>Location ID: <%= params[:id]  %></h2> 
 <table class="table">
   <tr>
     <th class="border">Stock Item</th>
@@ -11,14 +7,14 @@
     <th class="border">Amount</th>
     <th class="border">Order To</th>
   </tr>
-  <%# @gr_item.order(:stock_item_id).count.each do |count|  %>
   
-  <% @items.each do|entry| %>
+  
+  <% for i in 0..@items_table.length-1 %>
     <tr>
-      <td><%= entry.first.name %></td>
-      <td><%#=entry.first.Stock_Item_id %></td>
-      <td><%#=entry.first  %>/</td>
-      <td><%#=entry.first.  %></td>
+      <td><%= @items_table[i][1] %></td>
+      <td><%= @items_table[i][2] %></td>
+      <td><%= @items_table[i][3] %>/<%= @items_table[i][4]%></td>
+      <td><%= @items_table[i][5]  %></td>
     </tr>
   <% end %>
 </table>
