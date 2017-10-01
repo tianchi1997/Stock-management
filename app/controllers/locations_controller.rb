@@ -14,13 +14,7 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @locations_tree = @location.descendants.arrange(order: [:position, :name, :id])
-    @items_table = Item.joins(:location).joins(:stock_item).joins(:item_expiries)
-      .where(location: @location).group("stock_items.id, items.id").order("stock_items.name")
-      .pluck("items.id, stock_items.name, SUM(item_expiries.count), items.required, items.order_to")
-
-    @items_table.each do |row|
-      row[0] = item_path(row[0])
-    end
+    @items = Item.summary_with_order(@location.items, "stock_items.name")
   end
 
   # GET /locations/new

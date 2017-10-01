@@ -14,6 +14,15 @@ class StockItem < ApplicationRecord
   validates :expires, inclusion: { in: [ true, false ] }
   validates_associated :item_expiries
 
-  # Total Virtual Attribute
+  # Virtual Attributes
   attribute :total, :integer
+  attribute :required, :integer
+  attribute :order_to, :integer
+
+  def self.summary(stock_items)
+    return stock_items
+      .joins(items: [:item_expiries])
+      .select("stock_items.*, SUM(items.required) as required, SUM(COALESCE(items.order_to, items.required)) as order_to, SUM(item_expiries.count) as total")
+      .group(:id)
+  end
 end

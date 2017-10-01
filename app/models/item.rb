@@ -17,7 +17,12 @@ class Item < ApplicationRecord
   # Total Virtual Attribute
   attribute :total, :integer
 
-  def self.summary(items)
-    return ItemExpiry.select("item_id, SUM(count) as count").where(item: items).group(:item_id).includes(item: [:stock_item, :location])
+  def self.summary_with_order(items, order)
+    return items
+      .joins(:item_expiries)
+      .select("items.*, SUM(item_expiries.count) as total")
+      .group("items.id, stock_items.id, locations.id")
+      .includes(:stock_item, :location)
+      .order(order)
   end
 end

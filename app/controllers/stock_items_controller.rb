@@ -6,11 +6,12 @@ class StockItemsController < ApplicationController
 
   # GET /stock_items
   def index
-    @stock_items = StockItem.all
+    @stock_items = StockItem.summary(StockItem.all)
   end
 
   # GET /stock_items/1
   def show
+    @items = Item.summary_with_order(@stock_item.items, "locations.name")
   end
 
   # GET /stock_items/new

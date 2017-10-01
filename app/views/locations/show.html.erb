@@ -33,7 +33,7 @@
 
 
 <h2>Items</h2>
-<%= render 'application/table', table: @items_table, headers: ["Name", "Current", "Required", "Order To"] %>
+<%= render 'items/table', items: @items, name_type: :stock_item %>
 
 
 <% if can? :create, Item %>
