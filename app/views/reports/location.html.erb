@@ -12,9 +12,9 @@
   <% for i in 0..@items_table.length-1 %>
     <tr>
       <td><%= @items_table[i][1] %></td>
-      <td><%= @items_table[i][2] %></td>
-      <td><%= @items_table[i][3] %>/<%= @items_table[i][4]%></td>
-      <td><%= @items_table[i][5]  %></td>
+      <td><%= @items_table[i][0] %></td>
+      <td><%= @items_table[i][2] %>/<%= @items_table[i][3]%></td>
+      <td><%= @items_table[i][4]  %></td>
     </tr>
   <% end %>
 </table>
