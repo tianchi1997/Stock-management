@@ -1,5 +1,6 @@
 <h1>Reports:  locations</h1>
-  <h2>Location ID: <%= params[:id]  %></h2> 
+<h2>Location ID: <%= params[:id]  %></h2> 
+
 <table class="table">
   <tr>
     <th class="border">Stock Item</th>
@@ -7,14 +8,14 @@
     <th class="border">Amount</th>
     <th class="border">Order To</th>
   </tr>
-  
-  
-  <% for i in 0..@items_table.length-1 %>
+
+
+  <% @items.each do |item| %>
     <tr>
-      <td><%= @items_table[i][1] %></td>
-      <td><%= @items_table[i][0] %></td>
-      <td><%= @items_table[i][2] %>/<%= @items_table[i][3]%></td>
-      <td><%= @items_table[i][4]  %></td>
+      <td><%= item.stock_item.name %></td>
+      <td><%= item.stock_item.id %></td>
+      <td><%= item.total %>/<%= item.required %></td>
+      <td><%= item.order_to  %></td>
     </tr>
   <% end %>
 </table>
