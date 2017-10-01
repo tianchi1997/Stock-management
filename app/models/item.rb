@@ -14,6 +14,9 @@ class Item < ApplicationRecord
   # Validations
   validates :required, presence: true
 
+  # Total Virtual Attribute
+  attribute :total, :integer
+
   def self.summary(items)
     return ItemExpiry.select("item_id, SUM(count) as count").where(item: items).group(:item_id).includes(item: [:stock_item, :location])
   end

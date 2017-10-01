@@ -141,6 +141,8 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_select_on_includes (0.5.6)
+      activerecord (>= 5)
     railties (5.1.4)
       actionpack (= 5.1.4)
       activesupport (= 5.1.4)
@@ -252,6 +254,7 @@ DEPENDENCIES
   rails (~> 5.1.3)
   rails-assets-bootstrap-sass
   rails-assets-bootstrap-treeview
+  rails_select_on_includes
   react-rails
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)

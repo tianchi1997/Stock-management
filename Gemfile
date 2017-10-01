@@ -55,6 +55,9 @@ gem 'breadcrumbs_on_rails'
 # Nested locations
 gem 'ancestry', '~> 3.0.1'
 
+# ActiveRecord bug fix
+gem 'rails_select_on_includes'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

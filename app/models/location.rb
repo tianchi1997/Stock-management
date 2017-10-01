@@ -13,6 +13,9 @@ class Location < ApplicationRecord
   # Validations
   validates :name, presence: true
 
+  # Total Virtual Attribute
+  attribute :total, :integer
+
   # Nested set
   has_ancestry orphan_strategy: :destroy
 

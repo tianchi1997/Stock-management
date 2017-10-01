@@ -13,4 +13,7 @@ class StockItem < ApplicationRecord
   validates :item_code, presence: true
   validates :expires, inclusion: { in: [ true, false ] }
   validates_associated :item_expiries
+
+  # Total Virtual Attribute
+  attribute :total, :integer
 end
