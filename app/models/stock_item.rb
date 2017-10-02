@@ -21,8 +21,20 @@ class StockItem < ApplicationRecord
 
   def self.summary(stock_items)
     return stock_items
-      .joins(items: [:item_expiries])
-      .select("stock_items.*, SUM(items.required) as required, SUM(COALESCE(items.order_to, items.required)) as order_to, SUM(item_expiries.count) as total")
+      .joins(:items)
+      .joins(%{
+        INNER JOIN (
+          SELECT item_id, count FROM item_expiries
+          UNION ALL
+          SELECT id, NULL FROM items
+        ) item_expiries ON items.id = item_expiries.item_id
+      })
+      .select(%{
+        stock_items.*,
+        SUM(CASE WHEN count is NULL THEN items.required ELSE 0 END) as required,
+        SUM(CASE WHEN count is NULL THEN COALESCE(items.order_to, items.required) ELSE 0 END) as order_to,
+        SUM(count) as total
+      })
       .group(:id)
   end
 end
