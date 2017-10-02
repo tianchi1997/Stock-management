@@ -12,7 +12,7 @@ var StockTake = React.createClass({
         curLocation: prevState.curLocation + 1
       }));
     } else {
-      alert("No more locations");
+      alert("Stocktake completed");
       this.props.locationIDs[0]
       window.location.assign(window.location.href.replace("/stock_take", ""))
     }
