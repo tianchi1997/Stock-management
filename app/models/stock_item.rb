@@ -33,7 +33,7 @@ class StockItem < ApplicationRecord
         stock_items.*,
         SUM(CASE WHEN count is NULL THEN items.required ELSE 0 END) as required,
         SUM(CASE WHEN count is NULL THEN COALESCE(items.order_to, items.required) ELSE 0 END) as order_to,
-        SUM(count) as total
+        COALESCE(SUM(count), 0) as total
       })
       .group(:id)
   end

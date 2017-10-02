@@ -4,18 +4,16 @@
 <table class="table">
   <tr>
     <th class="border">Stock Item</th>
-    <th class="border">Stock Item ID</th>
     <th class="border">Amount</th>
     <th class="border">Order To</th>
   </tr>
 
 
-  <% @items.each do |item| %>
+  <% @stock_items.each do |stock_item| %>
     <tr>
-      <td><%= item.stock_item.name %></td>
-      <td><%= item.stock_item.id %></td>
-      <td><%= item.total %>/<%= item.required %></td>
-      <td><%= item.order_to  %></td>
+      <td><%= stock_item.name %></td>
+      <td><%= stock_item.total %>/<%= stock_item.required %></td>
+      <td><%= stock_item.order_to  %></td>
     </tr>
   <% end %>
 </table>
