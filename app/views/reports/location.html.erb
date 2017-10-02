@@ -2,18 +2,31 @@
 <h2>Location ID: <%= params[:id]  %></h2> 
 
 <table class="table">
-  <tr>
-    <th class="border">Stock Item</th>
-    <th class="border">Amount</th>
-    <th class="border">Order To</th>
-  </tr>
-
-
-  <% @stock_items.each do |stock_item| %>
+  <%if params[:order_to]%>
     <tr>
-      <td><%= stock_item.name %></td>
-      <td><%= stock_item.total %>/<%= stock_item.required %></td>
-      <td><%= stock_item.order_to  %></td>
+      <th style="width=40%" class="border" >Stock Item </th>
+      <th style="width=23%" class="border" >Amount/Required</th>
+      <th class="border" >Order To (Amount to Order)</th>
     </tr>
-  <% end %>
+    <% @stock_items.each do |stock_item| %>
+      <tr>
+        <td><%= stock_item.name %></td>
+        <td><%= stock_item.total %>/<%= stock_item.required %></td>
+        <td><%= stock_item.order_to  %>(<%=stock_item.order_to-stock_item.total%>)</td>
+      </tr>
+    <%end%>
+  <%else%>
+    <tr>
+      <th class="border" ">Stock Item</th>
+      <th class="border" >Amount</th>
+      <th class="border" >Order To</th>
+    </tr>
+    <% @stock_items.each do |stock_item| %>
+      <tr>
+        <td><%= stock_item.name %></td>
+        <td><%= stock_item.total %>/<%= stock_item.required %></td>
+        <td><%= stock_item.order_to  %></td>
+      </tr>
+    <% end %>
+  <%end%>
 </table>
