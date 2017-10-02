@@ -2,11 +2,6 @@ require "rails_helper"
 
 RSpec.describe ItemsController, type: :routing do
   describe "routing" do
-
-    it "routes to #index" do
-      expect(:get => "/items").to route_to("items#index")
-    end
-
     it "routes to #new" do
       expect(:get => "/items/new").to route_to("items#new")
     end
@@ -34,6 +29,5 @@ RSpec.describe ItemsController, type: :routing do
     it "routes to #destroy" do
       expect(:delete => "/items/1").to route_to("items#destroy", :id => "1")
     end
-
   end
 end
