@@ -27,7 +27,14 @@ var Location = React.createClass({
     this.loadLocation(this.props.locationID);
   },
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.curItem != -1 && this.state.items.length == 0) {
+      this.props.nextLocation();
+    }
+  },
+
   componentWillReceiveProps(newProps) {
+    this.setState({curItem: -1});
     this.loadLocation(newProps.locationID);
   },
 
@@ -40,11 +47,14 @@ var Location = React.createClass({
   nextItem() {
     if (this.state.curItem < this.state.items.length - 1) {
       this.setState({curItem: this.state.curItem + 1});
+    } else {
+      this.props.nextLocation();
     }
   },
 
   render: function() {
-    if(this.state.curItem != -1){
+    //only render the item after the item has been loaded into the state. 
+    if(this.state.curItem != -1 && this.state.items.length > 0){
       return (
         <div>
           <div>{this.state.name}</div>
@@ -55,7 +65,7 @@ var Location = React.createClass({
           />
         </div>
       );
-    } else{
+    } else {
       return (
         <div>{this.state.name}</div>
       )

@@ -13,14 +13,15 @@ var StockTake = React.createClass({
       }));
     } else {
       alert("No more locations");
+      this.props.locationIDs[0]
+      window.location.assign(window.location.href.replace("/stock_take", ""))
     }
   },
 
   render: function() {
     return (
       <div>
-        <Location locationID={this.state.locationIDs[this.state.curLocation]}/>
-        <button onClick={this.nextLocation} className="btn">Next Location</button>
+        <Location locationID={this.state.locationIDs[this.state.curLocation]} nextLocation={this.nextLocation}/>
       </div>
     );
   }
