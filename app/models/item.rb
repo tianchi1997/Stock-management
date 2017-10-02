@@ -19,8 +19,8 @@ class Item < ApplicationRecord
 
   def self.summary_with_order(items, order)
     return items
-      .joins("LEFT JOIN item_expiries on items.id = item_expiries.id")
-      .select("items.*, SUM(item_expiries.count) as total")
+      .joins("LEFT JOIN item_expiries on items.id = item_expiries.item_id")
+      .select("items.*, COALESCE(SUM(item_expiries.count), 0) as total")
       .group("items.id, stock_items.id, locations.id")
       .includes(:stock_item, :location)
       .order(order)
