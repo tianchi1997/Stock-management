@@ -25,13 +25,4 @@ class Item < ApplicationRecord
       .includes(:stock_item, :location)
       .order(order)
   end
-
-  def self.summary_with_order2(items, order)
-    return items
-      .joins("LEFT JOIN item_expiries ON items.id = item_expiries.id")
-      .select("items.*, SUM(item_expiries.count) as total")
-      .group("stock_items.id")
-      .includes(:stock_item)
-      .order(order)
-  end
 end

@@ -21,7 +21,7 @@ class LocationsController < ApplicationController
   def new
     @location = Location.new
     if params[:parent_id]
-      @location.parent = Location.find(id: :parent_id)
+      @location.parent = Location.find(params[:parent_id])
       add_location_breadcrumb @location.parent
     else
       add_breadcrumb "Locations", :locations_path
