@@ -11,7 +11,7 @@ class StockItemsController < ApplicationController
 
   # GET /stock_items/1
   def show
-    @items = Item.summary_with_order(@stock_item.items, "locations.name")
+    @items = Item.summary(@stock_item.items).order("locations.name")
   end
 
   # GET /stock_items/new
@@ -60,6 +60,6 @@ class StockItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stock_item_params
-      params.require(:stock_item).permit(:item_code, :name, :description, :supplier, :expires)
+      params.require(:stock_item).permit(:item_code, :name, :expires)
     end
 end

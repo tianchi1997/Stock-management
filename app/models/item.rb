@@ -17,12 +17,11 @@ class Item < ApplicationRecord
   # Total Virtual Attribute
   attribute :total, :integer
 
-  def self.summary_with_order(items, order)
+  def self.summary(items)
     return items
       .joins("LEFT JOIN item_expiries on items.id = item_expiries.item_id")
       .select("items.*, COALESCE(SUM(item_expiries.count), 0) as total")
       .group("items.id, stock_items.id, locations.id")
-      .includes(:stock_item, :location)
-      .order(order)
+      .eager_load(:stock_item, :location)
   end
 end

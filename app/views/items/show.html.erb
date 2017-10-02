@@ -18,6 +18,11 @@
   <%= @item.order_to %>
 </p>
 
+<p>
+  <strong>Current:</strong>
+  <%= @item.total %>
+</p>
+
 <% links = [] %>
 <% if can? :edit, @item %>
   <% links.push(link_to 'Edit', edit_item_path(@item)) %>
@@ -29,6 +34,8 @@
 
 <%== links.join(' | ') %>
 
-<h2>Expiries</h2>
-<%= render 'item_expiries/table', item_expiries: @item.item_expiries %>
+<% if @item.stock_item.expires %>
+  <h2>Expiries</h2>
+  <%= render 'item_expiries/table', item_expiries: @item.item_expiries %>
+<% end %>
 

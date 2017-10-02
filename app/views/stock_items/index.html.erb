@@ -5,7 +5,7 @@
     <tr>
       <th>Item Code</th>
       <th>Name</th>
-      <th>Supplier</th>
+      <th>Expires</th>
       <th>Total</th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
       <tr class="clickable-row" data-url="<%= url_for(stock_item) %>">
         <td><%= stock_item.item_code %></td>
         <td><%= stock_item.name %></td>
-        <td><%= stock_item.supplier %></td>
+        <td><%= stock_item.expires %></td>
         <td><%= stock_item.total %></td>
       </tr>
     <% end %>

@@ -20,14 +20,6 @@
   </div>
 
   <div class="field">
-    <%= form.text_field :description, id: :stock_item_description %>
-  </div>
-
-  <div class="field">
-    <%= form.text_field :supplier, id: :stock_item_supplier %>
-  </div>
-
-  <div class="field">
     <%= form.check_box :expires, id: :stock_item_expires, disabled: !stock_item.new_record? %>
   </div>
 

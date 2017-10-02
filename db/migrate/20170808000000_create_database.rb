@@ -14,8 +14,6 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
     create_table :stock_items do |t|
       t.string :name, null: false, index: true
       t.string :item_code, null: false, index: true
-      t.string :description
-      t.string :supplier
       t.boolean :expires, null: false
 
       t.datetime :deleted_at, index: true

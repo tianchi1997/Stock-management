@@ -32,16 +32,16 @@ Location.create!([
 ])
 
 StockItem.create!([
-  {name: "Stock Item 1", item_code: "I1", description: "Stock Item Description 1", supplier: "Stock Item Supplier 1", expires: false},
-  {name: "Stock Item 2", item_code: "I2", description: "Stock Item Description 2", supplier: "Stock Item Supplier 2", expires: false},
-  {name: "Stock Item 3", item_code: "I3", description: "Stock Item Description 3", supplier: "Stock Item Supplier 3", expires: false},
-  {name: "Stock Item 4", item_code: "I4", description: "Stock Item Description 4", supplier: "Stock Item Supplier 4", expires: false},
-  {name: "Stock Item 5", item_code: "I5", description: "Stock Item Description 5", supplier: "Stock Item Supplier 5", expires: false},
-  {name: "Stock Item 6", item_code: "I6", description: "Stock Item Description 6", supplier: "Stock Item Supplier 6", expires: true},
-  {name: "Stock Item 7", item_code: "I7", description: "Stock Item Description 7", supplier: "Stock Item Supplier 7", expires: true},
-  {name: "Stock Item 8", item_code: "I8", description: "Stock Item Description 8", supplier: "Stock Item Supplier 8", expires: true},
-  {name: "Stock Item 9", item_code: "I9", description: "Stock Item Description 9", supplier: "Stock Item Supplier 9", expires: true},
-  {name: "Stock Item 10", item_code: "I10", description: "Stock Item Description 10", supplier: "Stock Item Supplier 10", expires: true}
+  {name: "Stock Item 1", item_code: "I1", expires: false},
+  {name: "Stock Item 2", item_code: "I2", expires: false},
+  {name: "Stock Item 3", item_code: "I3", expires: false},
+  {name: "Stock Item 4", item_code: "I4", expires: false},
+  {name: "Stock Item 5", item_code: "I5", expires: false},
+  {name: "Stock Item 6", item_code: "I6", expires: true},
+  {name: "Stock Item 7", item_code: "I7", expires: true},
+  {name: "Stock Item 8", item_code: "I8", expires: true},
+  {name: "Stock Item 9", item_code: "I9", expires: true},
+  {name: "Stock Item 10", item_code: "I10", expires: true}
 ])
 
 Item.create!([

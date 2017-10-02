@@ -14,7 +14,7 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @locations_tree = @location.descendants.arrange(order: [:position, :name, :id])
-    @items = Item.summary_with_order(@location.items, "stock_items.name")
+    @items = Item.summary(@location.items).order("stock_items.name")
   end
 
   # GET /locations/new

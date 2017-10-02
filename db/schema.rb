@@ -80,8 +80,6 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   create_table "stock_items", force: :cascade do |t|
     t.string "name", null: false
     t.string "item_code", null: false
-    t.string "description"
-    t.string "supplier"
     t.boolean "expires", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false

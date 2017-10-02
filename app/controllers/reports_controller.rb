@@ -5,10 +5,8 @@ class ReportsController < ApplicationController
     add_location_breadcrumb Location.find(params[:id])
     add_breadcrumb "Report", location_report_path(params[:id])
 
-    
     @location = Location.find(params[:id])
     @stock_items = StockItem.summary(StockItem.all).where(items: {location: @location.subtree}).order(:name)
-
   end
 
   def stock_item
