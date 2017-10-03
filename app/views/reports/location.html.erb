@@ -13,7 +13,7 @@
       <% end %>
 
     </tr>
-    <%@location.subtree.each do |location|%>
+    <%@location.subtree.order(:id).each do |location|%>
       <tr>
         <td><strong>Location: <%=location.name%></strong></td>
         <td></td>
@@ -31,5 +31,23 @@
           <% end %>
         </tr>
       <%end%>   
-    <%end%>    
+    <%end%>  
+    <tr>
+      <td><strong>Subtotals</strong></td>
+      <td><strong>Amount/Required</strong></td>
+      <td><strong>Order To</strong></td>
+    </tr>
+    <% @stock_items.each do |stock_item| %>
+        <tr>
+          <td><%= stock_item.name %></td>
+          <td><%= stock_item.total %>/<%= stock_item.required %></td>
+
+          <%if params[:order_to]%>
+            <td><%= stock_item.order_to  %>(<%=stock_item.order_to-stock_item.total%>)</td>
+          <%else%>
+            <td><%= stock_item.order_to  %></td>
+          <% end %>
+        </tr>
+    <%end%>  
+
 </table>
