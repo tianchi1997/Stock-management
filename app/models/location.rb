@@ -20,5 +20,9 @@ class Location < ApplicationRecord
   def parent_name
     parent != nil ? parent.name : "No Parent"
   end
+
+  def stock_item_summaries
+    StockItem.summary(StockItem.all).where(items: {location: subtree})
+  end
 end
 
