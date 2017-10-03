@@ -41,13 +41,24 @@ RSpec.describe ItemsController, type: :controller do
   # in order to pass any filters (e.g. authentication) defined in
   # ItemsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
-
+ 
   describe "GET #show" do
     it "returns a success response" do
       item = Item.create! valid_attributes
       get :show, params: {id: item.to_param}, session: valid_session
       expect(response).to be_success
     end
+
+    it "gets the required contact" do
+      item = Item.create! valid_attributes
+      get :show, params: {id: item.to_param}, session: valid_session
+      assigns(:item).should eq(item)
+    end
+
+    it "renders the #show view" do
+      item = Item.create! valid_attributes
+      get :show, params: {id: item.to_param}, session: valid_session
+      response.should render_template :show
   end
 
   describe "GET #new" do
@@ -84,26 +95,39 @@ RSpec.describe ItemsController, type: :controller do
         post :create, params: {item: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
+
+      it "does not save the new contact" do
+        post :create, params: {item: invalid_attributes}, session: valid_session
+        expect(response).to_not change(Item,:count)
+      end 
+      it "redirects to the #new action" do
+        post :create, params: {item: invalid_attributes}, session: valid_session
+        expect(response).to render_template :new
+      end
     end
   end
 
   describe "PUT #update" do
+    before :each do 
+      @item = Factory(:item, name: "Name", current: "10", required: "30", order_to: "50"  )
+    end 
     context "with valid params" do
       let(:new_attributes) {
         skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested item" do
-        item = Item.create! valid_attributes
-        put :update, params: {id: item.to_param, item: new_attributes}, session: valid_session
-        item.reload
-        skip("Add assertions for updated state")
+        put :update, params: {id: @item, item: Factory.attributes_for(:item, name: "Newname", current: "20", required: "50", order_to: "100"  )}, session: valid_session
+        @item.reload
+        @item.name.should eq("Newname")
+        @item.current.should eq("20")
+        @item.required.should eq("50")
+        @item.order_to.should eq("100")
       end
 
       it "redirects to the item" do
-        item = Item.create! valid_attributes
-        put :update, params: {id: item.to_param, item: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(item)
+        put :update, params: {id: @item.to_param, item: Factory.attributes_for(:item)}, session: valid_session
+        expect(response).to redirect_to(@item)
       end
     end
 
@@ -115,7 +139,6 @@ RSpec.describe ItemsController, type: :controller do
       end
     end
   end
-
   describe "DELETE #destroy" do
     it "destroys the requested item" do
       item = Item.create! valid_attributes
