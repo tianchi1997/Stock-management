@@ -41,13 +41,24 @@ RSpec.describe ItemsController, type: :controller do
   # in order to pass any filters (e.g. authentication) defined in
   # ItemsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
-
+ 
   describe "GET #show" do
     it "returns a success response" do
       item = Item.create! valid_attributes
       get :show, params: {id: item.to_param}, session: valid_session
       expect(response).to be_success
     end
+
+    it "gets the required contact" do
+      item = Item.create! valid_attributes
+      get :show, params: {id: item.to_param}, session: valid_session
+      assigns(:item).should eq(item)
+    end
+
+    it "renders the #show view" do
+      item = Item.create! valid_attributes
+      get :show, params: {id: item.to_param}, session: valid_session
+      response.should render_template :show
   end
 
   describe "GET #new" do
@@ -83,6 +94,15 @@ RSpec.describe ItemsController, type: :controller do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {item: invalid_attributes}, session: valid_session
         expect(response).to be_success
+      end
+
+      it "does not save the new contact" do
+        post :create, params: {item: invalid_attributes}, session: valid_session
+        expect(response).to_not change(Item,:count)
+      end 
+      it "redirects to the #new action" do
+        post :create, params: {item: invalid_attributes}, session: valid_session
+        expect(response).to render_template :new
       end
     end
   end
