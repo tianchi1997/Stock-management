@@ -2,15 +2,15 @@
 
 <% links = [] %>
 <% if can? :read, Location %>
-  <% links.push(link_to 'Locations', locations_path) %>
+  <% links.push(link_to 'Locations', locations_path, :class=>"btn-group linktobutton") %>
 <% end %>
 
 <% if can? :read, StockItem %>
-  <% links.push(link_to 'Stock Items', stock_items_path) %>
+  <% links.push(link_to 'Stock Items', stock_items_path,:class=>"btn-group linktobutton") %>
 <% end %>
 
 <% if can? :read, User %>
-  <% links.push(link_to 'Users', users_path) %>
+  <% links.push(link_to 'Users', users_path,:class=>"btn-group linktobutton") %>
 <% end %>
 
-<%== links.join(' | ') %>
+<%== links.join(" ") %>
