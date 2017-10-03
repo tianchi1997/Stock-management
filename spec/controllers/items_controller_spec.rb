@@ -108,22 +108,26 @@ RSpec.describe ItemsController, type: :controller do
   end
 
   describe "PUT #update" do
+    before :each do 
+      @item = Factory(:item, name: "Name", current: "10", required: "30", order_to: "50"  )
+    end 
     context "with valid params" do
       let(:new_attributes) {
         skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested item" do
-        item = Item.create! valid_attributes
-        put :update, params: {id: item.to_param, item: new_attributes}, session: valid_session
-        item.reload
-        skip("Add assertions for updated state")
+        put :update, params: {id: @item, item: Factory.attributes_for(:item, name: "Newname", current: "20", required: "50", order_to: "100"  )}, session: valid_session
+        @item.reload
+        @item.name.should eq("Newname")
+        @item.current.should eq("20")
+        @item.required.should eq("50")
+        @item.order_to.should eq("100")
       end
 
       it "redirects to the item" do
-        item = Item.create! valid_attributes
-        put :update, params: {id: item.to_param, item: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(item)
+        put :update, params: {id: @item.to_param, item: Factory.attributes_for(:item)}, session: valid_session
+        expect(response).to redirect_to(@item)
       end
     end
 
@@ -135,7 +139,6 @@ RSpec.describe ItemsController, type: :controller do
       end
     end
   end
-
   describe "DELETE #destroy" do
     it "destroys the requested item" do
       item = Item.create! valid_attributes

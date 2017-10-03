@@ -3,7 +3,7 @@ FactoryGirl.define do
     transient do
       expires false
     end
-
+    
     association :location, strategy: :build
     stock_item { build(:stock_item, expires: expires) }
     required 5
