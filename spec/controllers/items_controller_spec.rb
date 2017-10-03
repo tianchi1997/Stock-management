@@ -131,4 +131,11 @@ RSpec.describe ItemsController, type: :controller do
     end
   end
 
+  describe "GET #audits" do
+
+  end
+
+  describe "POST #save_expiries" do
+
+  end
 end

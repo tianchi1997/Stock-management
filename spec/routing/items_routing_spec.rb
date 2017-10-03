@@ -29,5 +29,14 @@ RSpec.describe ItemsController, type: :routing do
     it "routes to #destroy" do
       expect(:delete => "/items/1").to route_to("items#destroy", :id => "1")
     end
+
+    it "routes to #audits" do
+      expect(:get => "/items/1/audits").to route_to("items#audits", :id => "1")
+    end
+
+    it "routes to #save_expiries" do
+      expect(:post => "/items/1/save_expiries").to route_to("items#save_expiries", :id => "1")
+    end
+
   end
 end

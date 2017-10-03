@@ -1,12 +1,21 @@
 class ItemsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :save_expiries]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :save_expiries, :audit]
   before_action :set_stock_items, only: [:new, :edit, :create, :update]
 
   # GET /items/1
   def show
-    @item = Item.summary(Item.where(id: @item.id)).preload(:item_expiries).first
+    relation = Item.summary(Item.where(id: @item.id))
+    if @item.stock_item.expires
+      @item = relation.preload(:item_expiries).first
+    else
+      @item = relation.first
+    end
+  end
+
+  def audit
+    @audits = @item.associated_audits.includes(:user)
   end
 
   # GET /items/new
