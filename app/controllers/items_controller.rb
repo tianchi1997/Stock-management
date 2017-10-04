@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :save_expiries, :audit]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :save_expiries, :audits]
   before_action :set_stock_items, only: [:new, :edit, :create, :update]
 
   # GET /items/1
@@ -13,8 +13,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  def audit
-    @audits = @item.associated_audits.includes(:user)
+  def audits
+    add_breadcrumb "Audits", item_audits_path(@item)
+    @audits = @item.associated_audits
   end
 
   # GET /items/new

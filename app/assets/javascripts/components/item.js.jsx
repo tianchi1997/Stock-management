@@ -8,7 +8,7 @@ var Item = React.createClass({
       itemExpiries: [],
       required: 0,
       quantity: 0,
-      error: ""
+      errors: ""
     };
   },
 
@@ -28,8 +28,8 @@ var Item = React.createClass({
     // Fetch the items associated with the location
     fetch(fetchURL, { credentials: 'include' })
       // Parse the response to json
-      .then(function(response) { return response.json(); })
-      .then(function(json) {
+      .then(function (response) { return response.json(); })
+      .then(function (json) {
         total = 0;
         if (!json.stockItem.expires) {
           if (json.itemExpiries.length) {
@@ -50,32 +50,61 @@ var Item = React.createClass({
         json.errors = "";
 
         self.setState(json);
-    })
+      })
   },
 
   getTotal(itemExpiries) {
-    return itemExpiries.reduce(function(total, expiry) {
+    return itemExpiries.reduce(function (total, expiry) {
       return total + expiry.count;
     }, 0);
   },
+  checkExpiry(count,expiry){
+    if(count == 0 || count == null ){
+      this.setState({errors: "Please enter a valid count"});
+      return false;
+    }
+    var today = new Date(); 
+  
+    e = expiry.split('-'); 
+    console.log("expiry",e);
+    thisyear = today.getFullYear(); 
+    thismonth = today.getMonth();
+    thisday = today.getDate();
+    if((e[0] < thisyear) || (e[0] == thisyear && e[1] < thismonth) || (e[0] == thisyear && e[1] == thismonth && e[2] < thisday) || expiry == null ){
+      this.setState({errors: "Please enter a valid expiry date"})
+      return false;
+    }
+    return true; 
 
+  },
   saveItem() {
+    var self = this; 
     fetchURL = "/items/" + this.state.id + "/save_expiries";
     itemExpiries = this.state.itemExpiries.slice();
 
+    //if the item does not expire then no need to check that quantity matches
     if (!this.state.stockItem.expires) {
       itemExpiries = [{
         expiryDate: null,
         count: this.state.quantity
       }];
     } else {
+      //checks that expiry quantities match the total quantity 
       total = this.getTotal(this.state.itemExpiries);
       if (total != this.state.quantity) {
-        this.setState({errors: "Quantity does not match total"});
+        this.setState({ errors: "Quantity does not match total" });
         return false;
       }
+      //checks that each entry has both an expiry and a quantity
+      //checks that each expiry entry is valid (i.e item has not already expired)
+      console.log("itemexpirieslength",self.state.itemExpiries.length)
+      for(i = 0;i<self.state.itemExpiries.length;i++){
+        console.log("expirydate",self.state.itemExpiries[i]);
+        if(!this.checkExpiry(self.state.itemExpiries[i].count,self.state.itemExpiries[i].expiryDate)){
+          return false; 
+        }
+      }
     }
-
     fetch(fetchURL, {
       credentials: 'include',
       method: 'post',
@@ -118,6 +147,8 @@ var Item = React.createClass({
       itemExpiries: newItemExpiries,
       errors: ""
     });
+
+
   },
 
   addExpiry() {
@@ -165,7 +196,7 @@ var Item = React.createClass({
     button = "";
 
     if (this.state.stockItem.expires) {
-      expiries = this.state.itemExpiries.map(function(itemExpiry, index) {
+      expiries = this.state.itemExpiries.map(function (itemExpiry, index) {
         return (
           <ItemExpiry
             key={index}
@@ -185,7 +216,7 @@ var Item = React.createClass({
     }
 
     return (
-      <div>
+      <div >
         <h2>{this.state.stockItem.name}</h2>
         <p>Current (To be removed): {this.state.current}</p>
         <p>Required: {this.state.required}</p>
@@ -193,8 +224,8 @@ var Item = React.createClass({
         <form onSubmit={this.preventDefault}>
           <label>Quantity:</label>
           <input type="number" name="quantity"
-                 value={this.state.quantity}
-                 onChange={this.onQuantityChange}
+            value={this.state.quantity}
+            onChange={this.onQuantityChange}
           />
         </form>
         <div>
@@ -204,7 +235,7 @@ var Item = React.createClass({
         <button onClick={this.prevItem} className="btn">Previous</button>
         <button onClick={this.nextItem} className="btn">Next</button>
         <p>{this.state.errors}</p>
-      </div>
+      </div >
     );
   }
 });

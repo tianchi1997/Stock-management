@@ -2,6 +2,7 @@ var Location = React.createClass({
   getInitialState() {
     return {
       name: "",
+      description: "",
       curItem: -1,
       items: [],
       id: this.props.locationID,
@@ -19,11 +20,13 @@ var Location = React.createClass({
       .then(function(response) { return response.json(); })
       .then(function(json) {
         json.curItem = 0;
+        console.log("json",json);
         self.setState(json);
     })
   },
 
   componentWillMount() {
+    //if the component will mount, fetch the information for the current locationID. 
     this.loadLocation(this.props.locationID);
   },
 
@@ -57,7 +60,10 @@ var Location = React.createClass({
     if(this.state.curItem != -1 && this.state.items.length > 0){
       return (
         <div>
-          <div>{this.state.name}</div>
+          <div>
+              <h2>Location: {this.state.name}</h2>
+              <p> {this.state.description}</p>
+          </div>
           <Item
             itemID={this.state.items[this.state.curItem].id}
             prevItem={this.prevItem}
