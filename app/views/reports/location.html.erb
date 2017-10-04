@@ -1,53 +1,26 @@
 <h1>Reports:  locations</h1>
 <h2>Location ID: <%= params[:id]  %></h2> 
-
 <table class="table">
-    <tr>
-      <th style="width=40%" class="border" >Stock Item </th>
-      <th style="width=23%" class="border" >Amount/Required</th>
-
-      <%if params[:order_to]%>
-        <th class="border" >Order To (Amount to Order)</th>
-      <%else%>
-        <th class="border">Order To</th>  
-      <% end %>
-
-    </tr>
-    <%@location.subtree.order(:id).each do |location|%>
-      <tr>
-        <td><strong>Location: <%=location.name%></strong></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <% @stock_items.where(items: {location: location}).each do |stock_item| %>
+  <%#Headder Row%>
+  <tr>
+    <th class="border">Stock Item</th>
+    <th class="border">Amount / Required</th>
+    <th class="border">Order To</th>
+  </tr>
+  <%@location.subtree.order(:id).each do |location|%>
+  <tr>
+    <td><%=location.name%></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <%@location.stock_item_summaries.each do |location_table|%>
+      <%if(location_table.total != nil)%>
         <tr>
-          <td><%= stock_item.name %></td>
-          <td><%= stock_item.total %>/<%= stock_item.required %></td>
-
-          <%if params[:order_to]%>
-            <td><%= stock_item.order_to  %>(<%=stock_item.order_to-stock_item.total%>)</td>
-          <%else%>
-            <td><%= stock_item.order_to  %></td>
-          <% end %>
+          <td><%=location_table.stock_item.name%></td>
+          <td><%=location_table.total%>/<%=location_table.required%></td>
+          <td><%= location_table.order_to%></td>
         </tr>
-      <%end%>   
-    <%end%>  
-    <tr>
-      <td><strong>Subtotals</strong></td>
-      <td><strong>Amount/Required</strong></td>
-      <td><strong>Order To</strong></td>
-    </tr>
-    <% @stock_items.each do |stock_item| %>
-        <tr>
-          <td><%= stock_item.name %></td>
-          <td><%= stock_item.total %>/<%= stock_item.required %></td>
-
-          <%if params[:order_to]%>
-            <td><%= stock_item.order_to  %>(<%=stock_item.order_to-stock_item.total%>)</td>
-          <%else%>
-            <td><%= stock_item.order_to  %></td>
-          <% end %>
-        </tr>
-    <%end%>  
-
+      <%end%>
+    <%end%>
+  <%end%>
 </table>
