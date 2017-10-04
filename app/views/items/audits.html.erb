@@ -1,0 +1,41 @@
+<p>
+  <strong>Location:</strong>
+  <%= @item.location.name %>
+</p>
+
+<p>
+  <strong>Stock item:</strong>
+  <%= @item.stock_item.name %>
+</p>
+
+<p>
+  <strong>Required:</strong>
+  <%= @item.required %>
+</p>
+
+<p>
+  <strong>Order to:</strong>
+  <%= @item.order_to %>
+</p>
+
+<p>
+  <strong>Current:</strong>
+  <%= @item.total %>
+</p>
+
+<% links = [] %>
+<% if can? :edit, @item %>
+  <% links.push(link_to 'Edit', edit_item_path(@item)) %>
+<% end %>
+
+<% if can? :destroy, @item %>
+  <% links.push(link_to 'Delete', @item, method: :delete, data: { confirm: 'Are you sure?' }) %>
+<% end %>
+
+<%== links.join(' | ') %>
+
+<% if @item.stock_item.expires %>
+  <h2>Expiries</h2>
+  <%= render 'item_expiries/table', item_expiries: @item.item_expiries %>
+<% end %>
+
