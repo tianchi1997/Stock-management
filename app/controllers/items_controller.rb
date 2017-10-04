@@ -6,11 +6,10 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   def show
-    relation = Item.summary(Item.where(id: @item.id))
     if @item.stock_item.expires
-      @item = relation.preload(:item_expiries).first
+      @item = Item.preload(:item_expiries).find(params[:id]);
     else
-      @item = relation.first
+      @item = Item.find(params[:id]);
     end
   end
 
