@@ -6,6 +6,8 @@ class Location < ApplicationRecord
   has_many :item_expiries, through: :items
   attr_readonly :ancestry
 
+  has_many :stock_item_summaries
+
   # Auditing
   acts_as_paranoid
   audited
@@ -19,10 +21,6 @@ class Location < ApplicationRecord
   # Get parent name
   def parent_name
     parent != nil ? parent.name : "No Parent"
-  end
-
-  def stock_item_summaries
-    StockItem.summary(StockItem.all).where(items: {location: subtree})
   end
 end
 

@@ -43,8 +43,10 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.bigint "item_id"
     t.date "expiry_date"
     t.integer "count", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_item_expiries_on_deleted_at"
     t.index ["item_id", "expiry_date"], name: "item_expiry_index", unique: true
     t.index ["item_id"], name: "index_item_expiries_on_item_id"
   end
@@ -117,4 +119,50 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   add_foreign_key "item_expiries", "items"
   add_foreign_key "items", "locations"
   add_foreign_key "items", "stock_items"
+
+  create_view "item_summaries",  sql_definition: <<-SQL
+      SELECT item_summaries.id AS item_id,
+      locations.id AS location_id,
+      locations.ancestry AS location_ancestry,
+      stock_items.id AS stock_item_id,
+      item_summaries.total,
+      item_summaries.required,
+      item_summaries.order_to
+     FROM ((locations
+       JOIN stock_items ON ((stock_items.deleted_at IS NULL)))
+       JOIN ( SELECT items.id,
+              items.location_id,
+              items.stock_item_id,
+              (COALESCE(sum(item_summary.total), (0)::numeric))::integer AS total,
+              items.required,
+              items.order_to
+             FROM (((locations locations_1
+               JOIN stock_items stock_items_1 ON ((stock_items_1.deleted_at IS NULL)))
+               JOIN items ON (((items.location_id = locations_1.id) AND (items.stock_item_id = stock_items_1.id) AND (items.deleted_at IS NULL))))
+               LEFT JOIN ( SELECT item_expiries.item_id,
+                      sum(item_expiries.count) AS total
+                     FROM item_expiries
+                    WHERE (item_expiries.deleted_at IS NULL)
+                    GROUP BY item_expiries.item_id) item_summary ON ((item_summary.item_id = items.id)))
+            WHERE (locations_1.deleted_at IS NULL)
+            GROUP BY items.id) item_summaries ON (((item_summaries.stock_item_id = stock_items.id) AND (item_summaries.location_id = locations.id))))
+    WHERE (locations.deleted_at IS NULL);
+  SQL
+
+  create_view "stock_item_summaries",  sql_definition: <<-SQL
+      SELECT locations.id AS location_id,
+      stock_items.id AS stock_item_id,
+      summaries.total,
+      summaries.required,
+      summaries.order_to
+     FROM ((locations
+       JOIN stock_items ON ((stock_items.deleted_at IS NULL)))
+       CROSS JOIN LATERAL ( SELECT sum(item_summaries.total) AS total,
+              sum(item_summaries.required) AS required,
+              sum(item_summaries.order_to) AS order_to
+             FROM item_summaries
+            WHERE (((item_summaries.location_id = locations.id) OR ((locations.ancestry IS NULL) AND (((item_summaries.location_ancestry)::text ~~ concat(locations.id, '/%')) OR ((item_summaries.location_ancestry)::text = concat(locations.id)))) OR ((locations.ancestry IS NOT NULL) AND (((item_summaries.location_ancestry)::text ~~ concat(locations.ancestry, '/', locations.id, '/%')) OR ((item_summaries.location_ancestry)::text = concat(locations.ancestry, '/', locations.id))))) AND (item_summaries.stock_item_id = stock_items.id))) summaries)
+    WHERE (locations.deleted_at IS NULL);
+  SQL
+
 end

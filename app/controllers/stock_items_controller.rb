@@ -2,7 +2,7 @@ class StockItemsController < ApplicationController
   load_and_authorize_resource
 
   add_breadcrumb "Stock Items", :stock_items_path
-  before_action :set_stock_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_stock_item, only: [:edit, :update, :destroy]
 
   # GET /stock_items
   def index
@@ -11,7 +11,7 @@ class StockItemsController < ApplicationController
 
   # GET /stock_items/1
   def show
-    @items = Item.summary(@stock_item.items).order("locations.name")
+    @stock_item = StockItem.preload(items: [:item_summary]).find(params[:id])
   end
 
   # GET /stock_items/new

@@ -6,6 +6,7 @@ class ItemExpiry < ApplicationRecord
   attr_readonly :item_id
 
   # Auditing
+  acts_as_paranoid
   audited associated_with: :item
 
   # Validations
