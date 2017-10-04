@@ -5,6 +5,7 @@ class StockItem < ApplicationRecord
   has_many :locations, through: :items
 
   has_many :stock_item_summaries
+  has_one :stock_item_summary, -> { where location_id: nil }
 
   # Auditing
   acts_as_paranoid

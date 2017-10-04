@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20170808000000) do
               items.stock_item_id,
               (COALESCE(sum(item_summary.total), (0)::numeric))::integer AS total,
               items.required,
-              items.order_to
+              COALESCE(items.order_to, items.required) AS order_to
              FROM (((locations locations_1
                JOIN stock_items stock_items_1 ON ((stock_items_1.deleted_at IS NULL)))
                JOIN items ON (((items.location_id = locations_1.id) AND (items.stock_item_id = stock_items_1.id) AND (items.deleted_at IS NULL))))
@@ -155,13 +155,20 @@ ActiveRecord::Schema.define(version: 20170808000000) do
       summaries.total,
       summaries.required,
       summaries.order_to
-     FROM ((locations
+     FROM ((( SELECT locations_1.id,
+              locations_1.ancestry,
+              locations_1.deleted_at
+             FROM locations locations_1
+          UNION ALL
+           SELECT NULL::bigint AS id,
+              NULL::character varying AS ancestry,
+              NULL::timestamp without time zone AS deleted_at) locations
        JOIN stock_items ON ((stock_items.deleted_at IS NULL)))
        CROSS JOIN LATERAL ( SELECT sum(item_summaries.total) AS total,
               sum(item_summaries.required) AS required,
               sum(item_summaries.order_to) AS order_to
              FROM item_summaries
-            WHERE (((item_summaries.location_id = locations.id) OR ((locations.ancestry IS NULL) AND (((item_summaries.location_ancestry)::text ~~ concat(locations.id, '/%')) OR ((item_summaries.location_ancestry)::text = concat(locations.id)))) OR ((locations.ancestry IS NOT NULL) AND (((item_summaries.location_ancestry)::text ~~ concat(locations.ancestry, '/', locations.id, '/%')) OR ((item_summaries.location_ancestry)::text = concat(locations.ancestry, '/', locations.id))))) AND (item_summaries.stock_item_id = stock_items.id))) summaries)
+            WHERE (((locations.id IS NULL) OR (item_summaries.location_id = locations.id) OR ((locations.ancestry IS NULL) AND (((item_summaries.location_ancestry)::text ~~ concat(locations.id, '/%')) OR ((item_summaries.location_ancestry)::text = concat(locations.id)))) OR ((locations.ancestry IS NOT NULL) AND (((item_summaries.location_ancestry)::text ~~ concat(locations.ancestry, '/', locations.id, '/%')) OR ((item_summaries.location_ancestry)::text = concat(locations.ancestry, '/', locations.id))))) AND (item_summaries.stock_item_id = stock_items.id))) summaries)
     WHERE (locations.deleted_at IS NULL);
   SQL
 

@@ -12,7 +12,6 @@ class ReportsController < ApplicationController
     if params[:order_to]
       @stock_items = StockItem.summary(StockItem.all).where(items: {location: @location.subtree}).having("SUM(count) < SUM(required)").order(:name)
     end
-    
   end
 
   def stock_item

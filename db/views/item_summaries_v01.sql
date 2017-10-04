@@ -13,7 +13,7 @@ INNER JOIN (
          items.stock_item_id                               AS stock_item_id,
          CAST(COALESCE(SUM(item_summary.total), 0) AS INT) AS total,
          items.required                                    AS required,
-         items.order_to                                    AS order_to
+         COALESCE(items.order_to, items.required)          AS order_to
   FROM locations
   JOIN stock_items ON stock_items.deleted_at IS NULL
   INNER JOIN items ON items.location_id = locations.id AND items.stock_item_id = stock_items.id AND items.deleted_at IS NULL
