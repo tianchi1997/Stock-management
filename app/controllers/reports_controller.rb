@@ -2,16 +2,11 @@ class ReportsController < ApplicationController
   authorize_resource class: false
 
   def location
-    add_location_breadcrumb Location.find(params[:id])
-    add_breadcrumb "Report", location_report_path(params[:id])
-
     @location = Location.find(params[:id])
-    @stock_items = StockItem.summary(StockItem.all).where(items: {location: @location.subtree}).order(:name)
+    add_location_breadcrumb @location
+    add_breadcrumb "Report", location_report_path(@location)
 
-    # -1.0/0.0 = Negative infinity (where required < total)
-    if params[:order_to]
-      @stock_items = StockItem.summary(StockItem.all).where(items: {location: @location.subtree}).having("SUM(count) < SUM(required)").order(:name)
-    end
+    @location_tree = Location.descendents.preload(stock_item_summaries: [:stock_item]).preload(items: [:stock_item]).arrange(order: [:position, :name, :id])
   end
 
   def stock_item

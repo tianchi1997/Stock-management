@@ -1,6 +1,6 @@
 class StockItemSummary < ApplicationRecord
-  has_one :location
-  has_one :stock_item
+  belongs_to :location
+  belongs_to :stock_item
 
   def readonly?
     true
