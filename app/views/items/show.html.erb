@@ -28,6 +28,10 @@
   <% links.push(link_to 'Edit', edit_item_path(@item)) %>
 <% end %>
 
+<% if can? :audit, @item %>
+  <% links.push(link_to 'Audits', item_audits_path(@item)) %>
+<% end %>
+
 <% if can? :destroy, @item %>
   <% links.push(link_to 'Delete', @item, method: :delete, data: { confirm: 'Are you sure?' }) %>
 <% end %>

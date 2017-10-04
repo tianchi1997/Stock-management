@@ -22,10 +22,6 @@
   <% links.push(link_to 'Order To Report', location_report_path(@location)+"?order_to=true") %>
 <% end %>
 
-<% if can? :location, :audits %>
-  <% links.push(link_to 'Audits', location_audits_path(@location)) %>
-<% end %>
-
 <% if can? :edit, @location %>
   <% links.push(link_to 'Edit', edit_location_path(@location)) %>
 <% end %>

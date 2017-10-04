@@ -23,19 +23,21 @@
   <%= @item.total %>
 </p>
 
-<% links = [] %>
-<% if can? :edit, @item %>
-  <% links.push(link_to 'Edit', edit_item_path(@item)) %>
-<% end %>
+<h2>Audits</h2>
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Expiry Date</th>
+      <th>Previous Count</th>
+      <th>New Count</th>
+    </tr>
+  </thead>
 
-<% if can? :destroy, @item %>
-  <% links.push(link_to 'Delete', @item, method: :delete, data: { confirm: 'Are you sure?' }) %>
-<% end %>
-
-<%== links.join(' | ') %>
-
-<% if @item.stock_item.expires %>
-  <h2>Expiries</h2>
-  <%= render 'item_expiries/table', item_expiries: @item.item_expiries %>
-<% end %>
-
+  <tbody>
+    <% @audits.each do |audits| %>
+      <tr>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
