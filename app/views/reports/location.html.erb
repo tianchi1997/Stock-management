@@ -5,18 +5,25 @@
   <tr>
     <th class="border">Stock Item</th>
     <th class="border">Amount / Required</th>
-    <th class="border">Order To</th>
+    <%if params[:order_to]%>
+      <th class="border">Order To (Amount Required)</th>
+    <%else%>
+      <th class="border">Order To</th>
+    <%end%>
   </tr>
   <%@location.subtree.order(:id).each do |location|%>
+  <%#Location (sub)Headder%>
+  <%tabs=location.depth-@location.subtree.first.depth%>
   <tr>
-    <td><%=location.name%></td>
+    <td><%=location.name.indent(tabs,"&nbsp&nbsp&nbsp&nbsp").html_safe%></td>
     <td></td>
     <td></td>
   </tr>
     <%@location.stock_item_summaries.each do |location_table|%>
+      <%#Deal with empty Rows %>
       <%if(location_table.total != nil)%>
         <tr>
-          <td><%=location_table.stock_item.name%></td>
+          <td><%=location_table.stock_item.name.indent(tabs+1,"&nbsp&nbsp&nbsp&nbsp").html_safe%></td>
           <td><%=location_table.total%>/<%=location_table.required%></td>
           <td><%= location_table.order_to%></td>
         </tr>
