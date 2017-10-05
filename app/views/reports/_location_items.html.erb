@@ -1,3 +1,12 @@
 <tr>
-  <td><%= location.name %>   <%= location.depth %></td>
+  <td><%= location.name.indent(location.depth,"&nbsp&nbsp&nbsp&nbsp").html_safe %> </td>
+  <td></td>
+  <td></td>
 </tr>
+<%location.items.each do|item|%>
+<tr>
+	<td><%=item.stock_item.name.indent(location.depth+1,"&nbsp&nbsp&nbsp&nbsp").html_safe%></td>
+	<td></td>
+	<td></td>
+</tr>
+<%end%>
