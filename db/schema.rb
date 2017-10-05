@@ -43,10 +43,8 @@ ActiveRecord::Schema.define(version: 20170808000000) do
     t.bigint "item_id"
     t.date "expiry_date"
     t.integer "count", null: false
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["deleted_at"], name: "index_item_expiries_on_deleted_at"
     t.index ["item_id", "expiry_date"], name: "item_expiry_index", unique: true
     t.index ["item_id"], name: "index_item_expiries_on_item_id"
   end
@@ -142,7 +140,6 @@ ActiveRecord::Schema.define(version: 20170808000000) do
                LEFT JOIN ( SELECT item_expiries.item_id,
                       sum(item_expiries.count) AS total
                      FROM item_expiries
-                    WHERE (item_expiries.deleted_at IS NULL)
                     GROUP BY item_expiries.item_id) item_summary ON ((item_summary.item_id = items.id)))
             WHERE (locations_1.deleted_at IS NULL)
             GROUP BY items.id) item_summaries ON (((item_summaries.stock_item_id = stock_items.id) AND (item_summaries.location_id = locations.id))))

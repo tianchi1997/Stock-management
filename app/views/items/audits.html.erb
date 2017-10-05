@@ -28,15 +28,30 @@
   <thead>
     <tr>
       <th>User</th>
+      <th>Time</th>
       <th>Expiry Date</th>
-      <th>Previous Count</th>
-      <th>New Count</th>
+      <th>Count</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @audits.each do |audits| %>
+    <% @audits.each do |audit| %>
       <tr>
+        <% if audit.user.present? %>
+          <td><%= audit.user.name %></td>
+        <% else%>
+          <td>System</td>
+        <% end %>
+
+        <td><%= audit.created_at.strftime("%c") %></td>
+        <% if audit.action == "create" %>
+          <td><%= audit.audited_changes["expiry_date"] %></td>
+          <td><%= audit.audited_changes["count"] %></td>
+        <% else %>
+          <td><%= audit.audited_changes["expiry_date"] %></td>
+          <td><%= 0 %></td>
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>

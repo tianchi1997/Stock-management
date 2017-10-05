@@ -20,6 +20,6 @@ INNER JOIN (
   LEFT JOIN (
     SELECT item_id,
            SUM(count) AS total
-    FROM item_expiries WHERE item_expiries.deleted_at IS NULL GROUP BY item_id
+    FROM item_expiries GROUP BY item_id
   ) item_summary ON item_summary.item_id = items.id WHERE locations.deleted_at IS NULL GROUP BY items.id
 ) item_summaries ON item_summaries.stock_item_id = stock_items.id AND item_summaries.location_id = locations.id WHERE locations.deleted_at IS NULL;
