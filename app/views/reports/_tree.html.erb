@@ -1,0 +1,12 @@
+<% depth = 0 if local_assigns[:depth].nil? %>
+
+<% location_tree.each do |location, subtree| %>
+  <%= render "reports/location_items", location: location, order_to: order_to, expiries: expiries, depth: depth %>
+
+  <%= render "reports/tree", location_tree: subtree, order_to: order_to, expiries: expiries, depth: depth + 1 %>
+
+  <% if subtree.length != 0 %>
+    <% render "reports/location_summary", location: location, order_to: order_to, depth: depth %>
+  <% end %>
+<% end %>
+

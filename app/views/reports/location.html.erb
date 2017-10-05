@@ -1,33 +1,19 @@
 <h1>Reports:  locations</h1>
-<h2>Location ID: <%= params[:id]  %></h2> 
+<h2>Location ID: <%= @location.id %></h2> 
 <table class="table">
-  <%#Headder Row%>
+  <%# Header Row %>
   <tr>
     <th class="border">Stock Item</th>
     <th class="border">Amount / Required</th>
-    <%if params[:order_to]%>
+    <%if @order_to %>
       <th class="border">Order To (Amount Required)</th>
     <%else%>
       <th class="border">Order To</th>
     <%end%>
   </tr>
-  <%@location.subtree.order(:id).each do |location|%>
-  <%#Location (sub)Headder%>
-  <%tabs=location.depth-@location.subtree.first.depth%>
-  <tr>
-    <td><%=location.name.indent(tabs,"&nbsp&nbsp&nbsp&nbsp").html_safe%></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <%@location.stock_item_summaries.each do |location_table|%>
-      <%#Deal with empty Rows %>
-      <%if(location_table.total != nil)%>
-        <tr>
-          <td><%=location_table.stock_item.name.indent(tabs+1,"&nbsp&nbsp&nbsp&nbsp").html_safe%></td>
-          <td><%=location_table.total%>/<%=location_table.required%></td>
-          <td><%= location_table.order_to%></td>
-        </tr>
-      <%end%>
-    <%end%>
-  <%end%>
+  <% if @display_tree %>
+    <%= render "reports/tree", location_tree: @location_tree, order_to: @order_to, expiries: @expiries %>
+  <% else %>
+    <%= render "reports/location_summary", location: @location, order_to: @order_to, expiries: @expiries, depth: 0 %>
+  <% end %>
 </table>
