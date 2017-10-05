@@ -37,7 +37,6 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.date :expiry_date
       t.integer :count, null: false
 
-      t.datetime :deleted_at, index: true
       t.timestamps
 
       t.index [:item_id, :expiry_date], unique: true, name: "item_expiry_index"

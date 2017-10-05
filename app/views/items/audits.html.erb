@@ -44,12 +44,12 @@
         <% end %>
 
         <td><%= audit.created_at.strftime("%c") %></td>
-        <% if audit.auditable.present? %>
-          <td><%= audit.auditable.expiry_date %></td>
-          <td><%= 0 %></td>
-        <% else %>
+        <% if audit.action == "create" %>
           <td><%= audit.audited_changes["expiry_date"] %></td>
           <td><%= audit.audited_changes["count"] %></td>
+        <% else %>
+          <td><%= audit.audited_changes["expiry_date"] %></td>
+          <td><%= 0 %></td>
         <% end %>
 
       </tr>
