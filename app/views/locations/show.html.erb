@@ -17,11 +17,6 @@
   <% links.push(link_to 'Stock Take', stock_take_path(@location)) %>
 <% end %>
 
-<% if can? :location, :reports %>
-  <% links.push(link_to 'Report', location_report_path(@location)) %>
-  <% links.push(link_to 'Order To Report', location_report_path(@location)+"?order_to=true") %>
-<% end %>
-
 <% if can? :edit, @location %>
   <% links.push(link_to 'Edit', edit_location_path(@location)) %>
 <% end %>
@@ -31,6 +26,16 @@
 <% end %>
 
 <%== links.join(' | ') %>
+
+<% if can? :location, :reports %>
+  <h2>Report</h2>
+  <%= bootstrap_form_tag url: location_report_path(@location) do |f| %>
+    <%= f.check_box :display_tree %>
+    <%= f.check_box :order_to %>
+    <%= f.check_box :expiries %>
+    <%= f.submit "Submit" %>
+  <% end %>
+<% end %>
 
 
 <h2>Items</h2>

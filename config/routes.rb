@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post 'items/:id/save_expiries', to: 'items#save_expiries'
 
   get 'locations/:id/stock_take', to: 'stock_take#location', as: 'stock_take'
-  get 'locations/:id/report', to: 'reports#location', as: 'location_report'
+  post 'locations/:id/report', to: 'reports#location', as: 'location_report'
   get 'stock_items/:id/report', to: 'reports#stock_item', as: 'stock_item_report'
 
 end
