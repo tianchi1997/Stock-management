@@ -5,11 +5,10 @@
   <tr>
     <th class="border">Stock Item</th>
     <th class="border">Amount / Required</th>
-    <%if @order_to %>
-      <th class="border">Order To (Amount Required)</th>
-    <%else%>
-      <th class="border">Order To</th>
-    <%end%>
+    <th class="border">Order To</th>
+    <% if @order_to %>
+      <th class="border">Amount to Order</th>
+    <% end %>
   </tr>
   <% if @display_tree %>
     <%= render "reports/tree", location_tree: @location_tree, order_to: @order_to, expiries: @expiries %>

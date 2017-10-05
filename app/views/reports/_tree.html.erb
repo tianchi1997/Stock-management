@@ -6,7 +6,7 @@
   <%= render "reports/tree", location_tree: subtree, order_to: order_to, expiries: expiries, depth: depth + 1 %>
 
   <% if subtree.present? %>
-    <% render "reports/location_summary", location: location, order_to: order_to, depth: depth %>
+    <%= render "reports/location_summary", location: location, order_to: order_to, depth: depth %>
   <% end %>
 <% end %>
 
