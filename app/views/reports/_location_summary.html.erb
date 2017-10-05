@@ -1,5 +1,5 @@
 <tr>
-  <td><b><%= ("Summary for " + location.name).indent(location.depth,"&nbsp&nbsp&nbsp&nbsp").html_safe %></b></td>
+  <td><b><%= ("Summary for " + location.name).indent(depth,"&nbsp&nbsp&nbsp&nbsp").html_safe %></b></td>
   <td></td>
   <td></td>
   <% if order_to %>
@@ -8,7 +8,7 @@
 </tr>
 <% location.stock_item_summaries.each do |item| %>
   <tr>
-    <td><%= item.stock_item.name.indent(location.depth + 1,"&nbsp&nbsp&nbsp&nbsp").html_safe %></td>
+    <td><%= item.stock_item.name.indent(depth + 1,"&nbsp&nbsp&nbsp&nbsp").html_safe %></td>
     <td><%= item.total %>/<%= item.required %></td>
     <td><%= item.order_to %></td>
     <% if order_to %>
