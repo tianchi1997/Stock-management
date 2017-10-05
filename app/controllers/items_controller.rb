@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
 
   def audits
     add_breadcrumb "Audits", item_audits_path(@item)
-    @audits = @item.associated_audits
+    @audits = @item.associated_audits.includes(:user).includes(:auditable)
   end
 
   # GET /items/new
