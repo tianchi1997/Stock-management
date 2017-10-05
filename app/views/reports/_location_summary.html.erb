@@ -3,3 +3,15 @@
   <td></td>
   <td></td>
 </tr>
+<% location.stock_item_summaries.each do|item| %>
+
+  <tr>
+    <td><%= item.stock_item.name.indent(location.depth+1,"&nbsp&nbsp&nbsp&nbsp").html_safe %></td>
+    <td><%= item.total %>/<%= item.required %></td>
+    <% if(order_to) %>
+	  <td><%= item.order_to %>(<%= item.order_to-item.total %>)</td>
+	<% else %>
+	  <td><%= item.order_to %></td>
+	<% end %>
+  </tr>
+<% end %>

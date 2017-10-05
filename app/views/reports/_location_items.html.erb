@@ -3,14 +3,14 @@
   <td></td>
   <td></td>
 </tr>
-<%location.items.each do|item|%>
-	<tr>
-		<td><%=item.stock_item.name.indent(location.depth+1,"&nbsp&nbsp&nbsp&nbsp").html_safe%></td>
-		<td><%=item.item_summary.total%>/<%=item.item_summary.required%></td>
-		<%if(order_to)%>
-			<td><%=item.item_summary.order_to%>(<%=item.item_summary.order_to-item.item_summary.total%>)</td>
-		<%else%>
-			<td><%=item.item_summary.order_to%></td>
-		<%end%>
-	</tr>
-<%end%>
+<% location.items.each do|item| %>
+  <% item=item.item_summary %>
+  <tr>
+    <td><%= item.stock_item.name.indent(location.depth+1,"&nbsp&nbsp&nbsp&nbsp").html_safe %></td>
+  	<td><%= item.total%>/<%=item.required %></td>
+	<%# if(order_to) %>
+	  <td><%#= item.order_to %>(<%#= item.order_to - item.total %>)</td>
+	<%# else %>
+	<%# end %>
+  </tr>
+<% end %>

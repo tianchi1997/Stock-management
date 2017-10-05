@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
   authorize_resource class: false
 
   def location
-    @location = Location.find(params[:id])
+    @location = Location.preload(stock_item_summaries:[:stock_item]).find(params[:id])
     add_location_breadcrumb @location
     add_breadcrumb "Report", location_report_path(@location)
 
@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
     @display_tree = params[:display_tree]
 
     if @display_tree
-      locations = @location.subtree.preload(stock_item_summaries: [:stock_item]).preload(items: [:stock_item])
+      locations = @location.subtree.preload(stock_item_summaries: [:stock_item]).preload(items: [:stock_item, :item_summary])
 
       if @expiries
         locations = locations.preload(items: [:item_expiries])
