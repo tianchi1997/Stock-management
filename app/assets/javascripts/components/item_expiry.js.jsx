@@ -19,18 +19,18 @@ class ItemExpiry extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.preventDefault}>
+        <form onSubmit={this.preventDefault.bind(this)}>
           <label>Count:</label>
           <input type="number" name="count"
                  value={this.props.itemExpiry.count}
-                 onChange={this.onCountChange}
+                 onChange={this.onCountChange.bind(this)}
           />
           <label>Date:</label>
           <input type="date" name="expiryDate"
                  value={this.props.itemExpiry.expiryDate}
-                 onChange={this.onExpiryChange}
+                 onChange={this.onExpiryChange.bind(this)}
           />
-          <button onClick={this.removeExpiry} className="btn">x</button>
+          <button onClick={this.removeExpiry.bind(this)} className="btn">x</button>
         </form>
       </div>
     );

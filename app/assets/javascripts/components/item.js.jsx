@@ -60,14 +60,21 @@ class Item extends React.Component {
     }, 0);
   }
 
-  checkExpiry(count, expiry) {
+  checkExpiry(count, expiry, curExpiries) {
     if (count <= 0 || count == null) {
       this.setState({ errors: "Please enter a valid count" });
       return false;
     }
 
+    if (curExpiries.indexOf(expiry) > - 1) {
+      this.setState({ errors: "Duplicate dates detected" });
+      return false;
+    }
+
     var today = new Date(new Date().toJSON().slice(0, 10));
     var date = new Date(expiry);
+
+    curExpiries.push(expiry);
 
     if (expiry == null || date < today){
       this.setState({errors: "Please enter a valid expiry date"})
@@ -106,8 +113,9 @@ class Item extends React.Component {
 
       // checks that each entry has both an expiry and a quantity
       // checks that each expiry entry is valid (i.e item has not already expired)
+      curExpiries = [];
       for(i = 0; i < self.state.itemExpiries.length; i++){
-        if(!this.checkExpiry(self.state.itemExpiries[i].count, self.state.itemExpiries[i].expiryDate)){
+        if(!this.checkExpiry(self.state.itemExpiries[i].count, self.state.itemExpiries[i].expiryDate, curExpiries)){
           return false;
         }
       }
@@ -197,8 +205,7 @@ class Item extends React.Component {
   }
 
   render() {
-    self = this;
-
+    var self = this;
     expiries = "";
     button = "";
 
@@ -209,15 +216,15 @@ class Item extends React.Component {
             key={index}
             expiryIndex={index}
             itemExpiry={itemExpiry}
-            removeExpiry={self.removeExpiry}
-            updateExpiry={self.updateExpiry}
-            updateCount={self.updateCount}
+            removeExpiry={self.removeExpiry.bind(self)}
+            updateExpiry={self.updateExpiry.bind(self)}
+            updateCount={self.updateCount.bind(self)}
           />
         );
       });
       button = (
         <div>
-          <button onClick={this.addExpiry} className="btn">Add expiry</button>
+          <button onClick={this.addExpiry.bind(this)} className="btn">Add expiry</button>
         </div>
       );
     }
@@ -228,11 +235,11 @@ class Item extends React.Component {
         <p>Current (To be removed): {this.state.current}</p>
         <p>Required: {this.state.required}</p>
         <p>Order To: {this.state.orderTo}</p>
-        <form onSubmit={this.preventDefault}>
+        <form onSubmit={this.preventDefault.bind(this)}>
           <label>Quantity:</label>
           <input type="number" name="quantity"
             value={this.state.quantity}
-            onChange={this.onQuantityChange}
+            onChange={this.onQuantityChange.bind(this)}
           />
         </form>
         <div>
