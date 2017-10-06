@@ -35,4 +35,4 @@ CROSS JOIN LATERAL (
                               )
                             )
                             AND item_summaries.stock_item_id = stock_items.id
-) summaries WHERE locations.deleted_at IS NULL AND summaries.required IS NOT NULL;
+) summaries WHERE locations.deleted_at IS NULL AND (locations.id IS NULL OR summaries.required IS NOT NULL);

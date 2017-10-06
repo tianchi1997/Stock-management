@@ -1,13 +1,13 @@
 <h1>Reports:  locations</h1>
 <h2>Location ID: <%= @location.id %></h2> 
-<table class="table">
+<table class="table table-striped table-bordered">
   <%# Header Row %>
   <tr>
-    <th class="border">Stock Item</th>
-    <th class="border">Amount / Required</th>
-    <th class="border">Order To</th>
+    <th></th>
+    <th>Amount / Required</th>
+    <th>Order To</th>
     <% if @order_to %>
-      <th class="border">Amount to Order</th>
+      <th>Amount to Order</th>
     <% end %>
   </tr>
   <% if @display_tree %>

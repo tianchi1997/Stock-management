@@ -2,7 +2,7 @@ class StockItemsController < ApplicationController
   load_and_authorize_resource
 
   add_breadcrumb "Stock Items", :stock_items_path
-  before_action :set_stock_item, only: [:edit, :update, :destroy]
+  before_action :set_stock_item, only: [:show, :edit, :update, :destroy]
 
   # GET /stock_items
   def index
