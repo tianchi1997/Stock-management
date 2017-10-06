@@ -149,9 +149,9 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   create_view "stock_item_summaries",  sql_definition: <<-SQL
       SELECT locations.id AS location_id,
       stock_items.id AS stock_item_id,
-      summaries.total,
-      summaries.required,
-      summaries.order_to
+      COALESCE(summaries.total, (0)::bigint) AS total,
+      COALESCE(summaries.required, (0)::bigint) AS required,
+      COALESCE(summaries.order_to, (0)::bigint) AS order_to
      FROM ((( SELECT locations_1.id,
               locations_1.ancestry,
               locations_1.deleted_at

@@ -26,29 +26,7 @@
 <%# Display links %>
 <%== links.join(' | ') %>
 
-<% if can? :location, :reports %>
-  <h2>Report</h2>
-  <%# Manual form as bootstrap forms gem does not support disabling hidden fields %>
-  <%= bootstrap_form_tag url: location_report_path(@location), method: :get do |f| %>
-    <div class="checkbox">
-      <label for="display_tree">
-        <input type="checkbox" value="1" name="display_tree" id="display_tree"> Display Sub-Locations
-      </label>
-    </div>
-    <div class="checkbox">
-      <label for="order_to">
-        <input type="checkbox" value="1" name="order_to" id="order_to"> Order Report
-      </label>
-    </div>
-    <div class="checkbox">
-      <label for="expiries">
-        <input type="checkbox" value="1" name="expiries" id="expiries"> Display Expiry Dates
-      </label>
-    </div>
-    <input type="submit" value="Submit" class="btn btn-default">
-  <% end %>
-<% end %>
-
+<%= render 'locations/report_form', location: @location %>
 
 <%# Render a table containing all items which are present at location %>
 <h2>Items</h2>

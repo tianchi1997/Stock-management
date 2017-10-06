@@ -1,12 +1,16 @@
+<% name = location.nil? ? "All Locations" : location.name %>
+<% stock_item_summaries = StockItemSummary.where(location: location) %>
+
 <tr>
-  <td><b><%= ("Summary for " + location.name).indent(depth,"&nbsp&nbsp&nbsp&nbsp").html_safe %></b></td>
+  <td><b><%= ("Summary for " + name).indent(depth,"&nbsp&nbsp&nbsp&nbsp").html_safe %></b></td>
   <td></td>
   <td></td>
   <% if order_to %>
     <td></td>
   <% end %>
 </tr>
-<% location.stock_item_summaries.each do |item| %>
+
+<% stock_item_summaries.each do |item| %>
   <tr>
     <td><%= item.stock_item.name.indent(depth + 1,"&nbsp&nbsp&nbsp&nbsp").html_safe %></td>
     <td><%= item.total %>/<%= item.required %></td>
@@ -18,5 +22,6 @@
         <td><%= item.order_to - item.total %></td>
       <% end %>
     <% end %>
+  
   </tr>
 <% end %>

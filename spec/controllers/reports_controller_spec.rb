@@ -7,12 +7,4 @@ RSpec.describe ReportsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-
-  describe "GET #stock_item" do
-    it "returns http success" do
-      get :stock_item
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end

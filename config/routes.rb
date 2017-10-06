@@ -15,5 +15,5 @@ Rails.application.routes.draw do
 
   get 'locations/:id/stock_take', to: 'stock_take#location', as: 'stock_take'
   get 'locations/:id/report', to: 'reports#location', as: 'location_report'
-  get 'stock_items/:id/report', to: 'reports#stock_item', as: 'stock_item_report'
+  get 'report', to: 'reports#location', as: 'report'
 end

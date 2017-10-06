@@ -3,7 +3,9 @@
 <% end %>
 
 <h1>Locations</h1>
+<%= render 'locations/report_form', location: nil %>
 <div id="tree"></div>
+
 
 <% if can? :create, Location %>
   <%= link_to 'New Location', new_location_path %>

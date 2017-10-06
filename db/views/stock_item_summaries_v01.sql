@@ -1,8 +1,8 @@
 SELECT     locations.id AS location_id,
            stock_items.id AS stock_item_id,
-           summaries.total     AS total,
-           summaries.required  AS required,
-           summaries.order_to  AS order_to
+           COALESCE(summaries.total, 0)     AS total,
+           COALESCE(summaries.required, 0)  AS required,
+           COALESCE(summaries.order_to, 0)  AS order_to
 FROM (
   SELECT locations.id         AS id,
          locations.ancestry   AS ancestry,

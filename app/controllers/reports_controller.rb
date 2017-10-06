@@ -2,16 +2,25 @@ class ReportsController < ApplicationController
   authorize_resource class: false
 
   def location
-    @location = Location.preload(stock_item_summaries:[:stock_item]).find(params[:id])
-    add_location_breadcrumb @location
-    add_breadcrumb "Report", location_report_path(@location)
-
+    @global = true
     @order_to = params[:order_to]
     @expiries = params[:expiries]
     @display_tree = params[:display_tree]
+    @location = nil
+
+    if params[:id]
+      @global = false
+      @location = Location.preload(stock_item_summaries:[:stock_item]).find(params[:id])
+      locations = @location.subtree
+      add_location_breadcrumb @location
+      add_breadcrumb "Report", location_report_path(@location)
+    else
+      locations = Location.all
+      add_breadcrumb "Report", :report_path
+    end
 
     if @display_tree
-      locations = @location.subtree.preload(stock_item_summaries: [:stock_item]).preload(items: [:stock_item, :item_summary])
+      locations = locations.preload(stock_item_summaries: [:stock_item]).preload(items: [:stock_item, :item_summary])
 
       if @expiries
         locations = locations.preload(items: [:item_expiries])
@@ -19,11 +28,5 @@ class ReportsController < ApplicationController
 
       @location_tree = locations.arrange(order: [:position, :name, :id])
     end
-  end
-
-  def stock_item
-    @stock_item = StockItem.find(params[:id])
-    add_breadcrumb @stock_item.name, stock_item_path(@stock_item)
-    add_breadcrumb "Report", stock_item_report_path(params[:id])
   end
 end
