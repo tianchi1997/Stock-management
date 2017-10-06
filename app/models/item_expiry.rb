@@ -9,7 +9,7 @@ class ItemExpiry < ApplicationRecord
   audited associated_with: :item
 
   # Validations
-  validates :count, presence: true
+  validates :count, presence: true, numericality: { greater_than: 0 }
   validate :expiry_date_valid
 
   # Scopes

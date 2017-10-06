@@ -58,29 +58,36 @@ var Item = React.createClass({
       return total + expiry.count;
     }, 0);
   },
-  checkExpiry(count,expiry){
-    if(count == 0 || count == null ){
+
+  checkExpiry(count, expiry){
+    if (count <= 0 || count == null) {
       this.setState({errors: "Please enter a valid count"});
       return false;
     }
-    var today = new Date(); 
-  
-    e = expiry.split('-'); 
+
+    var today = new Date();
+
+    e = expiry.split('-');
     console.log("expiry",e);
-    thisyear = today.getFullYear(); 
+    thisyear = today.getFullYear();
     thismonth = today.getMonth();
     thisday = today.getDate();
     if((e[0] < thisyear) || (e[0] == thisyear && e[1] < thismonth) || (e[0] == thisyear && e[1] == thismonth && e[2] < thisday) || expiry == null ){
       this.setState({errors: "Please enter a valid expiry date"})
       return false;
     }
-    return true; 
+    return true;
 
   },
+
   saveItem() {
-    var self = this; 
+    var self = this;
     fetchURL = "/items/" + this.state.id + "/save_expiries";
     itemExpiries = this.state.itemExpiries.slice();
+
+    if (this.state.quantity < 0) {
+      this.setState({ errors: "Quantity cannot be negative" });
+    }
 
     //if the item does not expire then no need to check that quantity matches
     if (!this.state.stockItem.expires) {
@@ -88,6 +95,10 @@ var Item = React.createClass({
         expiryDate: null,
         count: this.state.quantity
       }];
+
+      if (this.state.quantity == 0) {
+        itemExpiries = [];
+      }
     } else {
       //checks that expiry quantities match the total quantity 
       total = this.getTotal(this.state.itemExpiries);
@@ -95,13 +106,12 @@ var Item = React.createClass({
         this.setState({ errors: "Quantity does not match total" });
         return false;
       }
+
       //checks that each entry has both an expiry and a quantity
       //checks that each expiry entry is valid (i.e item has not already expired)
-      console.log("itemexpirieslength",self.state.itemExpiries.length)
-      for(i = 0;i<self.state.itemExpiries.length;i++){
-        console.log("expirydate",self.state.itemExpiries[i]);
+      for(i = 0; i < self.state.itemExpiries.length; i++){
         if(!this.checkExpiry(self.state.itemExpiries[i].count,self.state.itemExpiries[i].expiryDate)){
-          return false; 
+          return false;
         }
       }
     }

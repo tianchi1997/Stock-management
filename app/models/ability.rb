@@ -7,7 +7,6 @@ class Ability
     end
 
     if user.permission_level >= 1
-      can :stock_item, :report
       can :location, :report
     end
 
