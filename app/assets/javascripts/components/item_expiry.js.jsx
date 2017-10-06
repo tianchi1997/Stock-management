@@ -1,22 +1,22 @@
-var ItemExpiry = React.createClass({
+class ItemExpiry extends React.Component {
   preventDefault(event) {
     event.preventDefault();
-  },
+  }
 
   onCountChange(event) {
     this.props.updateCount(this.props.expiryIndex, parseInt(event.target.value));
-  },
+  }
 
   onExpiryChange(event) {
     this.props.updateExpiry(this.props.expiryIndex, event.target.value);
-  },
+  }
 
   removeExpiry(event) {
     this.props.removeExpiry(this.props.expiryIndex);
     event.preventDefault();
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
         <form onSubmit={this.preventDefault}>
@@ -35,5 +35,4 @@ var ItemExpiry = React.createClass({
       </div>
     );
   }
-});
-
+}

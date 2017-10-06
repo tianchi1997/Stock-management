@@ -1,10 +1,11 @@
-var StockTake = React.createClass({
-  getInitialState() {
-    return {
+class StockTake extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       curLocation: 0,
-      locationIDs: this.props.locationIDs
+      locationIDs: props.locationIDs
     };
-  },
+  }
 
   nextLocation() {
     if (this.state.curLocation != this.state.locationIDs.length - 1) {
@@ -16,15 +17,15 @@ var StockTake = React.createClass({
       this.props.locationIDs[0]
       window.location.assign(window.location.href.replace("/stock_take", ""))
     }
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div>
-        <Location locationID={this.state.locationIDs[this.state.curLocation]} nextLocation={this.nextLocation}/>
+        <Location locationID={this.state.locationIDs[this.state.curLocation]} nextLocation={this.nextLocation.bind(this)}/>
       </div>
     );
   }
-});
+}
 
 

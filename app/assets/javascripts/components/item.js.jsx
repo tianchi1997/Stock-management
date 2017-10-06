@@ -1,6 +1,7 @@
-var Item = React.createClass({
-  getInitialState() {
-    return {
+class Item extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       stockItem: {
         name: "",
         expires: false
@@ -10,15 +11,15 @@ var Item = React.createClass({
       quantity: 0,
       errors: ""
     };
-  },
+  }
 
   componentWillMount() {
     this.loadItem(this.props.itemID);
-  },
+  }
 
   componentWillReceiveProps(newProps) {
     this.loadItem(newProps.itemID);
-  },
+  }
 
   loadItem(itemID) {
     // Setting the context of 'this'
@@ -51,34 +52,30 @@ var Item = React.createClass({
 
         self.setState(json);
       })
-  },
+  }
 
   getTotal(itemExpiries) {
     return itemExpiries.reduce(function (total, expiry) {
       return total + expiry.count;
     }, 0);
-  },
+  }
 
-  checkExpiry(count, expiry){
+  checkExpiry(count, expiry) {
     if (count <= 0 || count == null) {
-      this.setState({errors: "Please enter a valid count"});
+      this.setState({ errors: "Please enter a valid count" });
       return false;
     }
 
-    var today = new Date();
+    var today = new Date(new Date().toJSON().slice(0, 10));
+    var date = new Date(expiry);
 
-    e = expiry.split('-');
-    console.log("expiry",e);
-    thisyear = today.getFullYear();
-    thismonth = today.getMonth();
-    thisday = today.getDate();
-    if((e[0] < thisyear) || (e[0] == thisyear && e[1] < thismonth) || (e[0] == thisyear && e[1] == thismonth && e[2] < thisday) || expiry == null ){
+    if (expiry == null || date < today){
       this.setState({errors: "Please enter a valid expiry date"})
       return false;
     }
     return true;
 
-  },
+  }
 
   saveItem() {
     var self = this;
@@ -89,7 +86,7 @@ var Item = React.createClass({
       this.setState({ errors: "Quantity cannot be negative" });
     }
 
-    //if the item does not expire then no need to check that quantity matches
+    // if the item does not expire then no need to check that quantity matches
     if (!this.state.stockItem.expires) {
       itemExpiries = [{
         expiryDate: null,
@@ -100,17 +97,17 @@ var Item = React.createClass({
         itemExpiries = [];
       }
     } else {
-      //checks that expiry quantities match the total quantity 
+      // checks that expiry quantities match the total quantity 
       total = this.getTotal(this.state.itemExpiries);
       if (total != this.state.quantity) {
         this.setState({ errors: "Quantity does not match total" });
         return false;
       }
 
-      //checks that each entry has both an expiry and a quantity
-      //checks that each expiry entry is valid (i.e item has not already expired)
+      // checks that each entry has both an expiry and a quantity
+      // checks that each expiry entry is valid (i.e item has not already expired)
       for(i = 0; i < self.state.itemExpiries.length; i++){
-        if(!this.checkExpiry(self.state.itemExpiries[i].count,self.state.itemExpiries[i].expiryDate)){
+        if(!this.checkExpiry(self.state.itemExpiries[i].count, self.state.itemExpiries[i].expiryDate)){
           return false;
         }
       }
@@ -122,7 +119,7 @@ var Item = React.createClass({
     })
 
     return true;
-  },
+  }
 
   onQuantityChange(event) {
     this.setState({
@@ -131,7 +128,7 @@ var Item = React.createClass({
     })
 
     event.preventDefault();
-  },
+  }
 
   updateCount(expiryIndex, newCount) {
     newItemExpiries = this.state.itemExpiries.slice();
@@ -144,7 +141,7 @@ var Item = React.createClass({
       itemExpiries: newItemExpiries,
       errors: ""
     });
-  },
+  }
 
   updateExpiry(expiryIndex, newExpiry) {
     newItemExpiries = this.state.itemExpiries.slice();
@@ -159,12 +156,12 @@ var Item = React.createClass({
     });
 
 
-  },
+  }
 
   addExpiry() {
     newItemExpiries = this.state.itemExpiries.slice();
     newItemExpiries.push({
-      expiryDate: new Date().today,
+      expiryDate: new Date().toJSON().slice(0, 10),
       count: 1
     });
 
@@ -172,7 +169,7 @@ var Item = React.createClass({
       itemExpiries: newItemExpiries,
       errors: ""
     });
-  },
+  }
 
   removeExpiry(expiryIndex) {
     newItemExpiries = this.state.itemExpiries.slice();
@@ -181,23 +178,23 @@ var Item = React.createClass({
       itemExpiries: newItemExpiries,
       errors: ""
     });
-  },
+  }
 
   prevItem() {
     if (this.saveItem()) {
       this.props.prevItem();
     }
-  },
+  }
 
   nextItem() {
     if (this.saveItem()) {
       this.props.nextItem();
     }
-  },
+  }
 
   preventDefault(event) {
     event.preventDefault();
-  },
+  }
 
   render() {
     self = this;
@@ -242,11 +239,11 @@ var Item = React.createClass({
           {expiries}
           {button}
         </div>
-        <button onClick={this.prevItem} className="btn">Previous</button>
-        <button onClick={this.nextItem} className="btn">Next</button>
+        <button onClick={this.prevItem.bind(this)} className="btn">Previous</button>
+        <button onClick={this.nextItem.bind(this)} className="btn">Next</button>
         <p>{this.state.errors}</p>
       </div >
     );
   }
-});
+}
 
