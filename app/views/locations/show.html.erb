@@ -1,17 +1,15 @@
+<%# Render location tree as javascript %>
+<%# This must be in the body as otherwise turbolinks will prevent refreshing %>
 <%= javascript_tag do %>
   var tree = <%== render partial: "locations/tree", formats: [:json], object: @locations_tree, as: :locations_tree %>;
 <% end %>
-
-<p>
-  <strong>Name:</strong>
-  <%= @location.name %>
-</p>
 
 <p>
   <strong>Description:</strong>
   <%= @location.description %>
 </p>
 
+<%# Add links that user has permission to access %>
 <% links = [] %>
 <% if can? :location, :stock_take %>
   <% links.push(link_to 'Stock Take', stock_take_path(@location)) %>
@@ -25,30 +23,47 @@
   <% links.push(link_to 'Delete', @location, method: :delete, data: { confirm: 'Are you sure?' }) %>
 <% end %>
 
+<%# Display links %>
 <%== links.join(' | ') %>
 
 <% if can? :location, :reports %>
   <h2>Report</h2>
+  <%# Manual form as bootstrap forms gem does not support disabling hidden fields %>
   <%= bootstrap_form_tag url: location_report_path(@location), method: :get do |f| %>
-    <%= f.check_box :display_tree, label: "Display Sub-Locations" %>
-    <%= f.check_box :order_to, label: "Order Report" %>
-    <%= f.check_box :expiries, label: "Display Expiry Dates" %>
-    <%= f.submit "Submit" %>
+    <div class="checkbox">
+      <label for="display_tree">
+        <input type="checkbox" value="1" name="display_tree" id="display_tree"> Display Sub-Locations
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="order_to">
+        <input type="checkbox" value="1" name="order_to" id="order_to"> Order Report
+      </label>
+    </div>
+    <div class="checkbox">
+      <label for="expiries">
+        <input type="checkbox" value="1" name="expiries" id="expiries"> Display Expiry Dates
+      </label>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-default">
   <% end %>
 <% end %>
 
 
+<%# Render a table containing all items which are present at location %>
 <h2>Items</h2>
 <%= render 'items/table', items: @items, name_type: :stock_item %>
 
-
+<%# Add link to create new item if user has permission %>
 <% if can? :create, Item %>
   <%= link_to 'Add Item', new_item_path(location_id: @location) %>
 <% end %>
 
 <h2>Sublocations</h2>
+<%# Placeholder for bootstrap tree %>
 <div id="tree"></div>
 
+<%# Add link to create new location below current location %>
 <% if can? :create, Location %>
   <%= link_to 'Add Sublocation', new_location_path(parent_id: @location) %>
 <% end %>
