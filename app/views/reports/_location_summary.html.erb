@@ -1,5 +1,9 @@
-<% name = location.nil? ? "All Locations" : location.name %>
-<% stock_item_summaries = StockItemSummary.where(location: location) %>
+<% if !defined? stock_item_summaries or stock_item_summaries.nil? %>
+  <% stock_item_summaries = location.stock_item_summaries %>
+  <% name = location.name %>
+<% else %>
+  <% name = "All Locations" %>
+<% end %>
 
 <tr>
   <td><b><%= ("Summary for " + name).indent(depth,"&nbsp&nbsp&nbsp&nbsp").html_safe %></b></td>

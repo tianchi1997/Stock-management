@@ -14,6 +14,6 @@
 <% end %>
 
   <% if !@display_tree or @global  %>
-    <%= render "reports/location_summary", location: @location, order_to: @order_to, expiries: @expiries, depth: 0 %>
+    <%= render "reports/location_summary", location: @location, order_to: @order_to, expiries: @expiries, depth: 0, stock_item_summaries: @stock_item_summaries %>
   <% end %>
 </table>

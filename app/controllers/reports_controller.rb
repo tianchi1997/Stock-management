@@ -15,7 +15,8 @@ class ReportsController < ApplicationController
       add_location_breadcrumb @location
       add_breadcrumb "Report", location_report_path(@location)
     else
-      locations = Location.all
+      locations = Location.all.preload(stock_item_summaries:[:stock_item])
+      @stock_item_summaries = StockItemSummary.where(location: nil).preload(:stock_item)
       add_breadcrumb "Report", :report_path
     end
 
