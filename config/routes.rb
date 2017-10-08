@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   resources :stock_items
   resources :users
 
-  get 'items/:id/audits', to: 'items#audits', as: 'item_audits'
   post 'items/:id/save_expiries', to: 'items#save_expiries'
 
   get 'locations/:id/stock_take', to: 'stock_take#location', as: 'stock_take'

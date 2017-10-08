@@ -11,10 +11,6 @@ class ItemsController < ApplicationController
     else
       @item = Item.find(params[:id]);
     end
-  end
-
-  def audits
-    add_breadcrumb "Audits", item_audits_path(@item)
     @audits = @item.associated_audits.includes(:user).includes(:auditable).order(created_at: :desc)
   end
 
