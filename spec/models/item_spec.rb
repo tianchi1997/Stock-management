@@ -24,8 +24,13 @@ RSpec.describe Item, type: :model do
   end
 
   describe "Validations" do
-    it "validates presence of required" do
-      is_expected.to validate_presence_of(:required)
+    subject { build(:item) }
+    it "validates required is greater than 0" do
+      is_expected.to validate_numericality_of(:required).is_greater_than(0)
+    end
+
+    it "validates order is greater than required" do
+      is_expected.to validate_numericality_of(:order_to)
     end
   end
 end

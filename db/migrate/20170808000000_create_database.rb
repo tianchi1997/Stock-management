@@ -85,7 +85,7 @@ class CreateDatabase < ActiveRecord::Migration[5.1]
       t.column :username, :string
       t.column :action, :string
       t.column :audited_changes, :jsonb
-      t.column :version, :integer, :default => 0
+      t.column :version, :integer, default: 0
       t.column :comment, :string
       t.column :remote_address, :string
       t.column :request_uuid, :string, index: true

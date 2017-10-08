@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(version: 20170808000000) do
               sum(item_summaries.order_to) AS order_to
              FROM item_summaries
             WHERE (((locations.id IS NULL) OR (item_summaries.location_id = locations.id) OR ((locations.ancestry IS NULL) AND (((item_summaries.location_ancestry)::text ~~ concat(locations.id, '/%')) OR ((item_summaries.location_ancestry)::text = concat(locations.id)))) OR ((locations.ancestry IS NOT NULL) AND (((item_summaries.location_ancestry)::text ~~ concat(locations.ancestry, '/', locations.id, '/%')) OR ((item_summaries.location_ancestry)::text = concat(locations.ancestry, '/', locations.id))))) AND (item_summaries.stock_item_id = stock_items.id))) summaries)
-    WHERE ((locations.deleted_at IS NULL) AND ((locations.id IS NULL) OR (summaries.required IS NOT NULL)));
+    WHERE ((locations.id IS NULL) OR ((locations.deleted_at IS NULL) AND (summaries.required IS NOT NULL)));
   SQL
 
 end

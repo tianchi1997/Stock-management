@@ -4,9 +4,10 @@ class Location < ApplicationRecord
   has_many :locations, dependent: :destroy
   has_many :stock_items, through: :items
   has_many :item_expiries, through: :items
-  attr_readonly :ancestry
-
   has_many :stock_item_summaries
+
+  # Prevent ancestry from changing
+  attr_readonly :ancestry
 
   # Auditing
   acts_as_paranoid

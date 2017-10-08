@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "items/edit", type: :view do
   before(:each) do
     @item = assign(:item, Item.create!(
-      :location => nil,
+      location: nil,
       :stock_item => nil,
-      :required => 1,
+      required: 1,
       :order_to => 1
     ))
   end

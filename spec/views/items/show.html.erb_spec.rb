@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "items/show", type: :view do
   before(:each) do
     @item = assign(:item, Item.create!(
-      :location => nil,
+      location: nil,
       :stock_item => nil,
-      :required => 2,
+      required: 2,
       :order_to => 3
     ))
   end

@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe "locations/new", type: :view do
   before(:each) do
     assign(:location, Location.new(
-      :location => nil,
-      :name => "MyString",
-      :description => "MyString"
+      location: nil,
+      name: "MyString",
+      description: "MyString"
     ))
   end
 
