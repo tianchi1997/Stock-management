@@ -22,7 +22,12 @@ class StockTake extends React.Component {
   render() {
     return (
       <div>
+        <div>
+        <NumPad/> 
+        </div>
+        <div>
         <Location locationID={this.state.locationIDs[this.state.curLocation]} nextLocation={this.nextLocation.bind(this)}/>
+        </div>
       </div>
     );
   }

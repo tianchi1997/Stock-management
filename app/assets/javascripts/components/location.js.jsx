@@ -60,7 +60,7 @@ class Location extends React.Component {
     // only render the item after the item has been loaded into the state. 
     if(this.state.curItem != -1 && this.state.items.length > 0){
       return (
-        <div>
+        <div class="jumbotron">
           <div>
               <h2>Location: {this.state.name}</h2>
               <p> {this.state.description}</p>
