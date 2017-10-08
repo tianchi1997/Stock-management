@@ -128,7 +128,12 @@ class Item extends React.Component {
 
     return true;
   }
+  onSelect(event){
+    console.log("item: event.target.id", event.target.id);
+    this.props.setActiveID(event.target.id);
 
+
+  }
   onQuantityChange(event) {
     this.setState({
       quantity: parseInt(event.target.value),
@@ -237,9 +242,10 @@ class Item extends React.Component {
         <p>Order To: {this.state.orderTo}</p>
         <form onSubmit={this.preventDefault.bind(this)}>
           <label>Quantity:</label>
-          <input type="number" name="quantity"
+          <input type="number" id="itemquantity" name="quantity"
             value={this.state.quantity}
             onChange={this.onQuantityChange.bind(this)}
+            onSelect={this.onSelect.bind(this)}
           />
         </form>
         <div>

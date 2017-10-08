@@ -3,7 +3,8 @@ class StockTake extends React.Component {
     super(props);
     this.state = {
       curLocation: 0,
-      locationIDs: props.locationIDs
+      locationIDs: props.locationIDs,
+      activeID: null
     };
   }
 
@@ -18,15 +19,28 @@ class StockTake extends React.Component {
       window.location.assign(window.location.href.replace("/stock_take", ""))
     }
   }
+  getActiveID(){
+    if(activeID != null){
 
+      console.log("activeID",this.state.activeID)
+      return this.state.activeID;
+    }
+    return null;
+  }
+  setActiveID(id){
+    console.log("stock_take: activeID",id)
+    this.setState({activeID: id}); 
+  }
   render() {
     return (
-      <div>
-        <div>
-        <NumPad/> 
-        </div>
-        <div>
-        <Location locationID={this.state.locationIDs[this.state.curLocation]} nextLocation={this.nextLocation.bind(this)}/>
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-6">
+          <Location locationID={this.state.locationIDs[this.state.curLocation]} nextLocation={this.nextLocation.bind(this)} setActiveID={this.setActiveID.bind(this)}/>
+          </div>
+          <div className="col-xs-6">
+          <Numpad getActiveID={this.getActiveID.bind(this)}/>
+          </div>
         </div>
       </div>
     );

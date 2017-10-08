@@ -1,7 +1,7 @@
 class Location extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props);
     this.state = {
       name: "",
       description: "",
@@ -55,12 +55,15 @@ class Location extends React.Component {
       this.props.nextLocation();
     }
   }
-
+  setActiveID(id){
+    console.log("location: activeID",id);
+    this.props.setActiveID(id);
+  }
   render() {
     // only render the item after the item has been loaded into the state. 
     if(this.state.curItem != -1 && this.state.items.length > 0){
       return (
-        <div class="jumbotron">
+        <div>
           <div>
               <h2>Location: {this.state.name}</h2>
               <p> {this.state.description}</p>
@@ -69,6 +72,7 @@ class Location extends React.Component {
             itemID={this.state.items[this.state.curItem].id}
             prevItem={this.prevItem.bind(this)}
             nextItem={this.nextItem.bind(this)}
+            setActiveID={this.setActiveID.bind(this)}
           />
         </div>
       );
