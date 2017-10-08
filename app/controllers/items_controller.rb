@@ -63,14 +63,25 @@ class ItemsController < ApplicationController
     json = JSON.parse(request.body.read, symbolize_names: true)
     json = json.group_by { |expiry| expiry[:expiryDate] }
     item_expiries = []
+    dates = []
 
     json.each do |date, expiries|
       total = expiries.map { |expiry| expiry[:count] }.sum
-      item_expiries.push(ItemExpiry.new(item: @item, expiry_date: date, count: total))
+      item_expiry = ItemExpiry.new(item: @item, expiry_date: date, count: total)
+      item_expiries.push(item_expiry)
+      dates.push(item_expiry.expiry_date)
     end
 
     if item_expiries.all? { |item_expiry| item_expiry.valid? }
-      ItemExpiry.where(item: @item).destroy_all
+      ItemExpiry.where(item: @item).each do |item_expiry|
+        # Don't log audit if date exists in new expiries
+        if dates.include?(item_expiry.expiry_date)
+          item_expiry.delete
+        else
+          item_expiry.destroy
+        end
+      end
+            
       item_expiries.each(&:save)
     end
   end
