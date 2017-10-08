@@ -2,7 +2,6 @@ require "rails_helper"
 
 RSpec.describe StockItemsController, type: :routing do
   describe "routing" do
-
     it "routes to #index" do
       expect(get: "/stock_items").to route_to("stock_items#index")
     end
