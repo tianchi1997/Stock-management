@@ -1,3 +1,5 @@
+require 'csv'
+
 class ReportsController < ApplicationController
   authorize_resource class: false
 
@@ -10,7 +12,7 @@ class ReportsController < ApplicationController
 
     if params[:id]
       @global = false
-      @location = Location.preload(stock_item_summaries:[:stock_item]).find(params[:id])
+      @location = Location.preload(stock_item_summaries: [:stock_item]).find(params[:id])
       locations = @location.subtree
       add_location_breadcrumb @location
       add_breadcrumb "Report", location_report_path(@location)

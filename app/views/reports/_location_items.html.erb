@@ -8,15 +8,11 @@
 </tr>
 <% location.items.each do |item| %>
   <tr>
-    <td><%= item.stock_item.name.indent(depth + 1, "&nbsp&nbsp&nbsp&nbsp").html_safe %></td>
+    <td><%= item.stock_item.name.indent(depth + 1, "&nbsp&nbsp&nbsp&nbsp").html_safe %> (<%= item.stock_item.item_code %>)</td>
     <td><%= item.item_summary.total %>/<%= item.required %></td>
     <td><%= item.order_to %></td>
     <% if order_to %>
-      <% if item.item_summary.total >= item.required %>
-        <td>0</td>
-      <% else %>
-        <td><%= (item.order_to || item.required) - item.item_summary.total %></td>
-      <% end %>
+      <td>item.order_amount</td>
     <% end %>
   </tr>
 
@@ -27,7 +23,7 @@
         <td><%= item_expiry.count %></td>
         <td></td>
         <% if order_to %>
-            <td></td>
+          <td></td>
         <% end %>
       </tr>
     <% end %>
