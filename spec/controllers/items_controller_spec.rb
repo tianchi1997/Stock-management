@@ -41,7 +41,7 @@ RSpec.describe ItemsController, type: :controller do
   # in order to pass any filters (e.g. authentication) defined in
   # ItemsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
- 
+
   describe "GET #show" do
     it "returns a success response" do
       item = Item.create! valid_attributes
@@ -59,6 +59,7 @@ RSpec.describe ItemsController, type: :controller do
       item = Item.create! valid_attributes
       get :show, params: {id: item.to_param}, session: valid_session
       response.should render_template :show
+    end
   end
 
   describe "GET #new" do
@@ -99,7 +100,7 @@ RSpec.describe ItemsController, type: :controller do
       it "does not save the new contact" do
         post :create, params: {item: invalid_attributes}, session: valid_session
         expect(response).to_not change(Item,:count)
-      end 
+      end
       it "redirects to the #new action" do
         post :create, params: {item: invalid_attributes}, session: valid_session
         expect(response).to render_template :new
@@ -108,9 +109,9 @@ RSpec.describe ItemsController, type: :controller do
   end
 
   describe "PUT #update" do
-    before :each do 
+    before :each do
       @item = Factory(:item, name: "Name", current: "10", required: "30", order_to: "50"  )
-    end 
+    end
     context "with valid params" do
       let(:new_attributes) {
         skip("Add a hash of attributes valid for your model")
@@ -139,6 +140,7 @@ RSpec.describe ItemsController, type: :controller do
       end
     end
   end
+
   describe "DELETE #destroy" do
     it "destroys the requested item" do
       item = Item.create! valid_attributes
@@ -152,10 +154,6 @@ RSpec.describe ItemsController, type: :controller do
       delete :destroy, params: {id: item.to_param}, session: valid_session
       expect(response).to redirect_to(items_url)
     end
-  end
-
-  describe "GET #audits" do
-
   end
 
   describe "POST #save_expiries" do

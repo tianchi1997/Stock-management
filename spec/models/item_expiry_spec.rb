@@ -55,5 +55,11 @@ RSpec.describe ItemExpiry, type: :model do
                stock_item: stock_item_without_expires).to be_invalid
       end
     end
+
+    subject { build(:item_expiry) }
+
+    it "validates count is more than 0" do
+      is_expected.to validate_numericality_of(:count).is_greater_than(0)
+    end
   end
 end

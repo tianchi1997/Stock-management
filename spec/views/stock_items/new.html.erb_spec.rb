@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe "stock_items/new", type: :view do
   before(:each) do
     assign(:stock_item, StockItem.new(
-      :name => "MyString",
-      :description => "MyString",
-      :supplier => "MyString",
-      :expires => false
+      name: "MyString",
+      description: "MyString",
+      supplier: "MyString",
+      expires: false
     ))
   end
 

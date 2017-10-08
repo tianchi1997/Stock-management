@@ -55,9 +55,6 @@ gem 'breadcrumbs_on_rails'
 # Nested locations
 gem 'ancestry', '~> 3.0.1'
 
-# ActiveRecord bug fix
-gem 'rails_select_on_includes'
-
 # SQL views
 gem 'scenic'
 

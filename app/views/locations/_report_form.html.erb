@@ -1,10 +1,12 @@
-<% if location.nil? %>
-  <% url = report_path %>
-<% else %>
-  <% url = location_report_path(location) %>
-<% end %>
-
 <% if can? :location, :reports %>
+  <% if location.nil? %>
+    <% url = report_path %>
+    <% csv_url = report_path(format: "csv") %>
+  <% else %>
+    <% url = location_report_path(location) %>
+    <% csv_url = location_report_path(location, format: "csv") %>
+  <% end %>
+
   <h2>Report</h2>
   <%# Manual form as bootstrap forms gem does not support disabling hidden fields %>
   <%= bootstrap_form_tag url: url, method: :get do |f| %>
@@ -25,4 +27,6 @@
     </div>
     <input type="submit" value="Submit" class="btn btn-default">
   <% end %>
+
+  <%= link_to 'CSV Order Report', csv_url %>
 <% end %>

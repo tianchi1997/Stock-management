@@ -91,7 +91,7 @@ ItemExpiry.create!([
   {item_id: 9, expiry_date: nil, count: 5},
   {item_id: 10, expiry_date: nil, count: 5},
   {item_id: 12, expiry_date: nil, count: 1},
-  {item_id: 13, expiry_date: nil, count: 0},
+  {item_id: 13, expiry_date: nil, count: 2},
   {item_id: 14, expiry_date: nil, count: 5},
   {item_id: 17, expiry_date: nil, count: 6},
   {item_id: 18, expiry_date: nil, count: 1},
