@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/devise'
 
 RSpec.describe ReportsController, type: :controller do
   describe "GET #location" do
