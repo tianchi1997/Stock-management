@@ -42,6 +42,10 @@ class Location extends React.Component {
     this.loadLocation(newProps.locationID);
   }
 
+  componentShouldUpdate(nextProps, nextState) {
+
+  }
+
   prevItem() {
     if (this.state.curItem > 0) {
       this.setState({curItem: this.state.curItem - 1});

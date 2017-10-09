@@ -56,10 +56,8 @@ RSpec.describe ItemExpiry, type: :model do
       end
     end
 
-    subject { build(:item_expiry) }
-
     it "validates count is more than 0" do
-      is_expected.to validate_numericality_of(:count).is_greater_than(0)
+      expect(build(:item_expiry)).to validate_numericality_of(:count).is_greater_than(0)
     end
   end
 end
