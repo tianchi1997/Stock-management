@@ -8,6 +8,7 @@ class Location extends React.Component {
       curItem: -1,
       items: [],
       id: props.locationID,
+      path: null 
     };
   }
 
@@ -67,6 +68,7 @@ class Location extends React.Component {
           <div>
               <h2>Location: {this.state.name}</h2>
               <p> {this.state.description}</p>
+              <p> {this.state.path}</p>
           </div>
           <Item
             itemID={this.state.items[this.state.curItem].id}

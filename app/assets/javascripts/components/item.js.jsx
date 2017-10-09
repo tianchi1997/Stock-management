@@ -76,8 +76,8 @@ class Item extends React.Component {
 
     curExpiries.push(expiry);
 
-    if (expiry == null || date < today){
-      this.setState({errors: "Please enter a valid expiry date"})
+    if (expiry == null || date < today) {
+      this.setState({ errors: "Please enter a valid expiry date" })
       return false;
     }
     return true;
@@ -114,8 +114,8 @@ class Item extends React.Component {
       // checks that each entry has both an expiry and a quantity
       // checks that each expiry entry is valid (i.e item has not already expired)
       curExpiries = [];
-      for(i = 0; i < self.state.itemExpiries.length; i++){
-        if(!this.checkExpiry(self.state.itemExpiries[i].count, self.state.itemExpiries[i].expiryDate, curExpiries)){
+      for (i = 0; i < self.state.itemExpiries.length; i++) {
+        if (!this.checkExpiry(self.state.itemExpiries[i].count, self.state.itemExpiries[i].expiryDate, curExpiries)) {
           return false;
         }
       }
@@ -129,11 +129,11 @@ class Item extends React.Component {
     return true;
   }
 
-  onSelect(event){
+  onSelect(event) {
     //console.log("item: event.target.id", event.target.id);
     //this.props.setActiveID(event.target.id);
     element = document.getElementById(event.target.id);
-    element.focus();   
+    element.focus();
 
   }
   onQuantityChange(event) {
@@ -158,8 +158,21 @@ class Item extends React.Component {
     });
   }
 
-  updateExpiry(expiryIndex, newExpiry) {
+  updateExpiry(expiryIndex, expiry, type) {
     newItemExpiries = this.state.itemExpiries.slice();
+    tempExp = newItemExpiries[expiryIndex].expiryDate;
+    dateArray = tempExp.split("-");
+    if (type == "day") {
+      dateArray[2] = expiry;
+    }
+    else if (type == "month") {
+      dateArray[1] = expiry;
+    }
+    else if (type == "year") {
+      dateArray[0] = expiry;
+    }
+    newExpiry = dateArray.join("-");
+
     newItemExpiries[expiryIndex] = {
       expiryDate: newExpiry,
       count: this.state.itemExpiries[expiryIndex].count
