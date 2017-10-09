@@ -7,7 +7,9 @@ class Numpad extends React.Component {
     e.preventDefault();
     if (document.activeElement.tagName.toLowerCase() == "input") {
       document.activeElement.value += e.target.value;
-      element.dispatchEvent(new Event("input", { bubbles: true }));
+      ev = new Event("input", { bubbles: true });
+      ev.simulated = true;
+      element.dispatchEvent(ev);
     }
   }
 
