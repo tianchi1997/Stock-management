@@ -1,4 +1,4 @@
-<% if can? :location, :reports %>
+<% if can? :location, :report %>
   <% if location.nil? %>
     <% url = report_path %>
     <% csv_url = report_path(format: "csv") %>
