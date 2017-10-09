@@ -129,9 +129,10 @@ class Item extends React.Component {
     return true;
   }
   onSelect(event){
-    console.log("item: event.target.id", event.target.id);
-    this.props.setActiveID(event.target.id);
-
+    //console.log("item: event.target.id", event.target.id);
+    //this.props.setActiveID(event.target.id);
+    element = document.getElementById(event.target.id);
+    element.focus();   
 
   }
   onQuantityChange(event) {
