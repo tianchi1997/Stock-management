@@ -2,11 +2,11 @@ class ItemExpiry extends React.Component {
   preventDefault(event) {
     event.preventDefault();
   }
-  onSelect(event){
+  onSelect(event) {
     //console.log("item: event.target.id", event.target.id);
     //this.props.setActiveID(event.target.id);
     element = document.getElementById(event.target.id);
-    element.focus();   
+    element.focus();
 
   }
   onCountChange(event) {
@@ -23,30 +23,61 @@ class ItemExpiry extends React.Component {
   }
 
   render() {
+    var expiryarray = this.props.itemExpiry.expiryDate.split('-');
+    console.log(expiryarray);
     return (
-      <div>
+      <div className="container-fluid">
         <form onSubmit={this.preventDefault.bind(this)}>
-          <label>Count:</label>
-          <input type="number" name="count"
-                 value={this.props.itemExpiry.count}
-                 onChange={this.onCountChange.bind(this)}
-                 onSelect={this.onSelect.bind(this)}
-          />
-          <label>Date:</label>
-          <input type="number" name="day"
-                 value={this.props.itemExpiry.expiryDate.substring(8,10)}
-                 onChange={this.onExpiryChange.bind(this)}
-          />
-          <input type="number" name="month"
-                 value={this.props.itemExpiry.expiryDate.substring(5,7)}
-                 onChange={this.onExpiryChange.bind(this)}
-          />
-          <input type="number" name="year"
-                 value={this.props.itemExpiry.expiryDate.substring(0,4)}
-                 onChange={this.onExpiryChange.bind(this)}
-          />
-          <button onClick={this.removeExpiry.bind(this)} className="btn">x</button>
+          <div className="form-group">
+            <div className="row">
+              <div className="col-xs-2">
+                <label>Count:</label>
+              </div>
+              <div className="col-xs-4">
+                <input type="number" name="count" id="count"
+                  value={this.props.itemExpiry.count}
+                  onChange={this.onCountChange.bind(this)}
+                  onSelect={this.onSelect.bind(this)}
+                  className="form-control"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-xs-2">
+                <label for="day">Date:</label>
+              </div>
+              <div className="col-xs-2 ">
+
+                <input type="number" name="day" id="day"
+                  value={expiryarray[2]}
+                  onChange={this.onExpiryChange.bind(this)}
+                  className="form-control "
+                />
+              </div>
+
+              <div className="col-xs-2 ">
+
+                <input type="number" name="month" id="month"
+                  value={expiryarray[1]}
+                  onChange={this.onExpiryChange.bind(this)}
+                  className="form-control "
+                />
+              </div>
+              <div className="col-xs-4">
+                <label className="sr-only" for="year" />
+                <input type="number" name="year" id="year"
+                  value={expiryarray[0]}
+                  onChange={this.onExpiryChange.bind(this)}
+                  className="form-control"
+                />
+              </div>
+              <div className="col-xs-2">
+                <button onClick={this.removeExpiry.bind(this)} className="btn">x</button>
+              </div>
+            </div>
+          </div>
         </form>
+
       </div>
     );
   }

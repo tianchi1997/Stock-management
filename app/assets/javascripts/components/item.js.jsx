@@ -262,6 +262,7 @@ class Item extends React.Component {
             updateExpiry={self.updateExpiry.bind(self)}
             updateCount={self.updateCount.bind(self)}
           />
+
         );
       });
       button = (
@@ -274,18 +275,20 @@ class Item extends React.Component {
     return (
       <div >
         <h2>{this.state.stockItem.name}</h2>
-        <p>Current (To be removed): {this.state.current}</p>
-        <p>Required: {this.state.required}</p>
-        <p>Order To: {this.state.orderTo}</p>
+        <h4>Current (To be removed): {this.state.current}</h4>
+        <h4>Required: {this.state.required}</h4>
+        <h4>Order To: {this.state.orderTo}</h4>
         <form onSubmit={this.preventDefault.bind(this)}>
-          <label>Quantity:</label>
+          <h3>Quantity:</h3>
           <input type="number" id="itemquantity" name="quantity"
             value={this.state.quantity}
             onChange={this.onQuantityChange.bind(this)}
             onSelect={this.onSelect.bind(this)}
+            className="input-lg"
           />
         </form>
         <div>
+          <h3>Expiries</h3>
           {expiries}
           {button}
         </div>
