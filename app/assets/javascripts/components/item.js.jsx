@@ -92,10 +92,16 @@ class Item extends React.Component {
     numberday = parseInt(dataArray[2]);
     numbermonth = parseInt(dataArray[1]); 
     if(numberday < 10){
-      dataArray[2].
+      dataArray[2] = '0'.concat(dataArray[2]); 
     }
-    return true;
-
+    if(numbermonth < 10){
+      dataArray[1] = '0'.concat(dataArray[1]); 
+    }
+    //check that year has 4 digits
+    if(dataArray[0].length != 4){
+      return false; 
+    }
+     return true;
   }
 
   saveItem() {
