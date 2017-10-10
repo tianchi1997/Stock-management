@@ -59,26 +59,40 @@ class Item extends React.Component {
       return total + expiry.count;
     }, 0);
   }
-
+  // checks the expiry entries 
   checkExpiry(count, expiry, curExpiries) {
     if (count <= 0 || count == null) {
       this.setState({ errors: "Please enter a valid count" });
       return false;
     }
-
+    // make sure that there are no duplicates
     if (curExpiries.indexOf(expiry) > - 1) {
       this.setState({ errors: "Duplicate dates detected" });
       return false;
     }
 
+    //create a new date object based on the expiry date entered. 
     var today = new Date(new Date().toJSON().slice(0, 10));
     var date = new Date(expiry);
 
     curExpiries.push(expiry);
-
+    // check that the expiry is valid. 
     if (expiry == null || date < today) {
       this.setState({ errors: "Please enter a valid expiry date" })
       return false;
+    }
+
+    console.log("expiry in checkExpiry",expiry);
+    dataArray = expiry.split("-");
+    //check that each entry has the correct format
+    if(dataArray[0].length != 4 || dataArray[1].length != 2 || dataArray[2] != 2 ){
+     return false; 
+    } 
+    //pad the day and month with zeros. 
+    numberday = parseInt(dataArray[2]);
+    numbermonth = parseInt(dataArray[1]); 
+    if(numberday < 10){
+      dataArray[2].
     }
     return true;
 
@@ -162,7 +176,9 @@ class Item extends React.Component {
     newItemExpiries = this.state.itemExpiries.slice();
     tempExp = newItemExpiries[expiryIndex].expiryDate;
     dateArray = tempExp.split("-");
+    //insert the expiry based on the type that was passed in
     if (type == "day") {
+      
       dateArray[2] = expiry;
     }
     else if (type == "month") {
