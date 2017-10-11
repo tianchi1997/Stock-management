@@ -9,12 +9,14 @@ class Numpad extends React.Component {
       document.activeElement.value += e.target.value;
       ev = new Event("input", { bubbles: true });
       ev.simulated = true;
-      element.dispatchEvent(ev);
+      document.activeElement.dispatchEvent(ev);
     }
   }
 
   del(e) {
-
+    if(document.activeElement.tagName.toLowerCase() == "input"){
+      document.activeElement.value = document.activeElement.value.substr(0, document.activeElement.value.length - 1)
+    }
   }
 
   render() {

@@ -2,13 +2,6 @@ class ItemExpiry extends React.Component {
   preventDefault(event) {
     event.preventDefault();
   }
-  onSelect(event) {
-    //console.log("item: event.target.id", event.target.id);
-    //this.props.setActiveID(event.target.id);
-    element = document.getElementById(event.target.id);
-    element.focus();
-
-  }
   onCountChange(event) {
     this.props.updateCount(this.props.expiryIndex, parseInt(event.target.value));
   }
@@ -37,14 +30,13 @@ class ItemExpiry extends React.Component {
                 <input type="number" name="count" id="count"
                   value={this.props.itemExpiry.count}
                   onChange={this.onCountChange.bind(this)}
-                  onSelect={this.onSelect.bind(this)}
                   className="form-control"
                 />
               </div>
             </div>
             <div className="row">
               <div className="col-xs-2">
-                <label for="day">Date:</label>
+                <label >Date:</label>
               </div>
               <div className="col-xs-2 ">
 
@@ -64,7 +56,7 @@ class ItemExpiry extends React.Component {
                 />
               </div>
               <div className="col-xs-4">
-                <label className="sr-only" for="year" />
+               
                 <input type="number" name="year" id="year"
                   value={expiryarray[0]}
                   onChange={this.onExpiryChange.bind(this)}

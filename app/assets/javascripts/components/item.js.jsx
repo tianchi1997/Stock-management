@@ -82,12 +82,7 @@ class Item extends React.Component {
       return false;
     }
 
-    console.log("expiry in checkExpiry",expiry);
     dataArray = expiry.split("-");
-    //check that each entry has the correct format
-    if(dataArray[0].length != 4 || dataArray[1].length != 2 || dataArray[2] != 2 ){
-     return false; 
-    } 
     //pad the day and month with zeros. 
     numberday = parseInt(dataArray[2]);
     numbermonth = parseInt(dataArray[1]); 
