@@ -57,12 +57,12 @@ class LocationsController < ApplicationController
 
   # DELETE /locations/1
   def destroy
-    @location.destroy
     if @location.parent == nil
       redirect_to locations_url, notice: 'Location was successfully destroyed.'
     else
       redirect_to location_path(@location.parent), notice: 'Location was successfully destroyed.'
     end
+    @location.destroy
   end
 
   private

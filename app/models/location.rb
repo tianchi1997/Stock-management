@@ -1,7 +1,6 @@
 class Location < ApplicationRecord
   # Associations
   has_many :items, dependent: :destroy
-  has_many :locations, dependent: :destroy
   has_many :stock_items, through: :items
   has_many :item_expiries, through: :items
   has_many :stock_item_summaries
