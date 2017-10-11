@@ -144,13 +144,7 @@ class Item extends React.Component {
     return true;
   }
 
-  onSelect(event) {
-    //console.log("item: event.target.id", event.target.id);
-    //this.props.setActiveID(event.target.id);
-    element = document.getElementById(event.target.id);
-    element.focus();
 
-  }
   onQuantityChange(event) {
     this.setState({
       quantity: parseInt(event.target.value),
@@ -244,8 +238,10 @@ class Item extends React.Component {
     var self = this;
     expiries = "";
     button = "";
+    expiryheader ="";
 
     if (this.state.stockItem.expires) {
+      expiryheader = "Expiries"
       expiries = this.state.itemExpiries.map(function (itemExpiry, index) {
         return (
           <ItemExpiry
@@ -261,13 +257,13 @@ class Item extends React.Component {
       });
       button = (
         <div>
-          <button onClick={this.addExpiry.bind(this)} className="btn">Add expiry</button>
+          <button onClick={this.addExpiry.bind(this)} className="btn btn-primary">Add expiry</button>
         </div>
       );
     }
 
     return (
-      <div >
+      <div className="no-margin" >
         <h2>{this.state.stockItem.name}</h2>
         <h4>Current (To be removed): {this.state.current}</h4>
         <h4>Required: {this.state.required}</h4>
@@ -277,17 +273,18 @@ class Item extends React.Component {
           <input type="number" id="itemquantity" name="quantity"
             value={this.state.quantity}
             onChange={this.onQuantityChange.bind(this)}
-            onSelect={this.onSelect.bind(this)}
             className="input-lg"
           />
         </form>
         <div>
-          <h3>Expiries</h3>
+          
+          <h3>{expiryheader}</h3>
           {expiries}
           {button}
         </div>
-        <button onClick={this.prevItem.bind(this)} className="btn">Previous</button>
-        <button onClick={this.nextItem.bind(this)} className="btn">Next</button>
+        <br/>
+        <button onClick={this.prevItem.bind(this)} className="btn btn-primary margin-right">Previous</button>
+        <button onClick={this.nextItem.bind(this)} className="btn btn-primary">Next</button>
         <p>{this.state.errors}</p>
       </div >
     );

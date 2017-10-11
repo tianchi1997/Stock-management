@@ -19,12 +19,12 @@ class ItemExpiry extends React.Component {
     var expiryarray = this.props.itemExpiry.expiryDate.split('-');
     console.log(expiryarray);
     return (
-      <div className="container-fluid">
+      
         <form onSubmit={this.preventDefault.bind(this)}>
           <div className="form-group">
             <div className="row">
               <div className="col-xs-2">
-                <label>Count:</label>
+                <label className="pad-bottom">Count:</label>
               </div>
               <div className="col-xs-4">
                 <input type="number" name="count" id="count"
@@ -34,11 +34,11 @@ class ItemExpiry extends React.Component {
                 />
               </div>
             </div>
-            <div className="row no-gutters">
-              <div className="col-xs-2">
+            <div className="row ">
+              <div className="col-xs-2 ">
                 <label >Date:</label>
               </div>
-              <div className="col-xs-2 fixed-width-day">
+              <div className="col-xs-2 fixed-width-day ">
 
                 <input type="number" name="day" id="day"
                   value={expiryarray[2]}
@@ -68,7 +68,7 @@ class ItemExpiry extends React.Component {
           </div>
         </form>
 
-      </div>
+
     );
   }
 }
