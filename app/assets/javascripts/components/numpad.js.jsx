@@ -7,15 +7,18 @@ class Numpad extends React.Component {
     e.preventDefault();
     if (document.activeElement.tagName.toLowerCase() == "input") {
       document.activeElement.value += e.target.value;
-      ev = new Event("input", { bubbles: true });
-      ev.simulated = true;
-      document.activeElement.dispatchEvent(ev);
+     
     }
   }
 
   del(e) {
+    e.preventDefault(); 
     if(document.activeElement.tagName.toLowerCase() == "input"){
-      document.activeElement.value = document.activeElement.value.substr(0, document.activeElement.value.length - 1)
+      element = document.activeElement; 
+      element.value = element.value.substr(0, element.value.length - 1);
+      ev = new Event("input", { bubbles: true });
+      ev.simulated = true;
+      document.activeElement.dispatchEvent(ev);
     }
   }
 
