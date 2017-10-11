@@ -16,7 +16,7 @@ class Ability
     can :read, Location
     can :read, Item
     can :read, StockItem
-    can :manage, ItemExpiry
+    can :save_expiries, Item
     can :location, :stock_take
   end
 end
