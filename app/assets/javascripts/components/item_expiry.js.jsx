@@ -34,11 +34,11 @@ class ItemExpiry extends React.Component {
                 />
               </div>
             </div>
-            <div className="row">
+            <div className="row no-gutters">
               <div className="col-xs-2">
                 <label >Date:</label>
               </div>
-              <div className="col-xs-2 ">
+              <div className="col-xs-2 fixed-width-day">
 
                 <input type="number" name="day" id="day"
                   value={expiryarray[2]}
@@ -47,24 +47,22 @@ class ItemExpiry extends React.Component {
                 />
               </div>
 
-              <div className="col-xs-2 ">
-
+              <div className="col-xs-2 fixed-width-day">
                 <input type="number" name="month" id="month"
                   value={expiryarray[1]}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control "
                 />
               </div>
-              <div className="col-xs-4">
-               
+              <div className="col-xs-4 fixed-width-year">              
                 <input type="number" name="year" id="year"
                   value={expiryarray[0]}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control"
                 />
               </div>
-              <div className="col-xs-2">
-                <button onClick={this.removeExpiry.bind(this)} className="btn">x</button>
+              <div className="col-xs-2 fixed-width-year">
+                <button onClick={this.removeExpiry.bind(this)} className="btn btn-danger">x</button>
               </div>
             </div>
           </div>

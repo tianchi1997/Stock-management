@@ -24,22 +24,22 @@ class Numpad extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="relative-position">
         <div id="Numpad">
-          <input id="1" value="1" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="2" value="2" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="3" value="3" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="1" value="1" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="2" value="2" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="3" value="3" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
           <br />
-          <input id="4" value="4" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="5" value="5" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="6" value="6" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="4" value="4" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="5" value="5" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="6" value="6" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
           <br />
-          <input id="7" value="7" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="8" value="8" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="9" value="9" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="7" value="7" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="8" value="8" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="9" value="9" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
           <br />
-          <input id="0" value="0" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="btnDel" type="button" value="Del" onMouseDown={this.del.bind(this)} />
+          <input id="0" value="0" type="button"  className="button-numpad" onMouseDown={this.handleInput.bind(this)} />
+          <input id="btnDel" type="button" value="Del"  className="button-numpad" onMouseDown={this.del.bind(this)} />
         </div>
       </div>
     );

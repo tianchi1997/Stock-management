@@ -23,7 +23,7 @@ class StockTake extends React.Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
+        <div className="row no-gutters">
           <div className="col-xs-6">
             <Location locationID={this.state.locationIDs[this.state.curLocation]} nextLocation={this.nextLocation.bind(this)} />
           </div>
