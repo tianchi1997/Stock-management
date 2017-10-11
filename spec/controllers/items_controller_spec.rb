@@ -27,20 +27,20 @@ require 'support/devise'
 RSpec.describe ItemsController, type: :controller do
   describe "GET #show" do
     it "returns a success response" do
-      item = Item.create! valid_attributes
-      get :show, params: {id: item.to_param}, session: valid_session
+      item = create(:item)
+      get :show, params: {id: item.to_param}
       expect(response).to be_success
     end
 
     it "gets the required contact" do
-      item = Item.create! valid_attributes
-      get :show, params: {id: item.to_param}, session: valid_session
+      item = create(:item)
+      get :show, params: {id: item.to_param}
       assigns(:item).should eq(item)
     end
 
     it "renders the #show view" do
-      item = Item.create! valid_attributes
-      get :show, params: {id: item.to_param}, session: valid_session
+      item = create(:item)
+      get :show, params: {id: item.to_param}
       response.should render_template :show
     end
   end

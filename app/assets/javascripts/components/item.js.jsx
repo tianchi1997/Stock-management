@@ -179,7 +179,6 @@ class Item extends React.Component {
     dateArray = tempExp.split("-");
     //insert the expiry based on the type that was passed in
     if (type == "day") {
-      
       dateArray[2] = expiry;
     }
     else if (type == "month") {

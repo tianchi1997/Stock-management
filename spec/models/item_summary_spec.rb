@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ItemSummary, type: :model do
   let(:item) { create(:item, required: 5, order_to: 10) }
 
-  it "is ready only" do
+  it "is read only" do
     expect(item.item_summary.readonly?).to be true
   end
 
