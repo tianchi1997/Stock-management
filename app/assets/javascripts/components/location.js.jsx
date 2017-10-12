@@ -65,22 +65,25 @@ class Location extends React.Component {
     if(this.state.curItem != -1 && this.state.items.length > 0){
       return (
         <div>
-          <div>
+          <div className="borders padding">
               <h2>Location: {this.state.name}</h2>
               <p> {this.state.description}</p>
               <p> {this.state.path}</p>
-          </div>
+          </div >
+          <br/> 
+          <div className="borders padding">
           <Item
             itemID={this.state.items[this.state.curItem].id}
             prevItem={this.prevItem.bind(this)}
             nextItem={this.nextItem.bind(this)}
             setActiveID={this.setActiveID.bind(this)}
           />
+          </div>
         </div>
       );
     } else {
       return (
-        <div>{this.state.name}</div>
+        <p></p>
       )
     }
   }

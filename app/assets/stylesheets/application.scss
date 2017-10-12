@@ -26,7 +26,40 @@
     border-radius: 10px;
     font-size: 3rem;
 }
-.float-left{
-  float: left;
-  width: 200px;
+.fixed-width-day{
+  width: 90px !important; 
+}
+.fixed-width-year{
+  width: 110px !important; 
+}
+.button-numpad {
+    background-color: #7AC8FF; /* Green */
+    border: solid white;
+    color: white;
+    padding: 30px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
+.relative-position{
+  position: fixed; 
+  
+}
+.pad-bottom{
+  padding-bottom: 25px; 
+}
+.padding{
+  padding: 0px 10px 15px 20px ;
+}
+.borders{
+  border: solid #42b0ff; 
+  border-radius: 5px; 
+}
+.margin-right{
+  margin-right: 10px; 
+}
+.no-margin{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
