@@ -2,19 +2,18 @@ class Numpad extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+
   handleInput(e) {
     e.preventDefault();
     if (document.activeElement.tagName.toLowerCase() == "input") {
       document.activeElement.value += e.target.value;
-     
     }
   }
 
   del(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     if(document.activeElement.tagName.toLowerCase() == "input"){
-      element = document.activeElement; 
+      element = document.activeElement;
       element.value = element.value.substr(0, element.value.length - 1);
       ev = new Event("input", { bubbles: true });
       ev.simulated = true;
