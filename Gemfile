@@ -70,6 +70,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
+  gem 'launchy'
 end
 
 group :development do
