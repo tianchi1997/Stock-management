@@ -78,7 +78,7 @@ class Item extends React.Component {
     curExpiries.push(expiry);
     // check that the expiry is valid.
     if (expiry == null || date < today) {
-      this.setState({ errors: "Please enter a valid expiry date" })
+      this.setState({ errors: "Please enter a valid expiry date" });
       return false;
     }
 
@@ -94,6 +94,16 @@ class Item extends React.Component {
     }
     //check that year has 4 digits
     if(dataArray[0].length != 4){
+      this.setState({errors: "Please enter a valid expiry date"});
+      return false; 
+    }
+    //check that the days and montsh are valid
+    if(numberday > 31){
+      this.setState({errors: "Please enter a valid day"});
+      return false;
+    }
+    if(numbermonth > 12){
+      this.setState({errors: "Please enter a valid month"});
       return false; 
     }
      return true;
