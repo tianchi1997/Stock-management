@@ -23,7 +23,7 @@ class Numpad extends React.Component {
 
   render() {
     return (
-      <div className="relative-position">
+      <div className="fixed-position">
         <div id="Numpad">
           <input id="1" value="1" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
           <input id="2" value="2" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />

@@ -278,6 +278,7 @@ class Item extends React.Component {
             value={this.state.quantity}
             onChange={this.onQuantityChange.bind(this)}
             className="input-lg"
+            readOnly="true"
           />
         </form>
         <div>

@@ -42,7 +42,7 @@
     display: inline-block;
     font-size: 20px;
 }
-.relative-position{
+.fixed-position{
   position: fixed; 
   
 }
@@ -62,4 +62,7 @@
 .no-margin{
   margin-left: 0px !important;
   margin-right: 0px !important;
+}
+input:focus { 
+    background-color: yellow !important;
 }

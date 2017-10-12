@@ -29,6 +29,7 @@ class ItemExpiry extends React.Component {
                   value={this.props.itemExpiry.count}
                   onChange={this.onCountChange.bind(this)}
                   className="form-control"
+                  readOnly="true"
                 />
               </div>
             </div>
@@ -42,6 +43,7 @@ class ItemExpiry extends React.Component {
                   value={expiryarray[2]}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control "
+                  readOnly="true"
                 />
               </div>
 
@@ -50,6 +52,7 @@ class ItemExpiry extends React.Component {
                   value={expiryarray[1]}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control "
+                  readOnly="true"
                 />
               </div>
               <div className="col-xs-4 fixed-width-year">
@@ -57,6 +60,7 @@ class ItemExpiry extends React.Component {
                   value={expiryarray[0]}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control"
+                  readOnly="true"
                 />
               </div>
               <div className="col-xs-2 fixed-width-year">
