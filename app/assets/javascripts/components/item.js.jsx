@@ -171,6 +171,11 @@ class Item extends React.Component {
     newItemExpiries = this.state.itemExpiries.slice();
     tempExp = newItemExpiries[expiryIndex].expiryDate;
     dateArray = tempExp.split("-");
+    
+    //prevent negative values. 
+    if(parseInt(expiry) < 0) {
+      expiry = '0'; 
+    }
     //insert the expiry based on the type that was passed in
     if (type == "day") {
       dateArray[2] = expiry;
@@ -265,7 +270,6 @@ class Item extends React.Component {
     return (
       <div className="no-margin" >
         <h2>{this.state.stockItem.name}</h2>
-        <h4>Current (To be removed): {this.state.current}</h4>
         <h4>Required: {this.state.required}</h4>
         <h4>Order To: {this.state.orderTo}</h4>
         <form onSubmit={this.preventDefault.bind(this)}>
