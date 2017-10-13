@@ -17,9 +17,7 @@ class ItemExpiry extends React.Component {
 
   render() {
     var expiryarray = this.props.itemExpiry.expiryDate.split('-');
-    console.log(expiryarray);
     return (
-      
         <form onSubmit={this.preventDefault.bind(this)}>
           <div className="form-group">
             <div className="row">
@@ -31,12 +29,13 @@ class ItemExpiry extends React.Component {
                   value={this.props.itemExpiry.count}
                   onChange={this.onCountChange.bind(this)}
                   className="form-control"
+                  readOnly="true"
                 />
               </div>
             </div>
             <div className="row ">
               <div className="col-xs-2 ">
-                <label >Date:</label>
+                <label>Date:</label>
               </div>
               <div className="col-xs-2 fixed-width-day ">
 
@@ -44,6 +43,7 @@ class ItemExpiry extends React.Component {
                   value={expiryarray[2]}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control "
+                  readOnly="true"
                 />
               </div>
 
@@ -52,13 +52,15 @@ class ItemExpiry extends React.Component {
                   value={expiryarray[1]}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control "
+                  readOnly="true"
                 />
               </div>
-              <div className="col-xs-4 fixed-width-year">              
+              <div className="col-xs-4 fixed-width-year">
                 <input type="number" name="year" id="year"
                   value={expiryarray[0]}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control"
+                  readOnly="true"
                 />
               </div>
               <div className="col-xs-2 fixed-width-year">
@@ -67,8 +69,6 @@ class ItemExpiry extends React.Component {
             </div>
           </div>
         </form>
-
-
     );
   }
 }

@@ -68,7 +68,7 @@ class Location extends React.Component {
           <div className="borders padding">
               <h2>Location: {this.state.name}</h2>
               <p> {this.state.description}</p>
-              <p> {this.state.path}</p>
+              <h4> {this.state.path.join(" / ")}</h4>
           </div >
           <br/> 
           <div className="borders padding">

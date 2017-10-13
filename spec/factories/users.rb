@@ -6,11 +6,11 @@ FactoryGirl.define do
     permission_level 0
 
     factory :report_user do
-        permission_level 1
+      permission_level 1
     end
 
     factory :admin do
-        permission_level 2
+      permission_level 2
     end
   end
 end

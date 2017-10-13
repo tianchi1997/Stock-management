@@ -3,37 +3,39 @@ require 'support/devise'
 
 RSpec.describe UsersController, type: :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # User. As you add validations to User, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # UsersController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  # Log in as admin, permissions are tested under ability model
+  login_admin
 
   describe "GET #index" do
+    before(:each) do
+      get :index
+    end
+
     it "returns a success response" do
-      user = User.create! valid_attributes
-      get :index, params: {}, session: valid_session
       expect(response).to be_success
+    end
+
+    it "renders index template" do
+      expect(response).to render_template("index")
+    end
+
+    it "assigns all users to @users" do
+      expect(assigns(:users)).to eq(User.all)
     end
   end
 
   describe "GET #show" do
-    it "returns a success response" do
-      user = User.create! valid_attributes
-      get :show, params: {id: user.to_param}, session: valid_session
-      expect(response).to be_success
-    end
+  let(:user) { create(:user) }
+  before(:each) do
+    get :show, params: {id: user.to_param}
   end
+
+  it "returns a success response" do
+    expect(response).to be_success
+  end
+
+end
+
 
   describe "GET #new" do
     it "returns a success response" do

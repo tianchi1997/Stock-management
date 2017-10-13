@@ -76,24 +76,34 @@ class Item extends React.Component {
     var date = new Date(expiry);
 
     curExpiries.push(expiry);
-    // check that the expiry is valid. 
+    // check that the expiry is valid.
     if (expiry == null || date < today) {
-      this.setState({ errors: "Please enter a valid expiry date" })
+      this.setState({ errors: "Please enter a valid expiry date" });
       return false;
     }
 
     dataArray = expiry.split("-");
-    //pad the day and month with zeros. 
+    //pad the day and month with zeros.
     numberday = parseInt(dataArray[2]);
-    numbermonth = parseInt(dataArray[1]); 
+    numbermonth = parseInt(dataArray[1]);
     if(numberday < 10){
-      dataArray[2] = '0'.concat(dataArray[2]); 
+      dataArray[2] = '0'.concat(dataArray[2]);
     }
     if(numbermonth < 10){
-      dataArray[1] = '0'.concat(dataArray[1]); 
+      dataArray[1] = '0'.concat(dataArray[1]);
     }
     //check that year has 4 digits
     if(dataArray[0].length != 4){
+      this.setState({errors: "Please enter a valid expiry date"});
+      return false; 
+    }
+    //check that the days and montsh are valid
+    if(numberday > 31){
+      this.setState({errors: "Please enter a valid day"});
+      return false;
+    }
+    if(numbermonth > 12){
+      this.setState({errors: "Please enter a valid month"});
       return false; 
     }
      return true;
@@ -171,6 +181,11 @@ class Item extends React.Component {
     newItemExpiries = this.state.itemExpiries.slice();
     tempExp = newItemExpiries[expiryIndex].expiryDate;
     dateArray = tempExp.split("-");
+    
+    //prevent negative values. 
+    if(parseInt(expiry) < 0) {
+      expiry = '0'; 
+    }
     //insert the expiry based on the type that was passed in
     if (type == "day") {
       dateArray[2] = expiry;
@@ -265,7 +280,6 @@ class Item extends React.Component {
     return (
       <div className="no-margin" >
         <h2>{this.state.stockItem.name}</h2>
-        <h4>Current (To be removed): {this.state.current}</h4>
         <h4>Required: {this.state.required}</h4>
         <h4>Order To: {this.state.orderTo}</h4>
         <form onSubmit={this.preventDefault.bind(this)}>
@@ -274,10 +288,10 @@ class Item extends React.Component {
             value={this.state.quantity}
             onChange={this.onQuantityChange.bind(this)}
             className="input-lg"
+            readOnly="true"
           />
         </form>
         <div>
-          
           <h3>{expiryheader}</h3>
           {expiries}
           {button}
