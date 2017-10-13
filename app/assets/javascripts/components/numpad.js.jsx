@@ -6,7 +6,11 @@ class Numpad extends React.Component {
   handleInput(e) {
     e.preventDefault();
     if (document.activeElement.tagName.toLowerCase() == "input") {
-      document.activeElement.value += e.target.value;
+      if (document.activeElement.value != "0") {
+        document.activeElement.value += e.target.value;
+      } else {
+        document.activeElement.value = e.target.value;
+      }
       ev = new Event("change", { bubbles: true });
       ev.simulated = true;
       document.activeElement.dispatchEvent(ev);
@@ -23,6 +27,41 @@ class Numpad extends React.Component {
       document.activeElement.dispatchEvent(ev);
     }
   }
+
+  clear(e) {
+    e.preventDefault();
+    if(document.activeElement.tagName.toLowerCase() == "input"){
+      element = document.activeElement;
+      element.value = "";
+      ev = new Event("change", { bubbles: true });
+      ev.simulated = true;
+      document.activeElement.dispatchEvent(ev);
+    }
+  }
+
+  increase(e) {
+    e.preventDefault();
+    if(document.activeElement.tagName.toLowerCase() == "input"){
+      element = document.activeElement;
+      element.value = parseInt(element.value) + 1;
+      ev = new Event("change", { bubbles: true });
+      ev.simulated = true;
+      document.activeElement.dispatchEvent(ev);
+    }
+  }
+
+  decrease(e) {
+    e.preventDefault();
+    if(document.activeElement.tagName.toLowerCase() == "input"){
+      element = document.activeElement;
+      element.value = Math.max(parseInt(element.value) - 1, 0);
+      ev = new Event("change", { bubbles: true });
+      ev.simulated = true;
+      document.activeElement.dispatchEvent(ev);
+    }
+  }
+
+
 
   render() {
     return (
@@ -41,7 +80,11 @@ class Numpad extends React.Component {
           <input id="9" value="9" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
           <br />
           <input id="0" value="0" type="button"  className="button-numpad" onMouseDown={this.handleInput.bind(this)} />
-          <input id="btnDel" type="button" value="Del"  className="button-numpad" onMouseDown={this.del.bind(this)} />
+          <input id="btnDel" type="button" value="←"  className="button-numpad" onMouseDown={this.del.bind(this)} />
+          <input id="btnDel" type="button" value="C"  className="button-numpad" onMouseDown={this.clear.bind(this)} />
+          <br />
+          <input id="btnDel" type="button" value="-"  className="button-numpad" onMouseDown={this.decrease.bind(this)} />
+          <input id="btnDel" type="button" value="+"  className="button-numpad" onMouseDown={this.increase.bind(this)} />
         </div>
       </div>
     );
