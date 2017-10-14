@@ -8,7 +8,9 @@ class Location extends React.Component {
       curItem: -1,
       items: [],
       id: props.locationID,
-      path: null 
+      path: null,
+      prevItemTrigger: 0, 
+      nextItemTrigger: 0 
     };
   }
 
@@ -30,17 +32,29 @@ class Location extends React.Component {
   componentWillMount() {
     //if the component will mount, fetch the information for the current locationID. 
     this.loadLocation(this.props.locationID);
+    this.setState({prevItemTrigger: this.props.prevItemTrigger, nextItemTrigger: this.props.nextItemTrigger});
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.curItem != -1 && this.state.items.length == 0) {
+      console.log("going to next location")
       this.props.nextLocation();
+      
     }
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({curItem: -1});
-    this.loadLocation(newProps.locationID);
+    //only load new location when a new location is actually being passed. 
+    if(newProps.prevItemTrigger == this.state.prevItemTrigger && newProps.nextItemTrigger == this.state.nextItemTrigger){
+      this.setState({curItem: -1});
+      this.loadLocation(newProps.locationID);
+    }
+    else if(newProps.prevItemTrigger > this.state.prevItemTrigger){
+      this.setState({prevItemTrigger: newProps.prevItemTrigger});
+    }
+    else if(newProps.nextItemTrigger > this.state.nextItemTrigger){
+      this.setState({nextItemTrigger: newProps.nextItemTrigger});
+    }
   }
 
   prevItem() {
@@ -77,13 +91,15 @@ class Location extends React.Component {
             prevItem={this.prevItem.bind(this)}
             nextItem={this.nextItem.bind(this)}
             setActiveID={this.setActiveID.bind(this)}
+            prevItemTrigger={this.state.prevItemTrigger}
+            nextItemTrigger={this.state.nextItemTrigger}
           />
           </div>
         </div>
       );
     } else {
       return (
-        <p></p>
+        <p>...</p>
       )
     }
   }

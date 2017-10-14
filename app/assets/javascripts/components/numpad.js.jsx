@@ -60,9 +60,6 @@ class Numpad extends React.Component {
       document.activeElement.dispatchEvent(ev);
     }
   }
-
-
-
   render() {
     return (
       <div className="fixed-position">
@@ -85,6 +82,9 @@ class Numpad extends React.Component {
           <br />
           <input id="btnDel" type="button" value="-"  className="button-numpad" onMouseDown={this.decrease.bind(this)} />
           <input id="btnDel" type="button" value="+"  className="button-numpad" onMouseDown={this.increase.bind(this)} />
+          <br />
+          <button onClick={this.props.prevItem} className="btn btn-primary margin-right">Previous</button>
+          <button onClick={this.props.nextItem} className="btn btn-primary">Next</button>
         </div>
       </div>
     );
