@@ -9,16 +9,32 @@ class Item extends React.Component {
       itemExpiries: [],
       required: 0,
       quantity: 0,
-      errors: ""
+      errors: "",
+      prevItemTrigger: 0,
+      nextItemTrigger: 0
+
     };
   }
 
   componentWillMount() {
+    //load the item details
     this.loadItem(this.props.itemID);
+    //load the prev and next item trigger values 
+    this.setState({prevItemTrigger: this.props.prevItemTrigger,nextItemTrigger: this.props.nextItemTrigger}); 
   }
 
   componentWillReceiveProps(newProps) {
-    this.loadItem(newProps.itemID);
+    //only load item when a new item is actually being passed, not when prev item or next item is being passed in. 
+    if(newProps.prevItemTrigger == this.state.prevItemTrigger && newProps.nextItemTrigger == this.state.nextItemTrigger){
+      this.loadItem(newProps.itemID);
+    }
+    //otherwise update the prevItem and nextItem index and call next/prev item function. 
+    else if(newProps.prevItemTrigger > this.state.prevItemTrigger){
+      this.setState({prevItemTrigger: newProps.prevItemTrigger},function(){this.prevItem()});
+    }
+    else if(newProps.nextItemTrigger > this.state.nextItemTrigger){
+      this.setState({nextItemTrigger: newProps.nextItemTrigger},function(){this.nextItem()});
+    }
   }
 
   loadItem(itemID) {
@@ -297,9 +313,6 @@ class Item extends React.Component {
           {button}
         </div>
         <br/>
-        <button onClick={this.prevItem.bind(this)} className="btn btn-primary margin-right">Previous</button>
-        <button onClick={this.nextItem.bind(this)} className="btn btn-primary">Next</button>
-        <p>{this.state.errors}</p>
       </div >
     );
   }
