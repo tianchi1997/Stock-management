@@ -27,26 +27,26 @@
   font-size: 3rem;
 }
 
-.fixed-width-day{
-  width: 90px !important;
+.fixed-width-date{
+  width: 200px !important;
 }
 
-.fixed-width-year{
+.fixed-width-4{
   width: 110px !important;
 }
 
 .button-numpad {
-  background-color: #7AC8FF; /* Green */
+  background-color: #7AC8FF; 
   border: solid white;
   color: white;
-  padding: 30px 32px;
+  padding: 25px 50px; 
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 20px;
-  width: 100px;
 }
-
+.white-background{
+  background-color: white !important; 
+}
 .fixed-position{
   position: fixed; 
 }
@@ -58,21 +58,16 @@
 .padding{
   padding: 0px 10px 15px 20px ;
 }
-
 .borders{
   border: solid #42b0ff; 
   border-radius: 5px; 
 }
-
 .margin-right{
   margin-right: 10px; 
 }
-
-.no-margin{
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-}
-
-input:focus { 
+input:focus#highlight { 
     background-color: yellow !important;
+}
+.add-expiry-btn-padding{
+  margin-left: 320px; 
 }

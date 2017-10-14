@@ -151,7 +151,6 @@ class Item extends React.Component {
         this.setState({ errors: "Quantity does not match total" });
         return false;
       }
-
       // checks that each entry has both an expiry and a quantity
       // checks that each expiry entry is valid (i.e item has not already expired)
       curExpiries = [];
@@ -166,12 +165,14 @@ class Item extends React.Component {
       method: 'post',
       body: JSON.stringify(itemExpiries)
     })
-
     return true;
   }
-
-
   onQuantityChange(event) {
+    if(event.key != undefined){
+      console.log(event.key);
+      event.target.value += event.key;
+      this.props.updateCount(this.props.expiryIndex,parseInt(event.target.value)); 
+    }
     this.setState({
       quantity: parseInt(event.target.value),
       errors: ""
@@ -193,29 +194,11 @@ class Item extends React.Component {
     });
   }
 
-  updateExpiry(expiryIndex, expiry, type) {
+  updateExpiry(expiryIndex, expiry) {
     newItemExpiries = this.state.itemExpiries.slice();
-    tempExp = newItemExpiries[expiryIndex].expiryDate;
-    dateArray = tempExp.split("-");
     
-    //prevent negative values. 
-    if(parseInt(expiry) < 0) {
-      expiry = '0'; 
-    }
-    //insert the expiry based on the type that was passed in
-    if (type == "day") {
-      dateArray[2] = expiry;
-    }
-    else if (type == "month") {
-      dateArray[1] = expiry;
-    }
-    else if (type == "year") {
-      dateArray[0] = expiry;
-    }
-    newExpiry = dateArray.join("-");
-
     newItemExpiries[expiryIndex] = {
-      expiryDate: newExpiry,
+      expiryDate: expiry,
       count: this.state.itemExpiries[expiryIndex].count
     };
 
@@ -288,7 +271,7 @@ class Item extends React.Component {
       });
       button = (
         <div>
-          <button onClick={this.addExpiry.bind(this)} className="btn btn-primary">Add expiry</button>
+          <button onClick={this.addExpiry.bind(this)} className="btn btn-primary add-expiry-btn-padding">Add expiry</button>
         </div>
       );
     }
@@ -300,7 +283,7 @@ class Item extends React.Component {
         <h4>Order To: {this.state.orderTo}</h4>
         <form onSubmit={this.preventDefault.bind(this)}>
           <h3>Quantity:</h3>
-          <input type="number" id="itemquantity" name="quantity"
+          <input type="number" id="highlight" name="quantity"
             value={this.state.quantity}
             onChange={this.onQuantityChange.bind(this)}
             className="input-lg"
