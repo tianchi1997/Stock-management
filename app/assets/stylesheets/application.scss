@@ -68,6 +68,9 @@
 input:focus#highlight { 
     background-color: yellow !important;
 }
-.add-expiry-btn-padding{
-  margin-left: 320px; 
+.add-expiry-btn-margins{
+  position: absolute !important;
+  right: 30px !important; 
+  float: right !important; 
+  margin-bottom: 20px !important; 
 }

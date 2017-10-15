@@ -78,11 +78,13 @@ class Item extends React.Component {
   // checks the expiry entries 
   checkExpiry(count, expiry, curExpiries) {
     if (count <= 0 || count == null) {
+      alert("Please enter a valid count"); 
       this.setState({ errors: "Please enter a valid count" });
       return false;
     }
     // make sure that there are no duplicates
     if (curExpiries.indexOf(expiry) > - 1) {
+      alert("Duplicate dates detected"); 
       this.setState({ errors: "Duplicate dates detected" });
       return false;
     }
@@ -94,33 +96,9 @@ class Item extends React.Component {
     curExpiries.push(expiry);
     // check that the expiry is valid.
     if (expiry == null || date < today) {
+       alert("Please enter a valid expiry date");
       this.setState({ errors: "Please enter a valid expiry date" });
       return false;
-    }
-
-    dataArray = expiry.split("-");
-    //pad the day and month with zeros.
-    numberday = parseInt(dataArray[2]);
-    numbermonth = parseInt(dataArray[1]);
-    if(numberday < 10){
-      dataArray[2] = '0'.concat(dataArray[2]);
-    }
-    if(numbermonth < 10){
-      dataArray[1] = '0'.concat(dataArray[1]);
-    }
-    //check that year has 4 digits
-    if(dataArray[0].length != 4){
-      this.setState({errors: "Please enter a valid expiry date"});
-      return false; 
-    }
-    //check that the days and montsh are valid
-    if(numberday > 31){
-      this.setState({errors: "Please enter a valid day"});
-      return false;
-    }
-    if(numbermonth > 12){
-      this.setState({errors: "Please enter a valid month"});
-      return false; 
     }
      return true;
   }
@@ -131,7 +109,9 @@ class Item extends React.Component {
     itemExpiries = this.state.itemExpiries.slice();
 
     if (this.state.quantity < 0) {
+      alert("Quantity cannot be negative");
       this.setState({ errors: "Quantity cannot be negative" });
+     
     }
 
     // if the item does not expire then no need to check that quantity matches
@@ -148,6 +128,7 @@ class Item extends React.Component {
       // checks that expiry quantities match the total quantity 
       total = this.getTotal(this.state.itemExpiries);
       if (total != this.state.quantity) {
+        alert("Quantity does not match total");
         this.setState({ errors: "Quantity does not match total" });
         return false;
       }
@@ -169,9 +150,18 @@ class Item extends React.Component {
   }
   onQuantityChange(event) {
     if(event.key != undefined){
-      console.log(event.key);
-      event.target.value += event.key;
-      this.props.updateCount(this.props.expiryIndex,parseInt(event.target.value)); 
+      //if the key was a number then append the number
+      if(parseInt(event.key) > 0 || parseInt(event.key) <= 9 ){
+        event.target.value += event.key;
+      }
+      //if the key press was backspace 
+      else if(event.key == "Backspace"){
+        event.target.value = event.target.value.substr(0, event.target.value.length - 1)
+      }
+      this.setState({
+        quantity: parseInt(event.target.value),
+        errors: ""
+      });
     }
     this.setState({
       quantity: parseInt(event.target.value),
@@ -271,7 +261,7 @@ class Item extends React.Component {
       });
       button = (
         <div>
-          <button onClick={this.addExpiry.bind(this)} className="btn btn-primary add-expiry-btn-padding">Add expiry</button>
+          <button onClick={this.addExpiry.bind(this)} className="btn btn-primary add-expiry-btn-margins">Add expiry</button>
         </div>
       );
     }
@@ -286,6 +276,7 @@ class Item extends React.Component {
           <input type="number" id="highlight" name="quantity"
             value={this.state.quantity}
             onChange={this.onQuantityChange.bind(this)}
+            onKeyDown={this.onQuantityChange.bind(this)}
             className="input-lg"
             readOnly="true"
           />
