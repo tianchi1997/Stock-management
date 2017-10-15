@@ -25,14 +25,13 @@ RSpec.describe ReportsController, type: :controller do
       it "assigns @global to be false" do
         expect(assigns(:global)).to be_falsey
       end
+      it "assigns @location correctly" do
+        expect (assigns(:location)).to eq(Location.find(location.to_param))
+      end
 
       it "assigns locations to be location subtree" do
         expect(assigns(:location_tree)).to eq(location.subtree)
       end
-
-      
-
-
     end
   end
 end
