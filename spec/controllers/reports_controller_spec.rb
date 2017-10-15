@@ -30,7 +30,7 @@ RSpec.describe ReportsController, type: :controller do
       end
 
       it "assigns locations to be location subtree" do
-        expect(assigns(:location_tree)).to eq(location.subtree)
+        expect(assigns(:location_tree)).to eq(Location.find(location.to_param).subtree.arrange(order: [:position, :name, :id]))
       end
     end
   end
