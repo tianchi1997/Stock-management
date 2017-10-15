@@ -57,7 +57,7 @@
           <% if audit.user.present? %>
             <td><%= audit.user.name %></td>
           <% else%>
-            <td>System</td>
+            <td>Expired</td>
           <% end %>
 
           <td><%= audit.created_at.strftime("%c") %></td>
