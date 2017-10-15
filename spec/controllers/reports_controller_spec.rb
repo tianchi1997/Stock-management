@@ -27,13 +27,13 @@ RSpec.describe ReportsController, type: :controller do
         expect(assigns(:global)).to be_falsey
       end
       it "assigns @location correctly" do
-        expect(assigns(:location)).to eq(Location.find(location.to_param))
+        expect(assigns(:location)).to eq(location)
       end
       it "assigns @display_tree correctly" do
         expect(assigns(:display_tree)).to be_truthy
       end
       it "assigns locations to be location subtree" do
-        expect(assigns(:location_tree)).to eq(Location.find(location.to_param).subtree.arrange(order: [:position, :name, :id]))
+        expect(assigns(:location_tree)).to eq({location => {}})
       end
     end
 
@@ -55,7 +55,7 @@ RSpec.describe ReportsController, type: :controller do
         expect(assigns(:global)).to be_falsey
       end
       it "assigns @location correctly" do
-        expect(assigns(:location)).to eq(Location.find(location.to_param))
+        expect(assigns(:location)).to eq(location)
       end
       it "assigns @display_tree correctly" do
         expect(assigns(:display_tree)).to be_falsey
@@ -63,9 +63,9 @@ RSpec.describe ReportsController, type: :controller do
     end
     
     describe "Global Report variable assignments" do
-      let(:location) {create(:location)}
-
       before(:each) do
+        create(:stock_item)
+        create(:location)
         get :location , params: {display_tree: true}
 
       end
@@ -82,10 +82,10 @@ RSpec.describe ReportsController, type: :controller do
         expect(assigns(:display_tree)).to be_truthy
       end
       it "assigns @stock_item_summaries to be summary"do
-        expect(assigns(:stock_item_summaries)).to eq(StockItemSummary.where(location: nil).preload(:stock_item))
+        expect(assigns(:stock_item_summaries).first.stock_item).to eq(StockItem.first)
       end
       it "assigns locations to be global tree" do
-        expect(assigns(:location_tree)).to eq(Location.all.arrange(order: [:position, :name, :id]))
+        expect(assigns(:location_tree)).to eq({Location.first => {}})
       end
     end
   end
