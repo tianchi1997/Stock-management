@@ -1,7 +1,6 @@
 class Location extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       name: "",
       description: "",
@@ -37,9 +36,7 @@ class Location extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.curItem != -1 && this.state.items.length == 0) {
-      console.log("going to next location")
       this.props.nextLocation();
-      
     }
   }
 
@@ -71,7 +68,6 @@ class Location extends React.Component {
     }
   }
   setActiveID(id){
-    console.log("location: activeID",id);
     this.props.setActiveID(id);
   }
   render() {

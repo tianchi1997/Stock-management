@@ -21,14 +21,15 @@ class StockTake extends React.Component {
       window.location.assign(window.location.href.replace("/stock_take", ""))
     }
   }
+
   pItem(){
-    console.log("prev Item pressed"); 
     this.setState({prevItemTrigger: this.state.prevItemTrigger + 1});
   }
+
   nItem(){
-    console.log("next Item pressed");
     this.setState({nextItemTrigger: this.state.nextItemTrigger + 1});
   }
+
   render() {
     return (
       <div className="container-fluid">

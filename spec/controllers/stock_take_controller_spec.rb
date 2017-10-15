@@ -15,7 +15,7 @@ RSpec.describe StockTakeController, type: :controller do
       location = create(:location) 
       locations = Location.sort_by_ancestry(location.subtree.order(:position, :name, :id))
       get :location, params: {id: location.to_param}
-      assigns(:locations).should eq(locations) 
+      expect(assigns(:locations)).to eq(locations) 
     end
   end
 end

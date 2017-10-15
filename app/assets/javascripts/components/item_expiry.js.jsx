@@ -2,6 +2,7 @@ class ItemExpiry extends React.Component {
   preventDefault(event) {
     event.preventDefault();
   }
+
   onCountChange(event) {
     if(event.key != undefined){
       event.target.value += event.key;
@@ -44,7 +45,7 @@ class ItemExpiry extends React.Component {
               </div>
               <div className="col-xs-4 fixed-width-date">
                 <input type="date" name="day" id="highlight"
-                  value={this.props.itemExpiry}
+                  value={this.props.itemExpiry.expiryDate}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control "
                 />

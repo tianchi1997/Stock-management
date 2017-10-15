@@ -75,6 +75,7 @@ class Item extends React.Component {
       return total + expiry.count;
     }, 0);
   }
+
   // checks the expiry entries 
   checkExpiry(count, expiry, curExpiries) {
     if (count <= 0 || count == null) {
@@ -167,9 +168,9 @@ class Item extends React.Component {
     })
     return true;
   }
+
   onQuantityChange(event) {
     if(event.key != undefined){
-      console.log(event.key);
       event.target.value += event.key;
       this.props.updateCount(this.props.expiryIndex,parseInt(event.target.value)); 
     }
