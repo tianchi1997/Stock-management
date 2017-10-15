@@ -5,7 +5,7 @@ RSpec.describe ItemsController, type: :controller do
   # Log in as admin, permissions are tested under ability model
   login_admin
 
-  let!(:item) {create(:item)}
+  let!(:item) {create(:item, expires: true)}
 
   describe "GET #show" do
     before(:each) do
@@ -127,8 +127,13 @@ RSpec.describe ItemsController, type: :controller do
   end
 
   describe "POST #save_expiries" do
-    it "test" do
-      post :save_expiries, "{
+    it "saves item expiries" do
+      expect {
+        post :save_expiries, 
+             body: [{itemId: item.to_param, count: 5, expiryDate: '2018-09-22'}].to_json, 
+             params: {id: item.to_param}, 
+             format: :json
+      }.to change(ItemExpiry, :count).by(1)
     end
   end
 end
