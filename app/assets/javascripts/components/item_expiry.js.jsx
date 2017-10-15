@@ -3,11 +3,15 @@ class ItemExpiry extends React.Component {
     event.preventDefault();
   }
   onCountChange(event) {
-    this.props.updateCount(this.props.expiryIndex, parseInt(event.target.value));
+    if(event.key != undefined){
+      event.target.value += event.key;
+      this.props.updateCount(this.props.expiryIndex,parseInt(event.target.value)); 
+    }
+    else this.props.updateCount(this.props.expiryIndex, parseInt(event.target.value));
   }
 
   onExpiryChange(event) {
-    this.props.updateExpiry(this.props.expiryIndex, event.target.value, event.target.name);
+    this.props.updateExpiry(this.props.expiryIndex, event.target.value);
   }
 
   removeExpiry(event) {
@@ -25,10 +29,11 @@ class ItemExpiry extends React.Component {
                 <label className="pad-bottom">Count:</label>
               </div>
               <div className="col-xs-4">
-                <input type="number" name="count" id="count"
+                <input type="number" name="count" id="highlight"
                   value={this.props.itemExpiry.count}
                   onChange={this.onCountChange.bind(this)}
-                  className="form-control"
+                  onKeyPress={this.onCountChange.bind(this)}
+                  className="form-control white-background"
                   readOnly="true"
                 />
               </div>
@@ -37,33 +42,14 @@ class ItemExpiry extends React.Component {
               <div className="col-xs-2 ">
                 <label>Date:</label>
               </div>
-              <div className="col-xs-2 fixed-width-day ">
-
-                <input type="number" name="day" id="day"
-                  value={expiryarray[2]}
+              <div className="col-xs-4 fixed-width-date">
+                <input type="date" name="day" id="highlight"
+                  value={this.props.itemExpiry}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control "
-                  readOnly="true"
                 />
               </div>
-
-              <div className="col-xs-2 fixed-width-day">
-                <input type="number" name="month" id="month"
-                  value={expiryarray[1]}
-                  onChange={this.onExpiryChange.bind(this)}
-                  className="form-control "
-                  readOnly="true"
-                />
-              </div>
-              <div className="col-xs-4 fixed-width-year">
-                <input type="number" name="year" id="year"
-                  value={expiryarray[0]}
-                  onChange={this.onExpiryChange.bind(this)}
-                  className="form-control"
-                  readOnly="true"
-                />
-              </div>
-              <div className="col-xs-2 fixed-width-year">
+              <div className="col-xs-4 fixed-width-4">
                 <button onClick={this.removeExpiry.bind(this)} className="btn btn-danger">x</button>
               </div>
             </div>

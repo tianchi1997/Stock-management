@@ -62,29 +62,34 @@ class Numpad extends React.Component {
   }
   render() {
     return (
-      <div className="fixed-position">
-        <div id="Numpad">
-          <input id="1" value="1" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="2" value="2" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="3" value="3" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <br />
-          <input id="4" value="4" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="5" value="5" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="6" value="6" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <br />
-          <input id="7" value="7" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="8" value="8" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <input id="9" value="9" className="button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
-          <br />
-          <input id="0" value="0" type="button"  className="button-numpad" onMouseDown={this.handleInput.bind(this)} />
-          <input id="btnDel" type="button" value="←"  className="button-numpad" onMouseDown={this.del.bind(this)} />
-          <input id="btnDel" type="button" value="C"  className="button-numpad" onMouseDown={this.clear.bind(this)} />
-          <br />
-          <input id="btnDel" type="button" value="-"  className="button-numpad" onMouseDown={this.decrease.bind(this)} />
-          <input id="btnDel" type="button" value="+"  className="button-numpad" onMouseDown={this.increase.bind(this)} />
-          <br />
-          <button onClick={this.props.prevItem} className="btn btn-primary margin-right">Previous</button>
-          <button onClick={this.props.nextItem} className="btn btn-primary">Next</button>
+      <div className="fixed-position container-fluid">
+        <div className="row">
+          <input id="1" value="1" className="col-xs-4 col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="2" value="2" className="col-xs-4 col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="3" value="3" className="col-xs-4 col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+        </div>
+        <div className="row">
+          <input id="4" value="4" className="col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="5" value="5" className="col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="6" value="6" className="col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+        </div>
+        <div className="row">
+          <input id="7" value="7" className="col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="8" value="8" className="col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+          <input id="9" value="9" className="col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
+        </div>
+        <div className="row">
+          <input id="0" value="0" type="button"  className="col-xs-4 button-numpad" onMouseDown={this.handleInput.bind(this)} />
+          <input id="btnDel" type="button" value="C"  className="col-xs-4 button-numpad" onMouseDown={this.clear.bind(this)} />
+          <input id="btnDel" type="button" value="←"  className="col-xs-4 button-numpad" onMouseDown={this.del.bind(this)} />
+        </div>
+        <div className="row">
+          <input id="btnDel" type="button" value="-"  className="col-xs-6 button-numpad" onMouseDown={this.decrease.bind(this)} />
+          <input id="btnDel" type="button" value="+"  className="col-xs-6 button-numpad" onMouseDown={this.increase.bind(this)} />
+        </div>
+        <div className="row">
+          <input onClick={this.props.prevItem} type="button" className="col-xs-6 button-numpad" value="Previous"/>
+          <input onClick={this.props.nextItem} type="button"className="col-xs-6 button-numpad" value="Next" />
         </div>
       </div>
     );
