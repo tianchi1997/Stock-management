@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "StockChecks", type: :feature do
+RSpec.feature "StockCheck", type: :feature do
   let(:location) {FactoryGirl.create(:location)}
 
   before(:each) do

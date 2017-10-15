@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Logins", type: :feature do
+RSpec.feature "Login", type: :feature do
   let(:user) {FactoryGirl.create(:user, password: "password")}
 
   scenario "User logs in from main page" do
