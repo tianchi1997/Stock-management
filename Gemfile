@@ -47,6 +47,7 @@ gem 'paranoia'
 # Bootstrap
 gem 'rails-assets-bootstrap-sass'
 gem 'rails-assets-bootstrap-treeview'
+gem 'rails-assets-select2'
 gem 'bootstrap_form'
 
 # Breadcrumbs
