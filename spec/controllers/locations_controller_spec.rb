@@ -5,28 +5,27 @@ RSpec.describe LocationsController, type: :controller do
   # Log in as admin, permissions are tested under ability model
   login_admin
 
-  describe "GET #index" do
-    before(:each) do
-      get :index
-    end
+  let!(:location) {create(:location)}
 
+  describe "GET #index" do
     it "returns a success response" do
+      get :index
       expect(response).to be_success
     end
 
     it "renders index template" do
+      get :index
       expect(response).to render_template("index")
     end
 
     it "assigns @locations and @locations_tree" do
-      location = create(:location)
+      get :index
       expect(assigns(:locations)).to eq([location])
-      expect(assigns(:locations_tree)).to eq(location.descendants.arrange(order: [:position, :name, :id]))
+      expect(assigns(:locations_tree)).to eq({location => {}})
     end
   end
 
   describe "GET #show" do
-    let(:location) { create(:location) }
     before(:each) do
       get :show, params: {id: location.to_param}
     end
@@ -64,7 +63,6 @@ RSpec.describe LocationsController, type: :controller do
   end
 
   describe "GET #edit" do
-    let(:location) { create(:location) }
     before(:each) do
       get :edit, params: {id: location.to_param}
     end
@@ -84,7 +82,7 @@ RSpec.describe LocationsController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new Location" do
+      it "creates a new location" do
         expect {
           post :create, params: {location: {name: "Location"}}
         }.to change(Location, :count).by(1)
@@ -107,14 +105,12 @@ RSpec.describe LocationsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       it "updates the requested location" do
-        location = create(:location)
         put :update, params: {id: location.to_param, location: {name: "New Name"}}
         location.reload
         expect(location.name).to eq "New Name"
       end
 
       it "redirects to the location" do
-        location = create(:location)
         put :update, params: {id: location.to_param, location: {name: location.name}}
         expect(response).to redirect_to(location)
       end
@@ -122,7 +118,6 @@ RSpec.describe LocationsController, type: :controller do
 
     context "with invalid params" do
       it "renders edit template" do
-        location = create(:location)
         put :update, params: {id: location.to_param, location: {name: nil}}
         expect(response).to render_template("edit")
       end
@@ -131,7 +126,6 @@ RSpec.describe LocationsController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested location" do
-      location = create(:location)
       expect {
         delete :destroy, params: {id: location.to_param}
       }.to change(Location, :count).by(-1)

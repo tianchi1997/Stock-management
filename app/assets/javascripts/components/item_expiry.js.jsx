@@ -2,6 +2,7 @@ class ItemExpiry extends React.Component {
   preventDefault(event) {
     event.preventDefault();
   }
+
   onCountChange(event) {
     if(event.key != undefined){
       event.target.value += event.key;
