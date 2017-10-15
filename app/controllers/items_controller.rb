@@ -6,11 +6,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   def show
-    if @item.stock_item.expires
-      @item = Item.preload(:item_expiries).find(params[:id]);
-    else
-      @item = Item.find(params[:id]);
-    end
+    @item = Item.preload(:item_expiries).find(params[:id]);
     @audits = @item.associated_audits.includes(:user).includes(:auditable).order(created_at: :desc)
   end
 

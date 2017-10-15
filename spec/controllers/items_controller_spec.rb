@@ -5,7 +5,7 @@ RSpec.describe ItemsController, type: :controller do
   # Log in as admin, permissions are tested under ability model
   login_admin
 
-  let!(:item) {create(:item)}
+  let!(:item) {create(:item, expires: true)}
 
   describe "GET #show" do
     before(:each) do
@@ -27,8 +27,9 @@ RSpec.describe ItemsController, type: :controller do
   end
 
   describe "GET #new" do
+    let(:location) { create(:location) }
     before(:each) do
-      get :new
+      get :new, params: {location_id: location.to_param}
     end
 
     it "returns a success response" do
@@ -41,6 +42,10 @@ RSpec.describe ItemsController, type: :controller do
 
     it "assigns @stock_items" do
       expect(assigns(:stock_items)).to eq([item.stock_item])
+    end
+
+    it "sets location of @item" do
+      expect(assigns(:item).location).to eq(location)
     end
   end
 
@@ -127,8 +132,53 @@ RSpec.describe ItemsController, type: :controller do
   end
 
   describe "POST #save_expiries" do
-    it "test" do
-      post :save_expiries, "{
+    it "saves item expiries" do
+      expect {
+        post(
+          :save_expiries, 
+          body: [{
+            itemId: item.to_param, 
+            count: 5, 
+            expiryDate: (DateTime.now. + 1.day).strftime("%F")
+          }].to_json, 
+          params: {id: item.to_param}, 
+          format: :json
+        )
+      }.to change(ItemExpiry, :count).by(1)
+    end
+
+    it "audits if date alrady exists" do
+      expiry = create(:item_expiry, item: item, expires: true)
+      
+      post(
+       :save_expiries, 
+        body: [{
+          itemId: item.to_param, 
+          count: 5,
+          expiryDate: expiry.expiry_date.strftime("%F")
+        }].to_json, 
+        params: {id: item.to_param}, 
+        format: :json
+      )
+
+      expect(item.associated_audits.count).to eq(2)
+    end
+
+    it "audits if date doesn't exist" do
+      expiry = create(:item_expiry, item: item, expires: true)
+      
+      post(
+       :save_expiries, 
+        body: [{
+          itemId: item.to_param, 
+          count: 5,
+          expiryDate: (DateTime.now + 5.days).strftime("%F")
+        }].to_json, 
+        params: {id: item.to_param}, 
+        format: :json
+      )
+
+      expect(item.associated_audits.count).to eq(3)
     end
   end
 end
