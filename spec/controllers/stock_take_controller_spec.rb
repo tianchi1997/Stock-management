@@ -18,8 +18,4 @@ RSpec.describe StockTakeController, type: :controller do
       assigns(:locations).should eq(locations) 
     end
   end
-
-
-  
-
 end
