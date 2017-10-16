@@ -7,7 +7,7 @@ RSpec.feature "Interface", type: :feature, js: true do
 
   let!(:parent) {FactoryGirl.create(:location)}
   let!(:location) {FactoryGirl.create(:location, parent: parent)}
-  let!(:item1) {FactoryGirl.create(:item, location: location, required: 5)}
+  let!(:item) {FactoryGirl.create(:item, location: location, required: 5)}
   let!(:stock_item) {FactoryGirl.create(:stock_item)}
 
   scenario "Numpad renders on stock take page with correct buttons" do 
@@ -56,6 +56,13 @@ RSpec.feature "Interface", type: :feature, js: true do
     expect(page).to have_text(location.name)
     expect(page).to have_text("New")
 
+    visit "/locations/#{location.to_param}/stock_take"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text(parent.name)
+    expect(page).to have_text(location.name)
+    expect(page).to have_text("Stock Take")
+
     visit "/items/#{item.to_param}"
     expect(page).to have_text("Home")
     expect(page).to have_text("Locations")
@@ -70,5 +77,18 @@ RSpec.feature "Interface", type: :feature, js: true do
     expect(page).to have_text(location.name)
     expect(page).to have_text(item.stock_item.name)
     expect(page).to have_text("Edit")
+
+    visit "/users"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Users")
+
+    visit "/stock_items"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Stock Items")
+
+    visit "/stock_items/#{stock_item.to_param}"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Stock Items")
+    expect(page).to have_text(stock_item.name)
   end
 end
