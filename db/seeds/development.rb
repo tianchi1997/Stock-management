@@ -13,22 +13,22 @@ User.create!([
 ])
 
 Location.create!([
-  {parent_id: nil, name: "Hospital A", position: 0, description: "Location Description 1"},
-  {parent_id: nil, name: "Hospital B", position: 0, description: "Location Description 2"},
-  {parent_id: nil, name: "Hospital C", position: 0, description: "Location Description 3"},
-  {parent_id: 1, name: "Vehicles", position: 0, description: "Location Description 4"},
-  {parent_id: 2, name: "Vehicles", position: 0, description: "Location Description 5"},
-  {parent_id: 3, name: "Vehicles", position: 0, description: "Location Description 6"},
-  {parent_id: 1, name: "Room", position: 0, description: "Location Description 7"},
-  {parent_id: 2, name: "Room", position: 0, description: "Location Description 8"},
-  {parent_id: 3, name: "Room", position: 0, description: "Location Description 9"},
-  {parent_id: 7, name: "Room 1", position: 0, description: "Location Description 10"},
-  {parent_id: 7, name: "Room 2", position: 0, description: "Location Description 11"},
-  {parent_id: 7, name: "Room 3", position: 0, description: "Location Description 12"},
-  {parent_id: 4, name: "Ambulance 1", position: 0, description: "Location Description 13"},
-  {parent_id: 4, name: "Ambulance 2", position: 0, description: "Location Description 14"},
-  {parent_id: 13, name: "Compartment 1", position: 0, description: "Location Description 15"},
-  {parent_id: 13, name: "Compartment 2", position: 0, description: "Location Description 16"}
+  {parent_id: nil, name: "Hospital A", description: "Location Description 1"},
+  {parent_id: nil, name: "Hospital B", description: "Location Description 2"},
+  {parent_id: nil, name: "Hospital C", description: "Location Description 3"},
+  {parent_id: 1, name: "Vehicles", description: "Location Description 4"},
+  {parent_id: 2, name: "Vehicles", description: "Location Description 5"},
+  {parent_id: 3, name: "Vehicles", description: "Location Description 6"},
+  {parent_id: 1, name: "Room", description: "Location Description 7"},
+  {parent_id: 2, name: "Room", description: "Location Description 8"},
+  {parent_id: 3, name: "Room", description: "Location Description 9"},
+  {parent_id: 7, name: "Room 1", description: "Location Description 10"},
+  {parent_id: 7, name: "Room 2", description: "Location Description 11"},
+  {parent_id: 7, name: "Room 3", description: "Location Description 12"},
+  {parent_id: 4, name: "Ambulance 1", description: "Location Description 13"},
+  {parent_id: 4, name: "Ambulance 2", description: "Location Description 14"},
+  {parent_id: 13, name: "Compartment 1", description: "Location Description 15"},
+  {parent_id: 13, name: "Compartment 2", description: "Location Description 16"}
 ])
 
 StockItem.create!([

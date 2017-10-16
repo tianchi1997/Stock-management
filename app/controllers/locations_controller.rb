@@ -23,6 +23,7 @@ class LocationsController < ApplicationController
     if params[:parent_id]
       # Set location parent if parent id parameter and add breadcrumb
       @location.parent = Location.find(params[:parent_id])
+
       add_location_breadcrumb @location.parent
       add_breadcrumb "New", new_sublocation_path(params[:parent_id])
     else
@@ -30,7 +31,6 @@ class LocationsController < ApplicationController
       add_breadcrumb "Locations", :locations_path
       add_breadcrumb "New", new_location_path
     end
-
   end
 
   # GET /locations/1/edit
