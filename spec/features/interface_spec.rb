@@ -1,42 +1,74 @@
 require 'rails_helper'
 
-RSpec.feature "Interface", type: :feature do
-  pending "add some scenarios (or delete) #{__FILE__}"
+RSpec.feature "Interface", type: :feature, js: true do
   before(:each) do
-    login_as(FactoryGirl.create(:user))
+    login_as(FactoryGirl.create(:admin))
   end
-    let!(:locationroot) {FactoryGirl.create(:location)}
-    let!(:location1) {FactoryGirl.create(:location, parent: locationroot)}
-    let!(:location2) {FactoryGirl.create(:location, parent: location1)}
-    let!(:item1) {FactoryGirl.create(:item, location: location2, required: 5)}
-  scenario "numpad is present" do 
-    visit "/locations/#{location1.to_param}/stock_take"
-    within('div#numpad') do
-      within('input#1') do
-        expect(page).to have_content("1")
-        end
-      within('input#2') do
-        expect(page).to have_content("2")
-      end
-      within('input#3') do
-        expect(page).to have_content("3")  
-      end
-      within('input#4') do
-        expect(page).to have_content("4")
-      end
-      within('input#5') do
-        expect(page).to have_content("5")
-      end
-      within('input#6') do
-        expect(page).to have_content("6")  
-      end
-      within('input#7') do
-        expect(page).to have_content("7")  
-      end
-      within('input#8') do
-        expect(page).to have_content("8")  
-      end
-      within('input#9') do
-        expect(page).to have_content("9")  
-      end
+
+  let!(:parent) {FactoryGirl.create(:location)}
+  let!(:location) {FactoryGirl.create(:location, parent: parent)}
+  let!(:item1) {FactoryGirl.create(:item, location: location, required: 5)}
+  let!(:stock_item) {FactoryGirl.create(:stock_item)}
+
+  scenario "Numpad renders on stock take page with correct buttons" do 
+    visit "/locations/#{location.to_param}/stock_take"
+    within('#numpad') do
+      values = page.all(:css, "input").map {|el| el.value}
+
+      expect(values).to match_array(["1", "2", "3", "4", "5",
+                                     "6", "7", "8", "9", "0",
+                                     "C", "←", "-", "+",
+                                     "Previous", "Next"
+      ])
+    end
+  end
+
+  scenario "Breadcrumbs render correctly on each page" do
+    visit "/"
+    expect(page).to have_text("Home")
+
+    visit "/locations/"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Locations")
+
+    visit "/locations/#{parent.to_param}"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text(parent.name)
+
+    visit "/locations/#{location.to_param}"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text(parent.name)
+    expect(page).to have_text(location.name)
+
+    visit "/locations/#{location.to_param}/edit"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text(parent.name)
+    expect(page).to have_text(location.name)
+    expect(page).to have_text("Edit")
+
+    visit "/locations/#{location.to_param}/new"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text(parent.name)
+    expect(page).to have_text(location.name)
+    expect(page).to have_text("New")
+
+    visit "/items/#{item.to_param}"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text(parent.name)
+    expect(page).to have_text(location.name)
+    expect(page).to have_text(item.stock_item.name)
+
+    visit "/items/#{item.to_param}/edit"
+    expect(page).to have_text("Home")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text(parent.name)
+    expect(page).to have_text(location.name)
+    expect(page).to have_text(item.stock_item.name)
+    expect(page).to have_text("Edit")
+  end
 end

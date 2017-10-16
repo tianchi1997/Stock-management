@@ -43,5 +43,5 @@
 
 <%# Add link to create new location below current location %>
 <% if can? :create, Location %>
-  <%= link_to 'Add Sublocation', new_location_path(parent_id: @location) %>
+  <%= link_to 'Add Sublocation', new_sublocation_path(parent_id: @location) %>
 <% end %>
