@@ -22,11 +22,13 @@ class StockTake extends React.Component {
     }
   }
 
-  pItem(){
+  pItem(event){
+    event.preventDefault(); 
     this.setState({prevItemTrigger: this.state.prevItemTrigger + 1});
   }
 
-  nItem(){
+  nItem(event){
+    event.preventDefault(); 
     this.setState({nextItemTrigger: this.state.nextItemTrigger + 1});
   }
 

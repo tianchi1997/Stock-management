@@ -88,8 +88,8 @@ class Numpad extends React.Component {
           <input id="btnDel" type="button" value="+"  className="col-xs-6 button-numpad" onMouseDown={this.increase.bind(this)} />
         </div>
         <div className="row">
-          <input onClick={this.props.prevItem} type="button" className="col-xs-6 button-numpad" value="Previous"/>
-          <input onClick={this.props.nextItem} type="button"className="col-xs-6 button-numpad" value="Next" />
+          <input onMouseDown={this.props.prevItem} type="button" className="col-xs-6 button-numpad" value="Previous"/>
+          <input onMouseDown={this.props.nextItem} type="button"className="col-xs-6 button-numpad" value="Next" />
         </div>
       </div>
     );
