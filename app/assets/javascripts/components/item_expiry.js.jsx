@@ -30,7 +30,7 @@ class ItemExpiry extends React.Component {
                 <label className="pad-bottom">Count:</label>
               </div>
               <div className="col-xs-4">
-                <input type="number" name="count" id="highlight"
+                <input type="number" name={"count_" + this.props.expiryIndex} id="highlight"
                   value={this.props.itemExpiry.count}
                   onChange={this.onCountChange.bind(this)}
                   onKeyPress={this.onCountChange.bind(this)}
@@ -44,7 +44,7 @@ class ItemExpiry extends React.Component {
                 <label>Date:</label>
               </div>
               <div className="col-xs-4 fixed-width-date">
-                <input type="date" name="day" id="highlight"
+                <input type="date" name={"expiry_date_" + this.props.expiryIndex} id="highlight"
                   value={this.props.itemExpiry.expiryDate}
                   onChange={this.onExpiryChange.bind(this)}
                   className="form-control "
