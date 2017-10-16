@@ -256,7 +256,7 @@ class Item extends React.Component {
             itemExpiry={itemExpiry}
             removeExpiry={self.removeExpiry.bind(self)}
             updateExpiry={self.updateExpiry.bind(self)}
-            updateCount={self.updateCount.bind(self)}
+            updateCount=self.updateCount.bind(self)
           />
 
         );
