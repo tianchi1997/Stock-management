@@ -1,8 +1,8 @@
 class LocationsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource # Authorise actions
 
+  # Set location before actions
   before_action :set_location, only: [:show, :edit, :update, :destroy]
-
 
   # GET /locations
   def index
@@ -21,10 +21,12 @@ class LocationsController < ApplicationController
   def new
     @location = Location.new
     if params[:parent_id]
+      # Set location parent if parent id parameter and add breadcrumb
       @location.parent = Location.find(params[:parent_id])
       add_location_breadcrumb @location.parent
       add_breadcrumb "New", new_sublocation_path(params[:parent_id])
     else
+      # Add breadcrumb for new root location
       add_breadcrumb "Locations", :locations_path
       add_breadcrumb "New", new_location_path
     end

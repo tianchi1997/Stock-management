@@ -1,6 +1,7 @@
 class StockItemsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource # Authorise actions
 
+  # Set variables before actions
   add_breadcrumb "Stock Items", :stock_items_path
   before_action :set_stock_item, only: [:show, :edit, :update, :destroy]
 

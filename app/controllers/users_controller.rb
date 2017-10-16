@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource # Authorise actions
 
+  # Add breadcrumb and set variables
   add_breadcrumb "Users", :users_path
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
