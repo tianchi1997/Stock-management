@@ -39,35 +39,41 @@
   background-color: #7AC8FF; 
   border: solid white;
   color: white;
-  padding: 25px 50px; 
+  padding: 25px 50px;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
 }
+
 .white-background{
   background-color: white !important; 
 }
+
 .fixed-position{
-  position: fixed; 
+  position: fixed;
 }
 
 .pad-bottom{
-  padding-bottom: 25px; 
+  padding-bottom: 25px;
 }
 
 .padding{
-  padding: 0px 10px 15px 20px ;
+  padding: 0px 10px 15px 20px;
 }
+
 .borders{
   border: solid #42b0ff; 
   border-radius: 5px; 
 }
+
 .margin-right{
   margin-right: 10px; 
 }
+
 input:focus#highlight { 
     background-color: yellow !important;
 }
+
 .add-expiry-btn-margins{
   position: absolute !important;
   right: 30px !important; 
