@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
   get 'locations/:id/stock_take', to: 'stock_take#location', as: 'stock_take'
   get 'locations/:id/report', to: 'reports#location', as: 'location_report'
+  get 'locations/:parent_id/new', to: 'locations#new', as: 'new_sublocation'
   get 'report', to: 'reports#location', as: 'report'
 end
