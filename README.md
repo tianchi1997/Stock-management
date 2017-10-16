@@ -2,27 +2,16 @@
 
 ## Description
 
-Charlotte is a stock management web program running on Ruby on Rails intended for use 
-
-## Requirements
-
-This template currently works with:
-
-* Rails 5.1.x
-* PostgreSQL 9.3 or above
-
-## Installation
-
-For installation details see [install](INSTALL.md).
-
-## Usage
+Charlotte is a stock management web program running on Ruby on Rails intended for use with medical stock items, that are a mix of perishable and non-perishable items.
+This product has been designed to be used on both PC's and tablets with an on-screen numberpad for stocktaking.
 
 ## What does it do?
 
 Charlotte has the following capabilities:
 * Item Expiry
-    * [Still missing part about expiry]
-    * A stock item can be set to have an ability to expire.
+    * A stock item can be set to expire.
+    * When an item passes expiry date, it will automatically be removed from the available amount in the stock check.
+    * The expired amounts still remain in the total amount that are shown beside the available amount inside the parentheses.
 * Stock Checking
     * The quantity of each items in locations can be accessed by simply seleting a location in the 'Locations' page.
     * If a user need to know where a stock item is located the quantity of each stock item can be accessed by selecting a stock item in the 'Stock Items' page.
@@ -39,6 +28,17 @@ Charlotte has the following capabilities:
     * An order report from any location can be downloaded as a CVS file to be used outside the program.
 * Auditing
     * When performing a stocktake, the time of change, the user and the amount will be recorded any time a change is made.
+
+
+## Requirements
+
+This program works using:
+* Rails 5.1.x
+* PostgreSQL 9.3 or above
+
+## Installation
+
+For installation details see [install](INSTALL.md).
 
 
 ## Dependencies
@@ -75,7 +75,6 @@ Charlotte has the following capabilities:
     * [simplecov][] - code coverage reports
 
 ## How does it work?
-
 
 [react-rails]: https://github.com/reactjs/react-rails
 [jbuilder]: https://github.com/rails/jbuilder
