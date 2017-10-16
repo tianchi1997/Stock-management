@@ -9,8 +9,8 @@
 </p>
 
 <p>
-  <strong>Permission level:</strong>
-  <%= @user.permission_level %>
+  <strong>Permissions:</strong>
+  <%= @user.permission_level_string %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %>

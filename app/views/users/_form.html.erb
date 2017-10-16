@@ -24,7 +24,14 @@
   </div>
 
   <div class="field">
-    <%= form.number_field :permission_level, id: :user_permission_level %>
+    <div class="form-group">
+      <label class="control-label" for="user_permission_level">Permission</label>
+        <select class="form-control" name="user[permission_level]" id="user_permission_level">
+          <option value="0">User - Read access to locations and ability to stock take</option>
+          <option value="1">Report User - User with access to reports</option>
+          <option value="2">Administrator - Full access</option>
+        </select>
+    </div>
   </div>
 
   <div class="actions">
