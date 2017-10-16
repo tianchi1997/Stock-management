@@ -1,5 +1,6 @@
 SELECT     locations.id AS location_id,
            stock_items.id AS stock_item_id,
+           COALESCE(summaries.total_all, 0)     AS total_all,
            COALESCE(summaries.total, 0)     AS total,
            COALESCE(summaries.required, 0)  AS required,
            COALESCE(summaries.order_to, 0)  AS order_to
@@ -13,7 +14,8 @@ FROM (
 ) locations
 JOIN stock_items ON stock_items.deleted_at IS NULL
 CROSS JOIN LATERAL (
-  SELECT SUM(item_summaries.total)         AS total,
+  SELECT SUM(item_summaries.total_all)         AS total_all,
+         SUM(item_summaries.total) AS total,
          SUM(item_summaries.required)      AS required,
          SUM(item_summaries.order_to)      AS order_to
   FROM item_summaries WHERE (

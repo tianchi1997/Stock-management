@@ -13,4 +13,14 @@ class User < ApplicationRecord
 
   # Scope
   default_scope { order(name: :asc) }
+
+  def permission_level_string
+    if permission_level >= 2
+      "Admin"
+    elsif permission_level >= 1
+      "Report User"
+    else
+      "User"
+    end
+  end
 end
