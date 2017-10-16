@@ -6,7 +6,8 @@
     <td></td>
   <% end %>
 </tr>
-<% location.items.each do |item| %>
+<% items = location.items.sort_by {|item| item.stock_item.name} %>
+<% items.each do |item| %>
   <tr>
     <td><%= item.stock_item.name.indent(depth + 1, "&nbsp&nbsp&nbsp&nbsp").html_safe %> (<%= item.stock_item.item_code %>)</td>
     <td><%= item.item_summary.total %>/<%= item.required %> (<%= item.item_summary.total_all %>)</td>
@@ -17,7 +18,8 @@
   </tr>
 
   <% if expiries and item.stock_item.expires %>
-    <% item.item_expiries.each do |item_expiry| %>
+      <% item_expiries = item.item_expiries.sort_by { |item_expiry| item_expiry.expiry_date } %>
+    <% item_expiries.each do |item_expiry| %>
       <tr>
         <td><%= item_expiry.expiry_date.to_s.indent(depth + 2, "&nbsp&nbsp&nbsp&nbsp").html_safe %></td>
         <td><%= item_expiry.count %></td>

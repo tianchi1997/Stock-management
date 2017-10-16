@@ -13,7 +13,7 @@
     <td></td>
   <% end %>
 </tr>
-
+<% stock_item_summaries = stock_item_summaries.sort_by {|summary| summary.stock_item.name} %>
 <% stock_item_summaries.each do |item| %>
   <tr>
     <td><%= item.stock_item.name.indent(depth + 1,"&nbsp&nbsp&nbsp&nbsp").html_safe %> (<%= item.stock_item.item_code %>)</td>
