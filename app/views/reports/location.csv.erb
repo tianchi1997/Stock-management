@@ -1,8 +1,9 @@
-<%= CSV.generate_line(["Item Code", "Item Name", "Total", "Required", "Order To", "Amount to Order"]) -%>
+<%= CSV.generate_line(["Item Code", "Item Name", "Total", "Total All" "Required", "Order To", "Amount to Order"]) -%>
 
 <% @stock_item_summaries = @stock_item_summaries || @location.stock_item_summaries %>
+<% @stock_item_summaries = @stock_item_summaries.sort_by {|summary| summary.stock_item.name} %>
 <% @stock_item_summaries.each do |item| %>
-<% line = [item.stock_item.item_code, item.stock_item.name, item.total, item.required, item.order_to, item.order_amount] %>
-<%= CSV.generate_line(line) -%>
+  <% line = [item.stock_item.item_code, item.stock_item.name, item.total, item.total_all, item.required, item.order_to, item.order_amount] %>
+  <%= CSV.generate_line(line) -%>
 <% end %>
 

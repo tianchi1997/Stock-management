@@ -6,12 +6,12 @@ class StockItemsController < ApplicationController
 
   # GET /stock_items
   def index
-    @stock_items = StockItem.all.preload(:stock_item_summary)
+    @stock_items = StockItem.all.preload(:stock_item_summary).order("stock_items.name")
   end
 
   # GET /stock_items/1
   def show
-    @stock_item = StockItem.preload(items: [:item_summary, :location]).find(params[:id])
+    @stock_item = StockItem.preload(items: [:item_summary]).includes(items: [:location]).order("locations.name").find(params[:id])
   end
 
   # GET /stock_items/new
