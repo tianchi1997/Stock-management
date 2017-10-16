@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1
   def show
-    @item = Item.preload(:item_expiries).find(params[:id]);
+    @item = Item.includes(:item_expiries).order("item_expiries.expiry_date").find(params[:id])
     @audits = @item.associated_audits.includes(:user).includes(:auditable).order(created_at: :desc)
   end
 

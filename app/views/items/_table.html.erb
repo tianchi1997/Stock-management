@@ -12,7 +12,7 @@
     <% items.each do |item| %>
       <tr class="clickable-row" data-url='<%= url_for(item) %>'>
         <td><%= item.send(name_type).name %></td>
-        <td><%= item.item_summary.total  %></td>
+        <td><%= item.item_summary.total %> (<%= item.item_summary.total_all %>)</td>
         <td><%= item.required  %></td>
         <td><%= item.order_to %></td>
       </tr>

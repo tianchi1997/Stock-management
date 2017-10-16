@@ -16,7 +16,7 @@
         <td><%= stock_item.item_code %></td>
         <td><%= stock_item.name %></td>
         <td><%= stock_item.expires ? "Yes" : "No" %></td>
-        <td><%= stock_item.stock_item_summary.total %></td>
+        <td><%= stock_item.stock_item_summary.total %> (<%= stock_item.stock_item_summary.total_all %>)</td>
       </tr>
     <% end %>
   </tbody>
