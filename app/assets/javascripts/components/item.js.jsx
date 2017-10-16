@@ -11,11 +11,19 @@ class Item extends React.Component {
       quantity: 0,
       errors: "",
       prevItemTrigger: 0,
-      nextItemTrigger: 0
-
+      nextItemTrigger: 0,
+      newItem: false
     };
   }
+  componentDidUpdate(prevProps, prevState) {
+    if(this.state.newItem) {
+      this.setState({newItem: false}); 
+      element = document.getElementsByName("quantity"); 
+      element[0].focus(); 
+      
 
+    }
+  }
   componentWillMount() {
     //load the item details
     this.loadItem(this.props.itemID);
@@ -41,7 +49,6 @@ class Item extends React.Component {
     // Setting the context of 'this'
     var self = this;
     var fetchURL = "/items/" + itemID + ".json";
-
     // Fetch the items associated with the location
     fetch(fetchURL, { credentials: 'include' })
       // Parse the response to json
@@ -65,6 +72,7 @@ class Item extends React.Component {
         json.quantity = Math.max(total, json.required);
         json.quantity = Math.min(maximum, json.quantity);
         json.errors = "";
+        json.newItem = true;
 
         self.setState(json);
       })
