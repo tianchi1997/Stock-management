@@ -7,12 +7,20 @@ RSpec.feature "StockCheck", type: :feature do
     login_as(FactoryGirl.create(:user), scope: :user)
   end
 
+  scenario "User checks items at a location" do
 
-  scenario "User views items at a specific location" do
   end
 
-  scenario "User views expiry dates for a specific item" do
+  scenario "User checks expiry dates for an item" do
+
   end
-  
+
+  scenario "User checks all stock items" do
+      
+  end
+
+  scenario "User checks a single stock item" do
+    
+  end
 end
 

@@ -15,11 +15,7 @@
       <tr class="clickable-row" data-url="<%= url_for(stock_item) %>">
         <td><%= stock_item.item_code %></td>
         <td><%= stock_item.name %></td>
-        <% if stock_item.expires == true %>
-          <td> Yes </td>
-        <% else %>
-          <td> No </td>
-        <%end%>  
+        <td><%= stock_item.expires ? "Yes" : "No" %></td>
         <td><%= stock_item.stock_item_summary.total %></td>
       </tr>
     <% end %>
