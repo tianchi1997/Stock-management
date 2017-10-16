@@ -65,6 +65,7 @@ group :development, :test do
 
   # rspec for testing and simplecov for coverage checking
   gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-wait'
   gem 'capybara'
   gem 'simplecov'
   gem 'factory_girl_rails'
