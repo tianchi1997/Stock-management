@@ -62,7 +62,7 @@ class Numpad extends React.Component {
   }
   render() {
     return (
-      <div className="fixed-position container-fluid">
+      <div className="fixed-position container-fluid" id="numpad">
         <div className="row">
           <input id="1" value="1" className="col-xs-4 col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
           <input id="2" value="2" className="col-xs-4 col-xs-4 button-numpad" type="button" onMouseDown={this.handleInput.bind(this)} />
@@ -80,16 +80,16 @@ class Numpad extends React.Component {
         </div>
         <div className="row">
           <input id="0" value="0" type="button"  className="col-xs-4 button-numpad" onMouseDown={this.handleInput.bind(this)} />
-          <input id="btnDel" type="button" value="C"  className="col-xs-4 button-numpad" onMouseDown={this.clear.bind(this)} />
-          <input id="btnDel" type="button" value="←"  className="col-xs-4 button-numpad" onMouseDown={this.del.bind(this)} />
+          <input id="clear" type="button" value="C"  className="col-xs-4 button-numpad" onMouseDown={this.clear.bind(this)} />
+          <input id="del" type="button" value="←"  className="col-xs-4 button-numpad" onMouseDown={this.del.bind(this)} />
         </div>
         <div className="row">
-          <input id="btnDel" type="button" value="-"  className="col-xs-6 button-numpad" onMouseDown={this.decrease.bind(this)} />
-          <input id="btnDel" type="button" value="+"  className="col-xs-6 button-numpad" onMouseDown={this.increase.bind(this)} />
+          <input id="increase" type="button" value="-"  className="col-xs-6 button-numpad" onMouseDown={this.decrease.bind(this)} />
+          <input id="decrease" type="button" value="+"  className="col-xs-6 button-numpad" onMouseDown={this.increase.bind(this)} />
         </div>
         <div className="row">
-          <input onMouseDown={this.props.prevItem} type="button" className="col-xs-6 button-numpad" value="Previous"/>
-          <input onMouseDown={this.props.nextItem} type="button"className="col-xs-6 button-numpad" value="Next" />
+          <input onMouseDown={this.props.prevItem} type="button" className="col-xs-6 button-numpad" value="Previous" id="previous"/>
+          <input onMouseDown={this.props.nextItem} type="button"className="col-xs-6 button-numpad" value="Next" id="next"/>
         </div>
       </div>
     );
