@@ -9,7 +9,7 @@
 <% location.items.each do |item| %>
   <tr>
     <td><%= item.stock_item.name.indent(depth + 1, "&nbsp&nbsp&nbsp&nbsp").html_safe %> (<%= item.stock_item.item_code %>)</td>
-    <td><%= item.item_summary.total %>/<%= item.required %></td>
+    <td><%= item.item_summary.total %>/<%= item.required %> (<%= item.item_summary.total_all %>)</td>
     <td><%= item.order_to %></td>
     <% if order_to %>
       <td><%= item.item_summary.order_amount %></td>
