@@ -19,6 +19,7 @@ RSpec.feature "Report", type: :feature ,js: true do
   let!(:itemExpiry3) {
     itemExpiry3 = FactoryGirl.build(:item_expiry, item: item2 , expiry_date: Date.today - 5.days)
     itemExpiry3.save(validate: false)
+    itemExpiry3
   }
   
 
@@ -69,7 +70,7 @@ RSpec.feature "Report", type: :feature ,js: true do
 
     click_button("View")
 
-    expect(page).to have_text("Summary for "+parent.name)
+    expect(page).to have_text("Summary for " + parent.name)
     expect(page).to have_text(item1.stock_item.name)
     expect(page).to have_text(item2.stock_item.name)
 
@@ -85,7 +86,7 @@ RSpec.feature "Report", type: :feature ,js: true do
     find(:css, "#order_to[value='1']").set(true)
     click_button("View")
 
-    expect(page).to have_text("Summary for "+parent.name)
+    expect(page).to have_text("Summary for " + parent.name)
     expect(page).to have_text(item1.stock_item.name)
     expect(page).to have_text(item2.stock_item.name)
 
@@ -95,7 +96,7 @@ RSpec.feature "Report", type: :feature ,js: true do
     expect(page).to have_text(item2.order_to)
 
     expect(page).to have_text("Amount to Order")
-    expect(page).to have_text(item1.item_summary.order_amount+item3.item_summary.order_amount)
+    expect(page).to have_text(item1.item_summary.order_amount + item3.item_summary.order_amount)
     expect(page).to have_text(item2.item_summary.order_amount)
   end
 end
