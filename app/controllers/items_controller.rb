@@ -80,6 +80,8 @@ class ItemsController < ApplicationController
           item_expiry.destroy
         end
       end
+
+      item_expiries.each(&:save)
     end
   end
 
