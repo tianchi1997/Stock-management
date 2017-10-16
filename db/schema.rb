@@ -119,7 +119,8 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   add_foreign_key "items", "stock_items"
 
   create_view "item_summaries",  sql_definition: <<-SQL
-      SELECT item_summaries.id AS item_id,
+      SELECT item_summaries.id,
+      item_summaries.id AS item_id,
       locations.id AS location_id,
       locations.ancestry AS location_ancestry,
       stock_items.id AS stock_item_id,
@@ -153,7 +154,8 @@ ActiveRecord::Schema.define(version: 20170808000000) do
   SQL
 
   create_view "stock_item_summaries",  sql_definition: <<-SQL
-      SELECT locations.id AS location_id,
+      SELECT row_number() OVER (ORDER BY locations.id, stock_items.id) AS id,
+      locations.id AS location_id,
       stock_items.id AS stock_item_id,
       COALESCE(summaries.total_all, (0)::bigint) AS total_all,
       COALESCE(summaries.total, (0)::bigint) AS total,

@@ -1,4 +1,5 @@
-SELECT     item_summaries.id            AS item_id,
+SELECT     item_summaries.id            AS id,
+           item_summaries.id            AS item_id,
            locations.id                 AS location_id,
            locations.ancestry           AS location_ancestry,
            stock_items.id               AS stock_item_id,

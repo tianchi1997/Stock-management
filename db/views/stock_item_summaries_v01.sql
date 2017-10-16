@@ -1,4 +1,5 @@
-SELECT     locations.id AS location_id,
+SELECT     ROW_NUMBER() OVER (ORDER BY locations.id, stock_items.id) AS id,
+           locations.id AS location_id,
            stock_items.id AS stock_item_id,
            COALESCE(summaries.total_all, 0)     AS total_all,
            COALESCE(summaries.total, 0)     AS total,

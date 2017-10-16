@@ -6,7 +6,7 @@ class StockItemsController < ApplicationController
 
   # GET /stock_items
   def index
-    @stock_items = StockItem.all.preload(:stock_item_summary)
+    @stock_items = StockItem.all.preload(:stock_item_summary).order("stock_items.name")
   end
 
   # GET /stock_items/1
