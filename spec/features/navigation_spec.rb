@@ -8,6 +8,11 @@ RSpec.feature "Navigation", type: :feature ,js: true do
   let!(:parent) {FactoryGirl.create(:location)}
   let!(:location) {FactoryGirl.create(:location, parent: parent)}
   let!(:location2) {FactoryGirl.create(:location, parent: parent)}
+
+
+
+
+
   scenario "Navigate from current location to a breadcrumb" do
     
 
@@ -46,7 +51,7 @@ RSpec.feature "Navigation", type: :feature ,js: true do
     expect(page).to have_text(location.description)
 
     click_link("Home")
-    expect(page).to have_text("Home")
+    expect(page).to have_text("Stock Management System")
     expect(page).to have_text("Stock Items")
     expect(page).to have_text("Locations")
     expect(page).to have_text("Users")
@@ -59,27 +64,52 @@ RSpec.feature "Navigation", type: :feature ,js: true do
     expect(page).to have_text("New Stock Item")
 
     click_link("Home")
-    expect(page).to have_text("Home")
+    expect(page).to have_text("Stock Management System")
     expect(page).to have_text("Stock Items")
     expect(page).to have_text("Locations")
     expect(page).to have_text("Users")
     
   end
   scenario "Navigate to stock items page from home page" do
+    visit '/'
+    expect(page).to have_text("Stock Management System")
+    expect(page).to have_text("Stock Items")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text("Users")
 
-skip("Potatoes")
+    click_link("Stock Items")
 
+    expect(page).to have_text("New Stock Item")
     
   end
   scenario "Navigate to locations page from home page" do
+    visit '/'
+    expect(page).to have_text("Stock Management System")
+    expect(page).to have_text("Stock Items")
+    expect(page).to have_text("Locations")
+    expect(page).to have_text("Users")
 
-skip("Potatoes")
+    click_link("Locations")
 
+    expect(page).to have_text("New Location")
     
   end
   scenario "Navigate to location of an item from item page" do
+    stock_item1 = create(:stock_item, expires: false)
+    stock_item2 = create(:stock_item, expires: false)
+    item1=create(:item, location: location , stock_item: stock_item1 , required: 5)
+    item2=create(:item, location: location , stock_item: stock_item2 , required: 5)
+    item3=create(:item, location: location2 , stock_item: stock_item1 , required: 5)
+    item4=create(:item, location: location2 , stock_item: stock_item2 , required: 5)
 
-skip("Potatoes")
+    visit "/stock_items/#{stock_item1.to_param}"
+
+    #expect(page).to have_text(location.name)
+    find('tr',text: location.name).click
+
+    #verify we are on the new page 
+    expect(page).to have_text("Audits")
+
   end
 
 end
