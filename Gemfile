@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-source 'http://insecure.rails-assets.org'
+source 'https://rails-assets.org'
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -65,13 +65,15 @@ group :development, :test do
 
   # rspec for testing and simplecov for coverage checking
   gem 'rspec-rails', '~> 3.5'
-  gem 'capybara'
   gem 'simplecov'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+
   gem 'rails-controller-testing'
-  gem 'launchy'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'geckodriver-helper'
 end
 
 group :development do

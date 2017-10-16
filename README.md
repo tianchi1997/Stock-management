@@ -38,10 +38,15 @@ For installation details see [install](INSTALL.md).
     * [breadcrumbs_on_rails][] - a breadcrumb generator for Rails
     * [rails-assets-bootstrap-sass][] - a Bootstrap rails asset pipeline integration gem
     * [rails-assets-bootstrap-treeview][] - a Bootstrap treeview plugin
+    * [rails-assets-select2][] - a select form for jquery
 * Testing
+    * [capybara][] - acceptance test framework for web applications
     * [database_cleaner][] - resets database state after each test
     * [factory_girl_rails][] - replacement for Rails fixtures
+    * [geckodriver-helper][] - helper for install geckodriver for selenium
+    * [rails-controller-testing][] - controller test macros for rspec
     * [rspec-rails][] - a ruby testing framework used to test behaviour of application
+    * [selenium-webdriver][] - driver for capybara supporting javascript
     * [shoulda-matches][] - shortcuts for common ActiveRecord tests
     * [simplecov][] - code coverage reports
 
@@ -54,6 +59,7 @@ For installation details see [install](INSTALL.md).
 [breadcrumbs_on_rails]: https://github.com/weppos/breadcrumbs_on_rails
 [rails-assets-bootstrap-sass]: https://github.com/twbs/bootstrap-sass
 [rails-assets-bootstrap-treeview]: https://github.com/jonmiles/bootstrap-treeview
+[rails-assets-select2]: https://github.com/select2/select2
 [ancestry]: https://github.com/stefankroes/ancestry
 [scenic]: https://github.com/thoughtbot/scenic
 [cancancan]: https://github.com/CanCanCommunity/cancancan
@@ -65,3 +71,7 @@ For installation details see [install](INSTALL.md).
 [rspec-rails]: https://github.com/rspec/rspec-rails
 [shoulda-matches]: https://github.com/thoughtbot/shoulda-matchers
 [simplecov]: https://github.com/colszowka/simplecov
+[rails-controller-testing]: https://github.com/rails/rails-controller-testing
+[capybara]: https://github.com/teamcapybara/capybara
+[selenium-webdriver]: https://rubygems.org/gems/selenium-webdriver/versions/2.48.1
+[geckodriver-helper]: https://github.com/DevicoSolutions/geckodriver-helper
