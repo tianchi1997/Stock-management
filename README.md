@@ -32,9 +32,10 @@ Charlotte has the following capabilities:
 
 ## Requirements
 
-This program works using:
+Charlotte requires:
 * Rails 5.1.x
-* PostgreSQL 9.3 or above
+* Ruby 2.2.2+
+* PostgreSQL 9.3+
 
 ## Installation
 
