@@ -31,6 +31,9 @@ class LocationsController < ApplicationController
       add_breadcrumb "Locations", :locations_path
       add_breadcrumb "New", new_location_path
     end
+
+    # Set default position to end
+    @location.position = Location.where(ancestry: @location.ancestry).maximum(:position) + 1
   end
 
   # GET /locations/1/edit
