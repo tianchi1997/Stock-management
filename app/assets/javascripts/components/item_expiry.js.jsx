@@ -1,8 +1,10 @@
 class ItemExpiry extends React.Component {
+  // Prevent default action of event
   preventDefault(event) {
     event.preventDefault();
   }
 
+  // When user changes count of item expiry
   onCountChange(event) {
     if(event.key != undefined){
       event.target.value += event.key;
@@ -11,6 +13,7 @@ class ItemExpiry extends React.Component {
     else this.props.updateCount(this.props.expiryIndex, parseInt(event.target.value));
   }
 
+  // When user changes expiry date
   onExpiryChange(event) {
     this.props.updateExpiry(this.props.expiryIndex, event.target.value);
   }
