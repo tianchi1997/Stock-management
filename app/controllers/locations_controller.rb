@@ -33,7 +33,7 @@ class LocationsController < ApplicationController
     end
 
     # Set default position to end
-    @location.position = Location.where(ancestry: @location.ancestry).maximum(:position) + 1
+    @location.position = (Location.where(ancestry: @location.ancestry).maximum(:position) || 0) + 1
   end
 
   # GET /locations/1/edit
