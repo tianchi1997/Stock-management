@@ -43,6 +43,9 @@ For installation details see [install](INSTALL.md).
 ## Licensing
 Charlotte is licensed under the MIT License. For more details see [license](LICENSE).
 
+## User Documentation
+For user documentation see [user guide](USER.md).
+
 ## Dependencies
 
 #### Charlotte has the following dependencies:
