@@ -1,4 +1,5 @@
 <%= bootstrap_form_for(item) do |form| %>
+  <%# Render errors %>
   <% if item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -12,6 +13,7 @@
   <% end %>
 
 
+  <%# Render each field input %>
   <div class="field">
     <%= form.text_field :location, id: :item_location_name, disabled: true, value: item.location.name %>
   </div>

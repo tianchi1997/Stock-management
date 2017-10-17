@@ -10,6 +10,7 @@
   </thead>
 
   <tbody>
+    <%# Render users with clickable rows %>
     <% @users.each do |user| %>
       <tr class="clickable-row" data-url="<%= user_path(user) %>">
         <td><%= user.name %></td>

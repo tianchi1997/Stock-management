@@ -10,7 +10,9 @@
   </head>
 
   <body>
+    <%# Render in bootstrap fluid container %>
     <div class="container-fluid">
+      <%# Render breadcrumb with log out button" %>
       <ol class="breadcrumb">
         <%= render_breadcrumbs tag: :li, separator: "" %>
         <% if user_signed_in? %>
@@ -18,8 +20,10 @@
         <% end %>
       </ol>
 
+      <%# Render notice %>
       <p id="notice"><%= notice %></p>
 
+      <%# Yield page %>
       <%= yield %>
     </div>
   </body>

@@ -1,3 +1,4 @@
+<%# Set stock item summaries and name if not passed in %>
 <% if !defined? stock_item_summaries or stock_item_summaries.nil? %>
   <% stock_item_summaries = location.stock_item_summaries %>
   <% name = location.name %>
@@ -9,11 +10,15 @@
   <td><b><%= ("Summary for " + name).indent(depth,"&nbsp&nbsp&nbsp&nbsp").html_safe %></b></td>
   <td></td>
   <td></td>
+  <%# Render extra column for order to %>
   <% if order_to %>
     <td></td>
   <% end %>
 </tr>
+<%# Sort stock item summaries %>
 <% stock_item_summaries = stock_item_summaries.sort_by {|summary| summary.stock_item.name} %>
+
+<%# Display each stock item summary %>
 <% stock_item_summaries.each do |item| %>
   <tr>
     <td><%= item.stock_item.name.indent(depth + 1,"&nbsp&nbsp&nbsp&nbsp").html_safe %> (<%= item.stock_item.item_code %>)</td>

@@ -1,5 +1,7 @@
+<%# Render CSV header %>
 <%= CSV.generate_line(["Item Code", "Item Name", "Total", "Total All" "Required", "Order To", "Amount to Order"]) -%>
 
+<%# Render rows of CSV file %>
 <% @stock_item_summaries = @stock_item_summaries || @location.stock_item_summaries %>
 <% @stock_item_summaries = @stock_item_summaries.sort_by {|summary| summary.stock_item.name} %>
 <% @stock_item_summaries.each do |item| %>

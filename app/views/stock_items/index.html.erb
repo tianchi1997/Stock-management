@@ -11,6 +11,7 @@
   </thead>
 
   <tbody>
+    <%# Render each stock item with clickable rows %>
     <% @stock_items.each do |stock_item| %>
       <tr class="clickable-row" data-url="<%= url_for(stock_item) %>">
         <td><%= stock_item.name %></td>
@@ -22,6 +23,7 @@
   </tbody>
 </table>
 
+<%# Display link to create stock item if user has access to %>
 <% if can? :create, StockItem %>
   <%= link_to 'New Stock Item', new_stock_item_path %>
 <% end %>

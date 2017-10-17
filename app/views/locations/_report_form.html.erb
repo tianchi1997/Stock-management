@@ -1,4 +1,6 @@
+<%# Render report form if user has access to reports %>
 <% if can? :location, :report %>
+  <%# Set URLs based on location parameter %>
   <% if location.nil? %>
     <% url = report_path %>
     <% csv_url = report_path(format: "csv") %>

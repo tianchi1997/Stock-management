@@ -1,3 +1,4 @@
+<%# Render attributes of stock item %>
 <p>
   <strong>Item Code:</strong>
   <%= @stock_item.item_code %>
@@ -13,6 +14,7 @@
   <%= @stock_item.expires ? "Yes" : "No" %>
 </p>
 
+<%# Generate links user has access to %>
 <% links = [] %>
 <% if can? :edit, @stock_item %>
   <% links.push(link_to 'Edit', edit_stock_item_path(@stock_item)) %>
@@ -24,6 +26,7 @@
 
 <%== links.join(' | ') %>
 
+<%# Render items table for stock item %>
 <h2>Items</h2>
 <%= render 'items/table', items: @stock_item.items, name_type: :location %>
 

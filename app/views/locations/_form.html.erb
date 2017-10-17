@@ -1,4 +1,5 @@
 <%= bootstrap_form_for(location) do |form| %>
+  <%# Render errors %>
   <% if location.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
@@ -11,6 +12,7 @@
     </div>
   <% end %>
 
+  <%# Render inputs for each attribute %>
   <div class="field">
     <%= form.text_field :parent_location_name, disabled: true, value: location.parent_name %>
   </div>

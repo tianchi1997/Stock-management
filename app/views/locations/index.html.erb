@@ -1,12 +1,16 @@
+<%# Render location tree in body, cannot be done in head due to turbolinks %>
 <%= javascript_tag do %>
   var tree = <%== render partial: "locations/tree", formats: [:json], object: @locations_tree, as: :locations_tree %>;
 <% end %>
 
 <h1>Locations</h1>
+<%# Render report form %>
 <%= render 'locations/report_form', location: nil %>
+
+<%# Placeholder for tree %>
 <div id="tree"></div>
 
-
+<%# Render add location link if user has access to create location %>
 <% if can? :create, Location %>
   <%= link_to 'New Location', new_location_path %>
 <% end %>

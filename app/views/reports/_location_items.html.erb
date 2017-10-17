@@ -1,14 +1,19 @@
 <tr>
+  <%# Indent location name %>
   <td><b><%= location.name.indent(depth,"&nbsp&nbsp&nbsp&nbsp").html_safe %></b></td>
   <td></td>
   <td></td>
+  <%# Render extra column if order to specified %>
   <% if order_to %>
     <td></td>
   <% end %>
 </tr>
+<%# Sort items %>
 <% items = location.items.sort_by {|item| item.stock_item.name} %>
 <% items.each do |item| %>
+  <%# Render item %>
   <tr>
+
     <td><%= item.stock_item.name.indent(depth + 1, "&nbsp&nbsp&nbsp&nbsp").html_safe %> (<%= item.stock_item.item_code %>)</td>
     <td><%= item.item_summary.total %>/<%= item.required %> (<%= item.item_summary.total_all %>)</td>
     <td><%= item.order_to %></td>
@@ -17,6 +22,7 @@
     <% end %>
   </tr>
 
+  <%# Render expiries if option specified %>
   <% if expiries and item.stock_item.expires %>
       <% item_expiries = item.item_expiries.sort_by { |item_expiry| item_expiry.expiry_date } %>
     <% item_expiries.each do |item_expiry| %>

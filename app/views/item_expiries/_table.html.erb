@@ -2,14 +2,15 @@
   <thead>
     <tr>
       <th>Count</th>
-      <th>Expiry</th>
+      <th>Expiry</th> 
     </tr>
   </thead>
 
   <tbody>
+    <%# Display each expiry as a table row %>
     <% item_expiries.each do |item_expiry| %>
       <tr>
-        <td><%= item_expiry.count  %></td>
+        <td><%= item_expiry.count  %></td> <%# Number of items expiring on date %>
         <td><%= item_expiry.expiry_date %></td>
       </tr>
     <% end %>

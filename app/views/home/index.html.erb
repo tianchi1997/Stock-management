@@ -1,5 +1,6 @@
 <h1>Stock Management System</h1>
 
+<%# Generate links user has access to and display them on screen %>
 <% links = [] %>
 <% if can? :read, Location %>
   <% links.push(link_to 'Locations', locations_path, :class=>"btn-group linktobutton") %>

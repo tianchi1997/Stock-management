@@ -1,4 +1,5 @@
 <%= bootstrap_form_for(stock_item) do |form| %>
+  <%# Display errors %>
   <% if stock_item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(stock_item.errors.count, "error") %> prohibited this stock_item from being saved:</h2>
@@ -11,6 +12,7 @@
     </div>
   <% end %>
 
+  <%# Render input fields for all attributes %>
   <div class="field">
     <%= form.text_field :item_code, id: :stock_item_item_code %>
   </div>
