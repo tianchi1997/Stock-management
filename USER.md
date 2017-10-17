@@ -7,21 +7,21 @@ Charlotte is licensed for use following the terms of a standard MIT License. For
 ## Navigation
 * Navigate to the website via the URL supplied to you by the Adminsitrator.
 * Enter the supplied email and password, and press the white “log in” button.
-![login](screenshots/login.PNG)
+![login](screenshots/login.png)
 * Login instructions, or a replacement password can be accessed via the links below the white “Log in” button.
 * Ticking the “Remember me” box will keep you logged in permanently on the device that is in use.
 * After logging in you will be redirected to the home page.
 
 ## Home Page
 The home page contains links to the major functionality of the stocktake system: Locations and Stock Items. 
-![home](screenshots/home.PNG)
+![home](screenshots/home.png)
 * The Locations page will list items under their respective locations.
 * The Stock Items page will show all the locations of a particular item. 
 Which page you wish to navigate to will depend on the use case, all tiems can be accessed from each section of the site.
 
 ## Locations
 The locations page is split into three components
-![locations](screenshots/locations.PNG)
+![locations](screenshots/locations.png)
 * The navigation bar at the top of the page allows for switching between locations and their predecessors, as well as the ability to log out in the right hand corner.
 * The reports component (if you have permissions) will create a series of reports for various purposes, jump to the “Reports” section of this document for more information.
 * Finally will be the “Location Tree”. Use the ‘+’ and ‘-’ buttons next to the locations to expand/collapse their sublocations.
@@ -30,7 +30,7 @@ The locations page is split into three components
  
 ## Stock Items
 The Stock Items page is split into three components, similarly to the locations page. 
-![stock_items](screenshots/stock_items.PNG)
+![stock_items](screenshots/stock_items.png)
 * At the top of the page is the navigation bar. This contains a link to the home page, and indicates your current location. As you navigate through stock items and their locations, the navigation bar will update to include links to previously visited sections of the site
 * A section immediately below the navigation bar which (when you click on a stock item) shows the name of the item and certain properties belonging to it
  * Additional properties may be discovered by navigating to a location through the stock item pages. 
@@ -39,9 +39,9 @@ The Stock Items page is split into three components, similarly to the locations 
 ## User Tasks
 ### Stock Take
 * Navigate to the location which enompasses all the sublocations you wish to stocktake for
-![stock_take](screenshots/stock_take.PNG)
+![stock_take](screenshots/stock_take.png)
 * Begin the stocktake by pressing the ‘stocktake’ link
-![stock_taking](screenshots/stock_taking.PNG)
+![stock_taking](screenshots/stock_taking.png)
 * The stocktake begins at the first item in the first room
 * Use the numpad on the right of the page to modify the quantity to match actual quantity
 * \+ and - buttons will increment or decrement by 1
@@ -67,15 +67,17 @@ A basic CSV summary is downloadable which contains the contents of the 'Summary 
 
 ## Administrator Features
 Administrators primarily have the additional functionality of being able to create and edit users, as well as editing stock items, and location structure. 
+![admin_home](admin_home.png)
 
 ### Item Auditing
 Auditing features are accessed by navigating to any particular item instance (through the locations page or stock items page.
-![audits](screenshots/audits.PNG)
+![audits](screenshots/audits.png)
 * Navigate to the location or item of interest
 * Click on the item. Auditing logs will be viewable under the secton 'Audits'
 
 ### Location Additions
 A “new location” button will be made available immediately below the locations table. If you wish to add a sublocation, navigate to the parent location and click the ‘add sublocation’ button.
+![admin_location](screenshots/admin_location.png)
 
 ### Stock Item Addition
 A “new location” button will be made available immediately below the locations table. If you wish to add a sublocation, navigate to the parent location and click the ‘add sublocation’ button.
