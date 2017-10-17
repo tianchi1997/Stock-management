@@ -38,7 +38,7 @@ The Stock Items page is split into three components, similarly to the locations 
 * Begin the stocktake by pressing the ‘stocktake’ link
 * The stocktake begins at the first item in the first room
 * Use the numpad on the right of the page to modify the quantity to match actual quantity
-* ``+`` and - buttons will increment or decrement by 1
+* \+ and - buttons will increment or decrement by 1
 * Previous and Next buttons will save and navigate to the next(or previous) item
 
 ### Reports
