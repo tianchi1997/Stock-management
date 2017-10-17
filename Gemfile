@@ -47,7 +47,7 @@ gem 'paranoia'
 # Bootstrap
 gem 'rails-assets-bootstrap-sass'
 gem 'rails-assets-bootstrap-treeview'
-gem 'rails-assets-select2'
+gem 'select2-rails'
 gem 'bootstrap_form'
 
 # Breadcrumbs
@@ -56,6 +56,7 @@ gem 'breadcrumbs_on_rails'
 # Nested locations and lists
 gem 'ancestry', '~> 3.0.1'
 gem 'acts_as_list'
+
 
 # SQL views
 gem 'scenic'

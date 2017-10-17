@@ -46,6 +46,7 @@ For installation details see [install](INSTALL.md).
 #### Charlotte has the following dependencies:
 
 * Models
+    * [acts_as_list][] - ordered list in ActiveRecord
     * [ancestry][] - tree heirarchy in ActiveRecord
     * [scenic][] - database views in Rails
 * Auditing
@@ -62,7 +63,7 @@ For installation details see [install](INSTALL.md).
     * [breadcrumbs_on_rails][] - a breadcrumb generator for Rails
     * [rails-assets-bootstrap-sass][] - a Bootstrap rails asset pipeline integration gem
     * [rails-assets-bootstrap-treeview][] - a Bootstrap treeview plugin
-    * [rails-assets-select2][] - a select form for jquery
+    * [select2-rails][] - a select form for jquery including bootstrap theme
 * Testing
     * [capybara][] - acceptance test framework for web applications
     * [database_cleaner][] - resets database state after each test
@@ -75,26 +76,31 @@ For installation details see [install](INSTALL.md).
     * [simplecov][] - code coverage reports
 
 ## How does it work?
+[acts_as_list]: https://github.com/swanandp/acts_as_list
+[ancestry]: https://github.com/stefankroes/ancestry
+[scenic]: https://github.com/thoughtbot/scenic
+
+[audited]: https://github.com/collectiveidea/audited
+[paranoia]: https://github.com/rubysherpas/paranoia
+
+[cancancan]: https://github.com/CanCanCommunity/cancancan
+[devise]: https://github.com/CanCanCommunity/cancancan
 
 [react-rails]: https://github.com/reactjs/react-rails
 [jbuilder]: https://github.com/rails/jbuilder
+
 [bootstrap_form]: https://github.com/bootstrap-ruby/rails-bootstrap-forms
 [breadcrumbs_on_rails]: https://github.com/weppos/breadcrumbs_on_rails
 [rails-assets-bootstrap-sass]: https://github.com/twbs/bootstrap-sass
 [rails-assets-bootstrap-treeview]: https://github.com/jonmiles/bootstrap-treeview
-[rails-assets-select2]: https://github.com/select2/select2
-[ancestry]: https://github.com/stefankroes/ancestry
-[scenic]: https://github.com/thoughtbot/scenic
-[cancancan]: https://github.com/CanCanCommunity/cancancan
-[devise]: https://github.com/CanCanCommunity/cancancan
-[audited]: https://github.com/collectiveidea/audited
-[paranoia]: https://github.com/rubysherpas/paranoia
+[select2-rails]: https://github.com/argerim/select2
+
+[capybara]: https://github.com/teamcapybara/capybara
 [database_cleaner]: https://github.com/DatabaseCleaner/database_cleaner
 [factory_girl_rails]: https://github.com/thoughtbot/factory_girl_rails
+[geckodriver-helper]: https://github.com/DevicoSolutions/geckodriver-helper
+[rails-controller-testing]: https://github.com/rails/rails-controller-testing
 [rspec-rails]: https://github.com/rspec/rspec-rails
+[selenium-webdriver]: https://rubygems.org/gems/selenium-webdriver/versions/2.48.1
 [shoulda-matches]: https://github.com/thoughtbot/shoulda-matchers
 [simplecov]: https://github.com/colszowka/simplecov
-[rails-controller-testing]: https://github.com/rails/rails-controller-testing
-[capybara]: https://github.com/teamcapybara/capybara
-[selenium-webdriver]: https://rubygems.org/gems/selenium-webdriver/versions/2.48.1
-[geckodriver-helper]: https://github.com/DevicoSolutions/geckodriver-helper

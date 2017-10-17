@@ -3,7 +3,7 @@
 
 stockItemSelector = function() {
   $('#item_stock_item_id').select2({
-    theme: "classic"
+    theme: "bootstrap"
   });
 };
 
