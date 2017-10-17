@@ -52,6 +52,7 @@ Stock Item reporting is a function that is only accessible to certain users. Che
 * Reports are accessed through locations. 
 * Navigate to the location that encompasses all areas you wish to be provided information on. (By clicking on the locations and sublocations in the table on the locations page)
 * The reports creation options are visible at the top of the page
+![reports](screenshots/reports.png)
 * Summary Report
   * Display a combined count of all items at a particular location (and sublocations)
 * Order-To report
@@ -59,6 +60,7 @@ Stock Item reporting is a function that is only accessible to certain users. Che
     *Items will be expected to be ordered when the current quantity of that item is less than the required quantity. They will suggest re-ordering to the Order-To value (or required value if no Order-To value is present)
 * Subtree-Inclusive
   * A significantly more detailed report which shows item summaries over a location (and sublocations) as well as individual item counts per sublocation. 
+![subtree_inclusive](screenshots/report.png)
 * Expiry Report
   * Only available with subtree-inclusive. Shows the additional detail of the expiry dates of certain items under their locations. 
   
@@ -67,7 +69,7 @@ A basic CSV summary is downloadable which contains the contents of the 'Summary 
 
 ## Administrator Features
 Administrators primarily have the additional functionality of being able to create and edit users, as well as editing stock items, and location structure. 
-![admin_home](admin_home.png)
+![admin_home](screenshots/admin_home.png)
 
 ### Item Auditing
 Auditing features are accessed by navigating to any particular item instance (through the locations page or stock items page.
@@ -81,9 +83,12 @@ A “new location” button will be made available immediately below the locatio
 
 ### Stock Item Addition
 A “new location” button will be made available immediately below the locations table. If you wish to add a sublocation, navigate to the parent location and click the ‘add sublocation’ button.
+![stock_item_add](screenshots/new_stock_item.png)
 
 ### Item Addition
 There exists the ability to edit the ‘required’ quantity and ‘order-to’ quantities for each location. Do so by navigating to the location, selecting the stock item and pressing the edit button
+![item_add](screenshots/add_item_sublocation.png)
 
 ### User Administration
 Additional functionality is available from the home page. The users page allows for the creation and editing of user rights 
+![user](screenshots/users.png)
